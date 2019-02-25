@@ -1,5 +1,9 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { connect } from 'react-redux'
+import { loggingInUser, loggingInCurrentUser, loggingOut } from '../redux/actionCreator'
+import { withRouter } from 'react-router-dom'
+
 
 class Login extends React.Component {
 
@@ -9,7 +13,7 @@ class Login extends React.Component {
         password: ""
     }
 
-    componentDidMount(){
+    componentDidMountReact(){
         let token = localStorage.getItem('token')
         if(token){
             fetch('http://localhost:3001/api/v1/profile', {
@@ -21,13 +25,35 @@ class Login extends React.Component {
             .then(r => r.json())
             .then(data => {
                 this.setState({
-                    currentUser: data
+                    currentUser: data.user
                 })
+                console.log(data)
             })
         }
     }
 
-    handleLoginSubmit = () => {
+    componentDidMount(){
+        let token = localStorage.getItem('token')
+        if(token){
+            this.props.getCurrentUser(token)
+        }
+    }
+
+    handleLoginSubmitRedux = () => {
+        let t = this
+        let info = {
+            email: this.state.email,
+            password: this.state.password,
+        }
+        if(!this.props.currentUser){
+            this.props.loggingInUser(info)
+        } else {
+            this.props.logOut()
+            localStorage.clear()
+        }
+    }
+
+    handleLoginSubmitReact = () => {
         if(!this.state.currentUser){
         fetch('http://localhost:3001/api/v1/login', {
 	        method: "POST",
@@ -41,19 +67,15 @@ class Login extends React.Component {
         })
         .then(res => res.json())
         .then(data => {
+            console.log(data)
               if(data.error){ 
                 alert('Incorrect username or password')
               } else {
                 this.setState({
-                    currentUser: data.user,
+                    currentUser: data.user_info.user,
                 })
                 localStorage.setItem("token", data.token)
               }
-            // data.error ? 
-            // alert('Incorrect username or password') 
-            // : 
-            // // this.setState({currentUser:data.user})
-            // console.log(data)
           })
         } else {
             this.setState({
@@ -65,6 +87,7 @@ class Login extends React.Component {
 
     render(){
         return(
+          <body className="login">
             <div className='login-form'>
             {/*
               Heads up! The styles below are necessary for the correct render of this example.
@@ -80,10 +103,11 @@ class Login extends React.Component {
             `}</style>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
-                <Header as='h2' color='blue' textAlign='center'>
-                  <Image src='/logo_transparent.png' /> {this.state.currentUser? `Hello ${this.state.currentUser.first_name}`: `Log-in to your account`}
+              <Image src='/logo_transparent.png' /> 
+                <Header className="login-header" as='h1' textAlign='center'>
+                  {this.props.currentUser? `Welcome ${this.props.currentUser.first_name}`: null}
                 </Header>
-                <Form onSubmit={this.handleLoginSubmit} size='large'>
+                <Form onSubmit={this.handleLoginSubmitRedux} size='large'>
                   <Segment stacked>
                     <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' 
                       onChange={(e)=> this.setState({ email: e.target.value})}/>
@@ -96,7 +120,7 @@ class Login extends React.Component {
                       onChange={(e) => this.setState({ password: e.target.value})}
                     />
                     {
-                    !this.state.currentUser?
+                    !this.props.currentUser?
                     <Button color='blue' fluid size='large'>
                       Login
                     </Button>
@@ -113,9 +137,24 @@ class Login extends React.Component {
               </Grid.Column>
             </Grid>
           </div>
+          </body>
         )
     }
 
 }
 
-export default Login
+const mapStateToProps = (state) => {
+    return{
+        currentUser: state.currentUser
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        loggingInUser: (info) => {dispatch(loggingInUser(info))},
+        getCurrentUser: (token) => {dispatch(loggingInCurrentUser(token))},
+        logOut: () => {dispatch(loggingOut())}
+    }
+}
+
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))

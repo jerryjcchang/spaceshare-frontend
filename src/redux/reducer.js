@@ -1,26 +1,65 @@
 import {combineReducers} from 'redux'
 
-state = {
-  email: "",
-  // firstName: "",
-  // lastName: "",
-  // company: "",
-  // password: "",
-  // passwordConfirmation: "",
-  // city: "",
-  // phoneNumber: ""
-}
-
-const emailReducer = (oldState=state, action) => {
+const setUserReducer = (oldState="", action) => {
   switch(action.type){
-    case "UPDATE EMAIL":
-      return {
-        ...oldState, email: action.payload
-      }
+    case "LOG_IN":
+      return action.payload.user
+    case "LOG_OUT":
+      return ""
     default:
       return oldState
   }
 }
+
+const setBookingsReducer = (oldState="", action) => {
+  switch(action.type){
+    case "LOG_IN":
+      return action.payload.bookings
+    case "LOG_OUT":
+      return ""
+    default:
+      return oldState
+  }
+}
+
+const setSpacesReducer = (oldState="", action) => {
+  switch(action.type){
+    case "LOG_IN":
+      return action.payload.spaces
+    case "LOG_OUT":
+      return ""
+    default:
+      return oldState
+  }
+}
+
+const rootReducer = combineReducers({
+  currentUser: setUserReducer,
+  user_bookings: setBookingsReducer,
+  user_spaces: setSpacesReducer
+})
+
+// state = {
+//   email: "",
+//   // firstName: "",
+//   // lastName: "",
+//   // company: "",
+//   // password: "",
+//   // passwordConfirmation: "",
+//   // city: "",
+//   // phoneNumber: ""
+// }
+
+// const emailReducer = (oldState=state, action) => {
+//   switch(action.type){
+//     case "UPDATE EMAIL":
+//       return {
+//         ...oldState, email: action.payload
+//       }
+//     default:
+//       return oldState
+//   }
+// }
 
 // const firstNameReducer = (oldState=state, action) => {
 //   switch(action.type){
@@ -47,4 +86,4 @@ const emailReducer = (oldState=state, action) => {
 //   }
 // }
 
-export default reducer
+export default rootReducer

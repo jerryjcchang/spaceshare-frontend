@@ -31,9 +31,9 @@ class Registration extends React.Component {
             `}</style>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
-                {/* <Header as='h2' textAlign='center'>
-                <div className="reg-header">Register</div>
-                </Header> */}
+                <Header as='h2' textAlign='center' style={{color: "white"}}>
+                <div className="reg-header">Sign Up</div>
+                </Header>
                 <Form size='large'>
                   <Segment stacked className="reg-form">
                     <Form.Input fluid placeholder='E-mail address'
@@ -56,9 +56,9 @@ class Registration extends React.Component {
                     </Button>
                   </Segment>
                 </Form>
-                <Message>
+                {/* <Message>
                   New to us? <a href='#'>Sign Up</a>
-                </Message>
+                </Message> */}
               </Grid.Column>
             </Grid>
           </div>
