@@ -40,7 +40,6 @@ class Login extends React.Component {
     }
 
     handleLoginSubmitRedux = () => {
-        let t = this
         let info = {
             email: this.state.email,
             password: this.state.password,
@@ -103,7 +102,7 @@ class Login extends React.Component {
             `}</style>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
-              <Image src='/logo_transparent.png' /> 
+              <Image centered size="medium" src='/logo_transparent.png' /> 
                 <Header className="login-header" as='h1' textAlign='center'>
                   {this.props.currentUser? `Welcome ${this.props.currentUser.first_name}`: null}
                 </Header>

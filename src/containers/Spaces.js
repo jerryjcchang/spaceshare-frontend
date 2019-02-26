@@ -7,7 +7,7 @@ class Spaces extends React.Component{
 
     render(){
         return(
-            <body class="home">
+            <body className="home">
                 
                 <Container>
                 <Header as='h1' style={{color: 'white'}} textAlign='center'>

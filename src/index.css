@@ -1,11 +1,11 @@
 html { 
-  /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed;  */
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
-  background: lightgrey;
+  /* background: lightgrey; */
 }
 
 body {
@@ -87,4 +87,8 @@ body.login{
 
 .search-bar {
   width: 40vw
+}
+
+body.home {
+  background: lightgrey
 }
