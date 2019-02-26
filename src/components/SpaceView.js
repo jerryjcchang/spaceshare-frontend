@@ -28,7 +28,7 @@ class SpaceView extends React.Component {
                             <h1>{this.props.space.name}</h1>
                             <Segment.Group>
                                 <Segment align="left">
-                                    <span><b>Address:</b>{this.props.space.street_address} </span>
+                                    <span><b>Address:</b> {this.props.space.street_address} </span>
                                     <span>{`${this.props.space.city}, ${this.props.space.state} ${this.props.space.zip}`}</span>      
                                 </Segment>                 
                                 <Segment align="left">

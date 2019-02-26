@@ -1,9 +1,8 @@
 import React from 'react'
-import { Header, Grid, Container, Card } from 'semantic-ui-react'
+import { Container, Card } from 'semantic-ui-react'
 import SpaceCard from '../components/SpaceCard'
 import SearchBar from '../components/SearchBar'
 import { connect } from 'react-redux'
-import { fetchingAllSpaces } from '../redux/actionCreator'
 import { withRouter } from 'react-router-dom'
 
 class Spaces extends React.Component{

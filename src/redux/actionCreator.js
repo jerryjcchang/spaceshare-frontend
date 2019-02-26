@@ -19,9 +19,8 @@ function fetchingAllSpaces(){
 }
 
 function loggingInCurrentUser(){
-    let token = localStorage.getItem('token')
-    if(token)
     return (dispatch) => {
+        let token = localStorage.getItem('token')
         fetch(`${PROFILE}`, {
                 method: "GET",
                 headers: {
