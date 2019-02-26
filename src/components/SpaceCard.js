@@ -1,18 +1,21 @@
 import React from 'react'
 import { Card, Image } from 'semantic-ui-react'
+import { Link } from 'react-router-dom'
 
 class SpaceCard extends React.Component{
     
     render(){
         return(
-            <Card raised fluid onClick={() => {alert("clicking space")}}>
-                <div className="rate-div"><h1>$35 hr</h1></div>
-                <Image src="https://www.wework.com/public/images/Web_72DPI-20180612_WeWork_Dalian_Lu_-_Common_Areas_-_Couch_Area-4__1_.jpg" />
+            // <Link to={`/spaces/${this.props.space.id}`}>
+            <Card raised fluid as={Link} to={`/spaces/${this.props.space.id}`}>
+                <div className="rate-div"><h3>${this.props.space.daily_rate} daily</h3></div>
+                <Image className="card-img" size="medium" src={this.props.space.img_url} />
                 <Card.Content>
-                <Card.Header>Space Card</Card.Header>
-                <Card.Description>Space Description</Card.Description>
+                <Card.Header>{this.props.space.name}</Card.Header>
+                <Card.Description>{this.props.space.city}, {this.props.space.state}</Card.Description>
                 </Card.Content>
             </Card>
+            // </Link>
         )
     }
 }

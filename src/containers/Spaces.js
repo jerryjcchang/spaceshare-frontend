@@ -2,6 +2,9 @@ import React from 'react'
 import { Header, Grid, Container, Card } from 'semantic-ui-react'
 import SpaceCard from '../components/SpaceCard'
 import SearchBar from '../components/SearchBar'
+import { connect } from 'react-redux'
+import { fetchingAllSpaces } from '../redux/actionCreator'
+import { withRouter } from 'react-router-dom'
 
 class Spaces extends React.Component{
 
@@ -10,15 +13,15 @@ class Spaces extends React.Component{
             <body className="home">
                 
                 <Container>
-                <Header as='h1' style={{color: 'white'}} textAlign='center'>
+                {/* <Header as='h1' style={{color: 'white'}} textAlign='center'>
                 <Header.Content>Spaces Index</Header.Content>
-                </Header>
+                </Header> */}
                 <SearchBar />
                     {/* <div className="ui four column grid"> */}
                     <Card.Group className="spaces-list" itemsPerRow="4">
                         {/* <div className="row"> */}
-                        {Array(20).join().split(',').map(function(a){return this.i++},{i:1})
-                         .map(space => <SpaceCard />)}
+                        {this.props.allSpaces
+                         .map(space => <SpaceCard index={space.id} space={space} />)}
                         {/* </div> */}
                     {/* </div> */}
                     </Card.Group>
@@ -29,4 +32,12 @@ class Spaces extends React.Component{
     }
 }
 
-export default Spaces
+const mapStateToProps = (state) => {
+    return{
+        allSpaces: state.allSpaces
+    }
+}
+
+
+
+export default withRouter(connect(mapStateToProps)(Spaces))

@@ -69,8 +69,8 @@ class SearchBar extends React.Component{
                     closable
                 />
                 </Menu.Item>
-                <Menu.Item borderless>End</Menu.Item>
-                <Menu.Item>
+                <Menu.Item borderless position="right">End</Menu.Item>
+                <Menu.Item borderless>
                 <DateInput
                     name="endDate"
                     placeholder="Date"

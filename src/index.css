@@ -1,5 +1,5 @@
 html { 
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed; 
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.pexels.com/photos/908284/pexels-photo-908284.jpeg') no-repeat center center fixed; 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -51,6 +51,10 @@ code {
   padding-bottom: 2vh;
 }
 
+.ui.medium.image {
+  height: 25vh;
+}
+
 /* body.home{
   background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed; 
   -webkit-background-size: cover;
@@ -68,9 +72,12 @@ body.login{
 }
 
 .rate-div {
-  background: black;
+  background: rgb(5, 80, 128);
   opacity: .8;
   color: white;
+  min-height: 5vh;
+  vertical-align: center;
+  padding-top: 1vh;
 }
 
 .ui.four.cards.spaces-list {
@@ -78,17 +85,55 @@ body.login{
 }
 
 .ui.menu.spaces-menu {
-  margin-top: 50px;
-  margin-bottom: 5px;
+  margin-top: 12vh;
+  margin-bottom: 7px;
 }
 
 .ui.fluid.dropdown.features-dropdown {
 }
 
 .search-bar {
-  width: 40vw
+  width: 35vw
 }
 
 body.home {
-  background: lightgrey
+  background: rgb(231, 230, 230)
+}
+
+body.register {
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed; 
+}
+
+.view-header {
+  margin-top: 12vh;
+}
+
+.ui.container.space-page{
+  margin-top: 12vh;
+}
+
+.ui.container.space-details{
+  margin-bottom: 5vh;
+}
+
+.view-image-container {
+  /* overflow: hidden; */
+  /* height: 65vh; */
+  width: 100%;
+  margin-top: 15vh;
+}
+
+body.space-page {
+  background: rgb(231, 230, 230);
+  height: 100%;
+}
+
+.ui.large.centered.image{
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 1vh;
+}
+
+.user-welcome {
+  margin-left: 2vw;
+  font-size: 4vh;
 }

@@ -16,6 +16,7 @@ class Registration extends React.Component {
 
     render(){
         return(
+          <body className="register">
             <div className='login-form'>
             {/*
               Heads up! The styles below are necessary for the correct render of this example.
@@ -62,6 +63,7 @@ class Registration extends React.Component {
               </Grid.Column>
             </Grid>
           </div>
+          </body>
         )
     }
 }

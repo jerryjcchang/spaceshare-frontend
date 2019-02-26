@@ -33,7 +33,17 @@ const setSpacesReducer = (oldState="", action) => {
   }
 }
 
+const setAllSpacesReducer = (oldState=[], action) => {
+  switch(action.type){
+    case "FETCH_ALL_SPACES":
+      return action.payload
+    default:
+      return oldState
+  }
+}
+
 const rootReducer = combineReducers({
+  allSpaces: setAllSpacesReducer,
   currentUser: setUserReducer,
   user_bookings: setBookingsReducer,
   user_spaces: setSpacesReducer

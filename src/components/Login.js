@@ -32,13 +32,6 @@ class Login extends React.Component {
         }
     }
 
-    componentDidMount(){
-        let token = localStorage.getItem('token')
-        if(token){
-            this.props.getCurrentUser(token)
-        }
-    }
-
     handleLoginSubmitRedux = () => {
         let info = {
             email: this.state.email,
@@ -102,10 +95,10 @@ class Login extends React.Component {
             `}</style>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
-              <Image centered size="medium" src='/logo_transparent.png' /> 
-                <Header className="login-header" as='h1' textAlign='center'>
+              <Image centered size="large" src='/logo_transparent.png' /> 
+                {/* <Header className="login-header" as='h1' textAlign='center'>
                   {this.props.currentUser? `Welcome ${this.props.currentUser.first_name}`: null}
-                </Header>
+                </Header> */}
                 <Form onSubmit={this.handleLoginSubmitRedux} size='large'>
                   <Segment stacked>
                     <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' 
@@ -151,7 +144,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => {
     return {
         loggingInUser: (info) => {dispatch(loggingInUser(info))},
-        getCurrentUser: (token) => {dispatch(loggingInCurrentUser(token))},
         logOut: () => {dispatch(loggingOut())}
     }
 }

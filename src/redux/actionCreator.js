@@ -1,9 +1,26 @@
 const URL = 'http://localhost:3001/api/v1'
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
+const SPACES = `${URL}/spaces`
 
+function fetchingAllSpaces(){
+    return (dispatch) => {
+        fetch(`${SPACES}`, {
+            method: "GET",
+            // headers: {
+            //     "Authentication": `Bearer ${token}`
+            // }
+        })
+        .then(r => r.json())
+        .then(allSpaces => {
+            dispatch(fetchedAllSpaces(allSpaces))
+        }) 
+    }
+}
 
-function loggingInCurrentUser(token){
+function loggingInCurrentUser(){
+    let token = localStorage.getItem('token')
+    if(token)
     return (dispatch) => {
         fetch(`${PROFILE}`, {
                 method: "GET",
@@ -51,4 +68,8 @@ function loggingOut(){
     return {type: "LOG_OUT"}
 }
 
-export {loggingInUser, loggingInCurrentUser, loggingOut}
+function fetchedAllSpaces(allSpaces){
+    return {type: "FETCH_ALL_SPACES", payload: allSpaces}
+}
+
+export {loggingInUser, loggingInCurrentUser, loggingOut, fetchingAllSpaces}

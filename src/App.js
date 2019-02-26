@@ -6,8 +6,16 @@ import Registration from './components/Registration'
 import Login from './components/Login'
 import Spaces from './containers/Spaces'
 import SpaceView from './components/SpaceView'
+import { connect } from 'react-redux'
+import { fetchingAllSpaces, loggingInCurrentUser } from './redux/actionCreator'
+import { withRouter } from 'react-router-dom'
 
 class App extends Component {
+
+  componentDidMount(){
+    this.props.fetchAllSpaces()
+    this.props.getCurrentUser()
+  }
 
   render() {
     return (
@@ -17,8 +25,8 @@ class App extends Component {
         <Route exact path="/register" component={Registration} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/spaces" component={Spaces} />
-        <Route exact path="/spaces/:id" render={()=> {
-          return (<SpaceView />)
+        <Route exact path="/spaces/:id" render={(props)=> {
+          return (<SpaceView routeProps={props} />)
         }} 
         />
       </div>
@@ -26,4 +34,11 @@ class App extends Component {
   }
 }
 
-export default App;
+const mapDispatchToProps = dispatch => {
+  return {
+      fetchAllSpaces: () => {dispatch(fetchingAllSpaces())},
+      getCurrentUser: () => {dispatch(loggingInCurrentUser())},
+  }
+}
+
+export default withRouter(connect(null, mapDispatchToProps)(App))
