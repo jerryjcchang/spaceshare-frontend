@@ -2,6 +2,7 @@ import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { loggingInUser, loggingInCurrentUser, loggingOut } from '../redux/actionCreator'
+import { Route, Redirect } from 'react-router'
 import { withRouter } from 'react-router-dom'
 
 
@@ -45,37 +46,37 @@ class Login extends React.Component {
         }
     }
 
-    handleLoginSubmitReact = () => {
-        if(!this.state.currentUser){
-        fetch('http://localhost:3001/api/v1/login', {
-	        method: "POST",
-	        headers: {
-                "Content-Type":"application/json", 
-                "Accept":"application/json"},
-	        body: JSON.stringify({
-	    	    email: this.state.email,
-		        password: this.state.password
-    	    })
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-              if(data.error){ 
-                alert('Incorrect username or password')
-              } else {
-                this.setState({
-                    currentUser: data.user_info.user,
-                })
-                localStorage.setItem("token", data.token)
-              }
-          })
-        } else {
-            this.setState({
-                currentUser: ""
-            })
-            localStorage.clear()
-        }
-    }
+    // handleLoginSubmitReact = () => {
+    //     if(!this.state.currentUser){
+    //     fetch('http://localhost:3001/api/v1/login', {
+	  //       method: "POST",
+	  //       headers: {
+    //             "Content-Type":"application/json", 
+    //             "Accept":"application/json"},
+	  //       body: JSON.stringify({
+	  //   	    email: this.state.email,
+		//         password: this.state.password
+    // 	    })
+    //     })
+    //     .then(res => res.json())
+    //     .then(data => {
+    //         console.log(data)
+    //           if(data.error){ 
+    //             alert('Incorrect username or password')
+    //           } else {
+    //             this.setState({
+    //                 currentUser: data.user_info.user,
+    //             })
+    //             localStorage.setItem("token", data.token)
+    //           }
+    //       })
+    //     } else {
+    //         this.setState({
+    //             currentUser: ""
+    //         })
+    //         localStorage.clear()
+    //     }
+    // }
 
     render(){
         return(

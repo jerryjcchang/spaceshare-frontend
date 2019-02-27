@@ -11,8 +11,18 @@ class SpaceView extends React.Component {
         endDate: ""
     }
 
+    handleChange = (event, {name, value}) => {
+        if (this.state.hasOwnProperty(name)) {
+          this.setState({ [name]: value });
+        }
+      }
+
     handleClick = () => {
         console.log(this.props.space.name)
+    }
+
+    handleReserve = {
+
     }
 
     render(){
@@ -45,7 +55,7 @@ class SpaceView extends React.Component {
                                             value={this.state.startDate}
                                             iconPosition="left"
                                             onChange={this.handleChange}
-                                            dateFormat="MM-DD-YYYY"
+                                            dateFormat="MM/DD/YYYY"
                                             closable
                                         />
                                         </Menu.Item>
@@ -58,7 +68,7 @@ class SpaceView extends React.Component {
                                             iconPosition="left"
                                             onChange={this.handleChange}
                                             closable
-                                            dateFormat="MM-DD-YYYY"
+                                            dateFormat="MM/DD/YYYY"
                                             minDate={this.state.startDate}
                                         />
                                         </Menu.Item>
@@ -84,6 +94,7 @@ const mapStateToProps = (state, ownProps) => {
         allSpaces: state.allSpaces,
         routeProps: ownProps.routeProps,
         space: state.allSpaces.find(space => space.id === parseInt(ownProps.routeProps.match.params.id)),
+        currentUserID: state.currentUser.id
     }
 }
 

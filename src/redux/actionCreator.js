@@ -64,6 +64,8 @@ function loggedIn(user_info){
 }
 
 function loggingOut(){
+    localStorage.clear()
+    alert('Goodbye!')
     return {type: "LOG_OUT"}
 }
 

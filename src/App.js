@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import './App.css';
 import Navbar from './components/Navbar'
 import Registration from './components/Registration'
@@ -23,7 +23,16 @@ class App extends Component {
         <Navbar />
         
         <Route exact path="/register" component={Registration} />
-        <Route exact path="/login" component={Login} />
+        {/* <Route exact path="/login" component={Login} /> */}
+
+        <Route exact path="/login" render={() => (
+          this.props.currentUser ? (
+            <Redirect to="/spaces" />
+          ) : (
+            <Login />
+          )
+        )}/>
+
         <Route exact path="/spaces" component={Spaces} />
         <Route exact path="/spaces/:id" render={(props)=> {
           return (<SpaceView routeProps={props} />)
@@ -34,6 +43,12 @@ class App extends Component {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+      currentUser: state.currentUser
+  }
+}
+
 const mapDispatchToProps = dispatch => {
   return {
       fetchAllSpaces: () => {dispatch(fetchingAllSpaces())},
@@ -41,4 +56,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default withRouter(connect(null, mapDispatchToProps)(App))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(App))
