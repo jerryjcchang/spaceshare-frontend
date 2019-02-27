@@ -6,6 +6,7 @@ import Registration from './components/Registration'
 import Login from './components/Login'
 import Spaces from './containers/Spaces'
 import SpaceView from './components/SpaceView'
+import Profile from './components/Profile'
 import { connect } from 'react-redux'
 import { fetchingAllSpaces, loggingInCurrentUser } from './redux/actionCreator'
 import { withRouter } from 'react-router-dom'
@@ -14,6 +15,7 @@ class App extends Component {
 
   componentDidMount(){
     this.props.fetchAllSpaces()
+    if(localStorage.getItem('token'))
     this.props.getCurrentUser()
   }
 
@@ -32,12 +34,12 @@ class App extends Component {
             <Login />
           )
         )}/>
-
         <Route exact path="/spaces" component={Spaces} />
         <Route exact path="/spaces/:id" render={(props)=> {
           return (<SpaceView routeProps={props} />)
         }} 
         />
+        <Route exact path="/profile" component={Profile} />
       </div>
     );
   }

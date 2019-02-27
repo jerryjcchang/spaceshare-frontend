@@ -1,14 +1,15 @@
 import React from 'react'
-import { withRouter } from 'react-router-dom'
+import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Image, Container, Segment, Button, Grid, Menu } from 'semantic-ui-react'
 import { DateInput } from 'semantic-ui-calendar-react'
+import { bookingSpace } from '../redux/actionCreator'
 
 class SpaceView extends React.Component {
 
     state = {
         startDate: "",
-        endDate: ""
+        endDate: "",
     }
 
     handleChange = (event, {name, value}) => {
@@ -21,8 +22,21 @@ class SpaceView extends React.Component {
         console.log(this.props.space.name)
     }
 
-    handleReserve = {
-
+    handleReserveButton = () => {
+        if(this.props.user){
+            if (!this.state.startDate || !this.state.endDate){
+                alert('You must select a Start and End date')
+            } else {
+            let info = {
+                space_id: this.props.space.id,
+                start: this.state.startDate,
+                end: this.state.endDate
+            }
+            this.props.bookingSpace(info)
+            }
+        } else {
+            alert('You must be logged in to reserve a space')
+        }
     }
 
     render(){
@@ -55,7 +69,7 @@ class SpaceView extends React.Component {
                                             value={this.state.startDate}
                                             iconPosition="left"
                                             onChange={this.handleChange}
-                                            dateFormat="MM/DD/YYYY"
+                                            dateFormat="MMM-DD-YYYY"
                                             closable
                                         />
                                         </Menu.Item>
@@ -68,11 +82,11 @@ class SpaceView extends React.Component {
                                             iconPosition="left"
                                             onChange={this.handleChange}
                                             closable
-                                            dateFormat="MM/DD/YYYY"
+                                            dateFormat="MMM-DD-YYYY"
                                             minDate={this.state.startDate}
                                         />
                                         </Menu.Item>
-                                        <Menu.Item><Button primary>Reserve</Button></Menu.Item>
+                                        <Menu.Item><Button primary onClick={this.handleReserveButton}>Reserve</Button></Menu.Item>
                                         <Menu.Item position="right"><h2>Daily Rate: ${this.props.space.daily_rate}</h2></Menu.Item>
                                         </Menu>
                                     </Segment>
@@ -91,15 +105,17 @@ class SpaceView extends React.Component {
 
 const mapStateToProps = (state, ownProps) => {
     return{
+        user: state.currentUser,
         allSpaces: state.allSpaces,
         routeProps: ownProps.routeProps,
         space: state.allSpaces.find(space => space.id === parseInt(ownProps.routeProps.match.params.id)),
-        currentUserID: state.currentUser.id
+        // currentUserID: state.currentUser.id
     }
 }
 
 const mapDispatchToProps = dispatch => {
     return {
+        bookingSpace: (info) => {dispatch(bookingSpace(info))},
     }
 }
 

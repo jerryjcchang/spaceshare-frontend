@@ -1,12 +1,40 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { Container, Image, Card } from 'semantic-ui-react' 
+import SpaceCard from './SpaceCard'
 
 class Profile extends React.Component{
 
     render(){
         return(
-            <h1>User Profile</h1>
+            <body className="profile">
+            {!this.props.user ? null :
+            (
+            <Container className="profile">
+            <Image circular size="small" centered src="https://www.freeiconspng.com/uploads/customers-icon-20.png" />    
+            <h1>{`${this.props.user.first_name} ${this.props.user.last_name}`}</h1>
+            <h3>Booked Spaces</h3>
+            <Card.Group centered itemsPerRow="4">
+                {this.props.bookings.map(booking => 
+                    <SpaceCard space={booking}/>)}
+
+            </Card.Group>
+            </Container>
+            )
+            }
+           
+            </body>
         )
     }
 }
 
-export default Profile
+
+const mapStateToProps = (state) => {
+    return{
+        user: state.currentUser,
+        bookings: state.user_bookings
+    }
+}
+
+
+export default connect(mapStateToProps)(Profile)

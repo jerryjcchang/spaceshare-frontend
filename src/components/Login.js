@@ -3,7 +3,7 @@ import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui
 import { connect } from 'react-redux'
 import { loggingInUser, loggingInCurrentUser, loggingOut } from '../redux/actionCreator'
 import { Route, Redirect } from 'react-router'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 
 
 class Login extends React.Component {
@@ -40,6 +40,7 @@ class Login extends React.Component {
         }
         if(!this.props.currentUser){
             this.props.loggingInUser(info)
+
         } else {
             this.props.logOut()
             localStorage.clear()
@@ -125,7 +126,7 @@ class Login extends React.Component {
                   </Segment>
                 </Form>
                 <Message>
-                  New to us? <a href='#'>Sign Up</a>
+                  New to us? <Link to='/register'>Sign Up</Link>
                 </Message>
               </Grid.Column>
             </Grid>

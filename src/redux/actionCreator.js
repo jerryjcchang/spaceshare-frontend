@@ -2,6 +2,7 @@ const URL = 'http://localhost:3001/api/v1'
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/spaces`
+const CREATE_BOOKING = `${URL}/bookings`
 
 function fetchingAllSpaces(){
     return (dispatch) => {
@@ -58,6 +59,25 @@ function loggingInUser(info){
         }
 }
 
+function bookingSpace(info){
+    let token = localStorage.getItem('token')
+    return (dispatch) => {
+        fetch(`${CREATE_BOOKING}`, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                "Accept":"application/json",
+                "Authentication": `Bearer ${token}`},
+            body: JSON.stringify(info)
+        })
+        .then(res => res.json())
+        .then(booking => {
+            console.log(booking)
+            dispatch(bookedSpace(booking))
+        })
+    }
+}
+
 
 function loggedIn(user_info){
     return {type: "LOG_IN", payload: user_info}
@@ -73,4 +93,8 @@ function fetchedAllSpaces(allSpaces){
     return {type: "FETCH_ALL_SPACES", payload: allSpaces}
 }
 
-export {loggingInUser, loggingInCurrentUser, loggingOut, fetchingAllSpaces}
+function bookedSpace(booking){
+    return {type: "MAKE_BOOKING", payload: booking}
+}
+
+export {loggingInUser, loggingInCurrentUser, loggingOut, fetchingAllSpaces, bookingSpace}

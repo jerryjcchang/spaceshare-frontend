@@ -128,6 +128,11 @@ body.space-page {
   height: 100%;
 }
 
+body.profile {
+  background: rgb(231, 230, 230);
+  height: 100%;
+}
+
 .ui.large.centered.image{
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 1vh;
@@ -136,4 +141,9 @@ body.space-page {
 .user-welcome {
   margin-left: 2vw;
   font-size: 4vh;
+}
+
+.ui.container.profile {
+  margin-top: 12vh;
+  overflow: hidden;
 }

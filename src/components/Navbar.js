@@ -13,7 +13,12 @@ class Navbar extends React.Component{
         <Menu fitted="vertically" fixed="top" className="navbar" inverted>
             <Menu.Item position="left">
                 <Image src="/logo_transparent.png" size='tiny' as={Link} to="/spaces"/>
-                {this.props.user ? <div className="user-welcome">Hi {this.props.user.first_name}</div> : null}
+                {this.props.user ? 
+                <Link to={`/profile`}>
+                <div className="user-welcome">Hi {this.props.user.first_name}</div></Link> 
+                : 
+                null}
+                
             </Menu.Item>
             <Menu.Item position='right'>
                 <h3>About</h3>
