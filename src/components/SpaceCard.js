@@ -9,7 +9,7 @@ class SpaceCard extends React.Component{
             // <Link to={`/spaces/${this.props.space.id}`}>
             <Card raised fluid as={Link} to={`/spaces/${this.props.space.id}`}>
                 <div className="rate-div"><h3>${this.props.space.daily_rate} daily</h3></div>
-                <Image className="card-img" size="medium" src={this.props.space.img_url} />
+                <Image className="card-img" src={this.props.space.img_url} />
                 <Card.Content>
                 <Card.Header>{this.props.space.name}</Card.Header>
                 <Card.Description>{this.props.space.city}, {this.props.space.state}</Card.Description>

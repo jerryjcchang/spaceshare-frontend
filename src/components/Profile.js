@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { Container, Image, Card } from 'semantic-ui-react' 
-import SpaceCard from './SpaceCard'
+import BookedCard from './BookedCard'
 
 class Profile extends React.Component{
 
@@ -14,9 +14,9 @@ class Profile extends React.Component{
             <Image circular size="small" centered src="https://www.freeiconspng.com/uploads/customers-icon-20.png" />    
             <h1>{`${this.props.user.first_name} ${this.props.user.last_name}`}</h1>
             <h3>Booked Spaces</h3>
-            <Card.Group centered itemsPerRow="4">
+            <Card.Group itemsPerRow="4">
                 {this.props.bookings.map(booking => 
-                    <SpaceCard space={booking}/>)}
+                    <BookedCard space={booking}/>)}
 
             </Card.Group>
             </Container>
@@ -32,7 +32,7 @@ class Profile extends React.Component{
 const mapStateToProps = (state) => {
     return{
         user: state.currentUser,
-        bookings: state.user_bookings
+        bookings: state.user_bookings,
     }
 }
 

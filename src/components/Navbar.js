@@ -15,10 +15,11 @@ class Navbar extends React.Component{
                 <Image src="/logo_transparent.png" size='tiny' as={Link} to="/spaces"/>
                 {this.props.user ? 
                 <Link to={`/profile`}>
-                <div className="user-welcome">Hi {this.props.user.first_name}</div></Link> 
+                    {/* <Image size="mini" src="https://www.freeiconspng.com/uploads/customers-icon-20.png" /> */}
+                    <span className="user-welcome">Hi {this.props.user.first_name}</span>
+                </Link> 
                 : 
                 null}
-                
             </Menu.Item>
             <Menu.Item position='right'>
                 <h3>About</h3>

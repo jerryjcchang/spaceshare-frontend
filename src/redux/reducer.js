@@ -17,6 +17,8 @@ const setBookingsReducer = (oldState="", action) => {
       return action.payload.bookings
     case "LOG_OUT":
       return ""
+    case "MAKE_BOOKING":
+      return [...oldState, action.payload]
     default:
       return oldState
   }
@@ -26,9 +28,6 @@ const setSpacesReducer = (oldState=[], action) => {
   switch(action.type){
     case "LOG_IN":
       return action.payload.spaces
-    case "MAKE_BOOKING":
-      debugger
-      return [...oldState, action.payload]
     case "LOG_OUT":
       return ""
     default:

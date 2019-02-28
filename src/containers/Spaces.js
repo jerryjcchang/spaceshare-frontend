@@ -17,7 +17,7 @@ class Spaces extends React.Component{
                 </Header> */}
                 <SearchBar />
                     {/* <div className="ui four column grid"> */}
-                    <Card.Group className="spaces-list" itemsPerRow="4">
+                    <Card.Group stackable doubling className="spaces-list" itemsPerRow="4">
                         {/* <div className="row"> */}
                         {this.props.allSpaces
                          .map(space => <SpaceCard index={space.id} space={space} />)}

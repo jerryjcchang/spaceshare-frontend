@@ -1,8 +1,9 @@
 import React from 'react'
-import { Input, Menu, Dropdown, Container,} from 'semantic-ui-react'
+import { Input, Menu, Dropdown, Container, Icon} from 'semantic-ui-react'
 import DropdownDate from 'react-dropdown-date'
 import { DateInput, TimeInput, DateTimeInput, DatesRangeInput} from 'semantic-ui-calendar-react';
-import moment from 'moment';
+import moment, { isMoment } from 'moment';
+import CalendarInput from './CalendarInput'
 
 class SearchBar extends React.Component{
 
@@ -10,8 +11,8 @@ class SearchBar extends React.Component{
 
     state = {
         searchTerm:"",
-        startDate: "",
-        endDate: "",
+        // startDate: "",
+        // endDate: "",
         options: {
             single: false,
             group: false,
@@ -47,7 +48,7 @@ class SearchBar extends React.Component{
     render(){
         return(
             <Container>
-            <Menu raised className="spaces-menu">
+            <Menu stackable raised className="spaces-menu">
                 <Menu.Item className="search-bar">
                     <Input 
                         name="searchTerm"
@@ -57,31 +58,8 @@ class SearchBar extends React.Component{
                         placeholder='Where to Work'
                         onChange={this.handleChange}/>
                 </Menu.Item >
-                <Menu.Item borderless position="right">Start</Menu.Item>
-                <Menu.Item>
-                <DateInput
-                    name="startDate"
-                    placeholder="Date"
-                    value={this.state.startDate}
-                    iconPosition="left"
-                    onChange={this.handleChange}
-                    dateFormat="MM-DD-YYYY"
-                    closable
-                />
-                </Menu.Item>
-                <Menu.Item borderless position="right">End</Menu.Item>
-                <Menu.Item borderless>
-                <DateInput
-                    name="endDate"
-                    placeholder="Date"
-                    value={this.state.endDate}
-                    iconPosition="left"
-                    onChange={this.handleChange}
-                    closable
-                    dateFormat="MM-DD-YYYY"
-                    minDate={this.state.startDate}
-                />
-                </Menu.Item>
+                {/* <Menu.Item borderless position="right">Start</Menu.Item> */}
+                <CalendarInput />
             </Menu>
             <Dropdown raised className="features-dropdown" placeholder ='Select Features' fluid multiple selection options={this.options} />
             </Container>

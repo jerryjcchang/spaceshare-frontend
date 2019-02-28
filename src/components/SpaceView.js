@@ -2,8 +2,9 @@ import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Image, Container, Segment, Button, Grid, Menu } from 'semantic-ui-react'
-import { DateInput } from 'semantic-ui-calendar-react'
+import { DateInput, DatesRangeInput } from 'semantic-ui-calendar-react'
 import { bookingSpace } from '../redux/actionCreator'
+// import { moment } from ''
 
 class SpaceView extends React.Component {
 
@@ -23,6 +24,9 @@ class SpaceView extends React.Component {
     }
 
     handleReserveButton = () => {
+        var moment = require('moment')
+        moment().format()
+        debugger
         if(this.props.user){
             if (!this.state.startDate || !this.state.endDate){
                 alert('You must select a Start and End date')
@@ -33,6 +37,7 @@ class SpaceView extends React.Component {
                 end: this.state.endDate
             }
             this.props.bookingSpace(info)
+            this.props.routeProps.history.push('/profile')
             }
         } else {
             alert('You must be logged in to reserve a space')
@@ -47,7 +52,7 @@ class SpaceView extends React.Component {
                 {/* <div className="view-header" onClick={this.handleClick}>{this.props.space.name}</div> */}
                 {/* <div className="view-image-container"> */}
                 <Container className="space-page">
-                    <Image raised centered size="large" src={this.props.space.img_url}></Image>
+                    <Image raised centered size="big" src={this.props.space.img_url}></Image>
                     <Container raised className="space-details">
                             <h1>{this.props.space.name}</h1>
                             <Segment.Group>
@@ -60,7 +65,7 @@ class SpaceView extends React.Component {
                                 </Segment>
                                 <Segment>
                                     {/* <Button primary>Reserve</Button> */}
-                                    <Menu secondary>
+                                    <Menu stackable secondary>
                                     <Menu.Item>Start</Menu.Item>
                                         <Menu.Item>
                                         <DateInput
@@ -84,6 +89,7 @@ class SpaceView extends React.Component {
                                             closable
                                             dateFormat="MMM-DD-YYYY"
                                             minDate={this.state.startDate}
+                                            initialDate={this.state.startDate}
                                         />
                                         </Menu.Item>
                                         <Menu.Item><Button primary onClick={this.handleReserveButton}>Reserve</Button></Menu.Item>
