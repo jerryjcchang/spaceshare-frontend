@@ -72,6 +72,7 @@ function bookingSpace(info){
         })
         .then(res => res.json())
         .then(booking => {
+            // debugger
             console.log(booking)
             dispatch(bookedSpace(booking))
         })
@@ -94,6 +95,7 @@ function fetchedAllSpaces(allSpaces){
 }
 
 function bookedSpace(booking){
+    debugger
     return {type: "MAKE_BOOKING", payload: booking}
 }
 
