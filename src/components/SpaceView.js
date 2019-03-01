@@ -4,13 +4,19 @@ import { connect } from 'react-redux'
 import { Image, Container, Segment, Button, Grid, Menu } from 'semantic-ui-react'
 import { DateInput, DatesRangeInput } from 'semantic-ui-calendar-react'
 import { bookingSpace } from '../redux/actionCreator'
-// import { moment } from ''
+// import { moment } from 'moment'
+
+var moment = require('moment')
+moment().format()
 
 class SpaceView extends React.Component {
+
+    moment = require('moment')
 
     state = {
         startDate: "",
         endDate: "",
+        bookedDates: [],
     }
 
     handleChange = (event, {name, value}) => {
@@ -26,7 +32,7 @@ class SpaceView extends React.Component {
     handleReserveButton = () => {
         var moment = require('moment')
         moment().format()
-        debugger
+        // debugger
         if(this.props.user){
             if (!this.state.startDate || !this.state.endDate){
                 alert('You must select a Start and End date')
@@ -42,6 +48,27 @@ class SpaceView extends React.Component {
         } else {
             alert('You must be logged in to reserve a space')
         }
+    }
+
+    blockedDates = () => {
+        let t = this
+
+            let bookings = this.props.bookings.filter(booking => this.props.space_id === booking.space.id)
+            // debugger
+            if(bookings !== []){
+                if(bookings.length === 1){
+                    let bookingArr = bookings[0].dates
+                    let parsedBookingDates = bookingArr.map(date => moment(date).format('MMM-DD-YYYY'))
+                    this.setState({bookedDates: parsedBookingDates})
+                } else {
+                    // take bookings array and map booking dates
+                    let bookingsDatesArr = bookings.map(booking => booking.dates)
+                    let bookingArr = [].concat.apply([],bookingsDatesArr)
+                    let uniqueBookingDates = bookingArr.filter((v,i,a) => a.indexOf(v) === i)
+                    let parsedBookingDates = uniqueBookingDates.map(date => moment(date).format('MMM-DD-YYYY'))
+                    this.setState({bookedDates: parsedBookingDates})
+                }
+            }
     }
 
     render(){
@@ -76,6 +103,8 @@ class SpaceView extends React.Component {
                                             onChange={this.handleChange}
                                             dateFormat="MMM-DD-YYYY"
                                             closable
+                                            disable={this.state.bookedDates}
+                                            onClick={this.blockedDates}
                                         />
                                         </Menu.Item>
                                         <Menu.Item>End</Menu.Item>
@@ -90,6 +119,8 @@ class SpaceView extends React.Component {
                                             dateFormat="MMM-DD-YYYY"
                                             minDate={this.state.startDate}
                                             initialDate={this.state.startDate}
+                                            disable={this.state.bookedDates}
+                                            // marked={this.state.bookedDates}
                                         />
                                         </Menu.Item>
                                         <Menu.Item><Button primary onClick={this.handleReserveButton}>Reserve</Button></Menu.Item>
@@ -115,7 +146,8 @@ const mapStateToProps = (state, ownProps) => {
         allSpaces: state.allSpaces,
         routeProps: ownProps.routeProps,
         space: state.allSpaces.find(space => space.id === parseInt(ownProps.routeProps.match.params.id)),
-        // currentUserID: state.currentUser.id
+        bookings: state.user_bookings,
+        space_id: parseInt(ownProps.routeProps.match.params.id)
     }
 }
 

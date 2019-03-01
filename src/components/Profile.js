@@ -16,7 +16,7 @@ class Profile extends React.Component{
             <h3>Booked Spaces</h3>
             <Card.Group itemsPerRow="4">
                 {this.props.bookings.map(booking => 
-                    <BookedCard space={booking}/>)}
+                    <BookedCard booking={booking}/>)}
 
             </Card.Group>
             </Container>

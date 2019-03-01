@@ -20,7 +20,7 @@ class Spaces extends React.Component{
                     <Card.Group stackable doubling className="spaces-list" itemsPerRow="4">
                         {/* <div className="row"> */}
                         {this.props.allSpaces
-                         .map(space => <SpaceCard index={space.id} space={space} />)}
+                         .map(space => <SpaceCard key={space.id} space={space} />)}
                         {/* </div> */}
                     {/* </div> */}
                     </Card.Group>

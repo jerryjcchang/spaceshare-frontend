@@ -34,7 +34,7 @@ class CalendarInput extends React.Component{
                     // markColor="blue"
                 />
                 </Menu.Item>
-                <Menu.Item borderless>
+                <Menu.Item>
                 <DateInput
                     clearable
                     clearIcon={<Icon name="remove" color="red" />}
