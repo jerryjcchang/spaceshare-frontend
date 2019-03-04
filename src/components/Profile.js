@@ -5,6 +5,8 @@ import BookedCard from './BookedCard'
 
 class Profile extends React.Component{
 
+
+
     render(){
         return(
             <body className="profile">
@@ -32,9 +34,8 @@ class Profile extends React.Component{
 const mapStateToProps = (state) => {
     return{
         user: state.currentUser,
-        bookings: state.user_bookings,
+        bookings: state.userBookings,
     }
 }
 
-
-export default connect(mapStateToProps)(Profile)
+export default connect(mapStateToProps,)(Profile)

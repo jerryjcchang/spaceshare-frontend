@@ -52,8 +52,8 @@ code {
 }
 
 .ui.image.card-img {
-  max-height: 40vh;
-  min-height: 23vh;
+  height: 23vh;
+  width: 100vw;
 }
 
 /* body.home{
@@ -127,6 +127,7 @@ body.register {
 body.space-page {
   background: rgb(231, 230, 230);
   min-height: 100vh;
+  /* padding-bottom: 5vh; */
 }
 
 body.profile {
@@ -149,4 +150,32 @@ body.profile {
   padding-bottom: 5vh;
   overflow: hidden;
   min-height: 100vh;
+}
+
+/* .ui.container.bookings {
+  margin-bottom: 
+} */
+
+.ui.horizontal.segments.booking-div {
+  background-color: white;
+  margin-top: 1vh;
+}
+
+.ui.segments.bookings {
+  background: #2c86cf;
+  margin-bottom: 5vh;
+}
+
+.ui.menu:not(.vertical) .item>.button {
+  margin-left: .4vw;
+}
+
+.ui.segment.booking-menu.highlight {
+  border-style: solid;
+  border-width: 5px;
+  border-color: #00b5ad;
+}
+
+#days-div {
+  width: 15vw;
 }

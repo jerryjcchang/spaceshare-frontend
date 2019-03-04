@@ -25,7 +25,7 @@ class Navbar extends React.Component{
                 <h3>About</h3>
             </Menu.Item>
             {this.props.user ?
-            <Menu.Item onClick={this.props.logOut}>
+            <Menu.Item onClick={this.props.logOut} as={Link} to="/spaces" >
                 <h3>Log Out</h3>
             </Menu.Item>
             :

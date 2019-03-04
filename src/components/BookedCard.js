@@ -2,26 +2,28 @@ import React from 'react'
 import { Card, Header, Image, Icon } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
+import { deletingBooking } from '../redux/actionCreator'
 
 class BookedCard extends React.Component{
+
+    handleCancelBooking = () => {
+        this.props.cancelBooking(this.props.booking.id)
+    }
     
     render(){
         return(
             // <Link to={`/spaces/${this.props.space.id}`}>
             <Card raised fluid as={Link} to={`/spaces/${this.props.booking.space.id}`}>
                 <div className="rate-div">
-                   
-                    <Icon title="Edit Booking" align="right" size="large" name="edit"/>
-                    <Icon title="Contact Host" size="large" name="mail"/>
-                    <Icon title="Cancel Booking" size="large" name="cancel"/>
+                   <h3>{this.props.booking.space.name}</h3>
                 </div>
-                <Image className="card-img" size="medium" src={this.props.booking.space.img_url} />
+                <Image className="card-img" src={this.props.booking.space.img_url} />
                 <Card.Content>
-                <Card.Header>{this.props.booking.space.name}</Card.Header>
+                {/* <Card.Header>{this.props.booking.space.name}</Card.Header> */}
                 {/* <Card.Description>{this.props.space.city}, {this.props.space.state}</Card.Description> */}
                 <Card.Description>
                     <Header>
-                        <Icon title="Days Booked" color="grey" inverted circular size="large" name="calendar check"/>{this.props.booking.dates.length}
+                        <Icon title="Days Booked" color="grey" inverted circular size="large" name="calendar check"/>Bookings: {this.props.booking.dates.length}
                     </Header>
                     </Card.Description>
                 </Card.Content>
@@ -33,8 +35,14 @@ class BookedCard extends React.Component{
 
 const mapStateToProps = state => {
     return {
-        bookings: state.user_bookings
+        bookings: state.userBookings,
     }
 }
 
-export default connect(mapStateToProps)(BookedCard)
+const mapDispatchToProps = dispatch => {
+    return{
+        cancelBooking: (info) => {dispatch(deletingBooking(info))},
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(BookedCard)
