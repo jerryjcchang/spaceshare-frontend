@@ -23,7 +23,7 @@ class BookedCard extends React.Component{
                 {/* <Card.Description>{this.props.space.city}, {this.props.space.state}</Card.Description> */}
                 <Card.Description>
                     <Header>
-                        <Icon title="Days Booked" color="grey" inverted circular size="large" name="calendar check"/>Bookings: {this.props.booking.dates.length}
+                        <Icon title="Days Booked" color="grey" inverted circular size="large" name="calendar check"/>Booked Days: {this.props.booking.dates.length}
                     </Header>
                     </Card.Description>
                 </Card.Content>

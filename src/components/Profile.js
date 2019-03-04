@@ -5,7 +5,16 @@ import BookedCard from './BookedCard'
 
 class Profile extends React.Component{
 
-
+    uniqueBookings = () => {
+        const uniqueBookings = []
+        this.props.bookings.filter(booking => {
+            let i = uniqueBookings.findIndex(x => x.space.id === booking.space.id)
+            if(i <= -1){
+                uniqueBookings.push(booking)
+            } return null
+        })
+        return uniqueBookings
+    }
 
     render(){
         return(
@@ -17,7 +26,7 @@ class Profile extends React.Component{
             <h1>{`${this.props.user.first_name} ${this.props.user.last_name}`}</h1>
             <h3>Booked Spaces</h3>
             <Card.Group itemsPerRow="4">
-                {this.props.bookings.map(booking => 
+                {this.uniqueBookings().map(booking => 
                     <BookedCard booking={booking}/>)}
 
             </Card.Group>

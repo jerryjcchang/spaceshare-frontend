@@ -6,9 +6,7 @@ import { loggingOut } from '../redux/actionCreator'
 
 class Navbar extends React.Component{
 
- 
-
- render(){
+    render(){
      return(
         <Menu fitted="vertically" fixed="top" className="navbar" inverted>
             <Menu.Item position="left">
@@ -25,7 +23,9 @@ class Navbar extends React.Component{
                 <h3>About</h3>
             </Menu.Item>
             {this.props.user ?
-            <Menu.Item onClick={this.props.logOut} as={Link} to="/spaces" >
+            <Menu.Item as={Link} to="/profile"><h3>My Profile</h3></Menu.Item> : null}
+            {this.props.user ?
+            <Menu.Item onClick={this.props.logOut} as={Link} to="/spaces">
                 <h3>Log Out</h3>
             </Menu.Item>
             :

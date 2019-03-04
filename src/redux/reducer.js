@@ -22,7 +22,7 @@ const setBookingsReducer = (oldState="", action) => {
       return [...oldState, action.payload].sort((a,b) => moment(a.start)-moment(b.start))
     case "UPDATE_BOOKING":
       return oldState.map(booking => {
-        if(booking.booking_id === action.payload.id){
+        if(booking.id === action.payload.id){
           return {
             ...booking,
             start: action.payload.start,
@@ -33,7 +33,7 @@ const setBookingsReducer = (oldState="", action) => {
         return booking
       })
     case "DELETE_BOOKING":
-      return oldState.filter(booking => booking.booking_id !== action.payload.id)
+      return oldState.filter(booking => booking.id !== action.payload.id)
     default:
       return oldState
   }

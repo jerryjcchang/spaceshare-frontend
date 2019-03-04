@@ -19,6 +19,10 @@ class SpaceView extends React.Component {
         endDate: "",
     }
 
+    componentWillUnmount(){
+        document.getElementById("booking-menu").classList.remove("highlight")
+    }
+
     handleEndDate = () => {
         return(this.props.editing ? this.props.end : this.state.endDate)
     }
@@ -75,11 +79,11 @@ class SpaceView extends React.Component {
         } else {
             if (document.getElementById("booking-menu")){
             document.getElementById("booking-menu").classList.remove("highlight")
+            }
             return (<Menu.Item>
                 <Button primary onClick={this.handleReserveButton}>Reserve</Button>
                 </Menu.Item>)    
             }
-        }
     }
 
     handleCancelEdit = () => {

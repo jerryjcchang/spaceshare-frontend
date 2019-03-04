@@ -3,7 +3,21 @@ const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/spaces`
 const BOOKINGS = `${URL}/bookings`
+const USERS = `${URL}/users`
 const token = localStorage.getItem('token')
+
+function registerUser(info){
+    return (dispatch) => {
+        fetch(`${USERS}`, {
+            method: "POST",
+            headers: {
+                "Content-Type":"application/json",
+                "Accept":"application/json"
+            },
+            body: JSON.stringify(info)
+        })
+    }
+}
 
 function fetchingAllSpaces(){
     return (dispatch) => {

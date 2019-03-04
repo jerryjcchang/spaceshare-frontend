@@ -9,7 +9,7 @@ class BookingDiv extends React.Component{
     handleDeleteBooking = () => {
         let t = this
         if (window.confirm("Are you sure you want to cancel this booking?")){
-            this.props.cancelBooking(this.props.booking.booking_id)
+            this.props.cancelBooking(this.props.booking.id)
         }
     }
 
@@ -20,7 +20,7 @@ class BookingDiv extends React.Component{
                 <Segment id="date-div" align="left"><Icon name="arrow alternate circle right" size="large"/> Start: {moment(this.props.booking.start).format("MMM-D-YYYY")}</Segment>
                 <Segment id="date-div" align="left"><Icon name="arrow alternate circle left" size="large"/>End: {moment(this.props.booking.end).format("MMM-D-YYYY")}</Segment>
                 <Segment align="right">
-                    <Button onClick={() => {this.props.editBooking(this.props.booking.booking_id, this.props.booking.start, this.props.booking.end)}}
+                    <Button onClick={() => {this.props.editBooking(this.props.booking.id, this.props.booking.start, this.props.booking.end)}}
                             color="teal" title="Edit Booking" align="right" name="edit">Edit</Button>
                     {/* <Icon color="teal" title="Contact Host" size="large" name="mail"/> */}
                     <Button onClick={this.handleDeleteBooking} 
