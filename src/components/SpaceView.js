@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { Image, Container, Segment, Button, Grid, Menu, Icon, Popup } from 'semantic-ui-react'
 import { DateInput, DatesRangeInput } from 'semantic-ui-calendar-react'
 import { bookingSpace, setStartDate, setEndDate, editBooking, clearStartDate, clearEndDate, cancelEdit, updatingBooking} from '../redux/actionCreator'
+import Map from './Map'
 import BookingDiv from './BookingDiv'
 import moment from 'moment'
 
@@ -149,6 +150,9 @@ class SpaceView extends React.Component {
                     <Container raised className="space-details">
                             <h1>{this.props.space.name}</h1>
                             <Segment.Group>
+                                <Segment id="map-container">
+                                    <Map space={this.props.space}/>
+                                </Segment>
                                 <Segment align="left">
                                     <span><b>Address:</b> {this.props.space.street_address} </span>
                                     <span>{`${this.props.space.city}, ${this.props.space.state} ${this.props.space.zip}`}</span>      
