@@ -98,7 +98,8 @@ body.login{
 }
 
 body.home {
-  background: rgb(231, 230, 230)
+  background: rgb(231, 230, 230);
+  min-height: 100vh;
 }
 
 body.register {
@@ -178,4 +179,32 @@ body.profile {
 
 #days-div {
   width: 15vw;
+}
+
+#feature-icon {
+  width: 8vh;
+  length: 8vh;
+  margin-right: 3vh;
+}
+
+#card-features-div{
+  margin-top: 1.5vh;
+  border: 0vh;
+  border-top: 1px;
+  border-style: solid;
+  border-color: rgb(236, 236, 236);
+  padding-top: 1.2vh;
+  /* background: lightgrey; */
+  /* min-height: 3.5vh; */
+  /* padding: 1vh; */
+}
+
+#card-feature{
+  width: 2.65vh;
+  length: 2.65vh;
+  margin-left: .5vh;
+}
+
+#card-content{
+  height: 14vh;
 }

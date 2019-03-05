@@ -7,6 +7,45 @@ import { withRouter } from 'react-router-dom'
 
 class Spaces extends React.Component{
 
+    filteredSpaces = () => {
+        let {allSpaces, searchTerm, selectedFeatures} = this.props
+        let filteredSpaces = allSpaces.filter(space => space.name.toLowerCase().includes(searchTerm.toLowerCase()) || space.city.toLowerCase().includes(searchTerm.toLowerCase()))
+        if (selectedFeatures.length > 0){
+            let x
+        selectedFeatures.forEach(
+            feature => {
+                // debugger
+                    x = filteredSpaces.filter((space) => {
+                        return space.features_list.includes(feature)
+                    })
+            console.log("x is", x)
+                }
+            )
+            return x
+        }
+        return filteredSpaces
+    }
+        
+
+    renderSpaces = () => {
+        let {allSpaces, searchTerm, selectedFeatures} = this.props
+        if(this.props.allSpaces && !searchTerm && selectedFeatures.length <= 0){
+            console.log('inside block 1')
+            return(
+            <Card.Group stackable doubling className="spaces-list" itemsPerRow="4">
+                {this.props.allSpaces.map(space => <SpaceCard key={space.id} space={space} />)}
+            </Card.Group>
+            )
+        } else if(searchTerm || selectedFeatures){
+            console.log('inside block 2')
+            return(
+            <Card.Group stackable doubling className="spaces-list" itemsPerRow="4">
+                {this.filteredSpaces().map(space => <SpaceCard key={space.id} space={space} />)}
+            </Card.Group>
+            )
+        }
+    }
+
     render(){
         return(
             <body className="home">
@@ -16,14 +55,7 @@ class Spaces extends React.Component{
                 <Header.Content>Spaces Index</Header.Content>
                 </Header> */}
                 <SearchBar />
-                    {/* <div className="ui four column grid"> */}
-                    <Card.Group stackable doubling className="spaces-list" itemsPerRow="4">
-                        {/* <div className="row"> */}
-                        {this.props.allSpaces
-                         .map(space => <SpaceCard key={space.id} space={space} />)}
-                        {/* </div> */}
-                    {/* </div> */}
-                    </Card.Group>
+                    {this.renderSpaces()}
                 </Container>
                 
             </body>
@@ -33,7 +65,9 @@ class Spaces extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
-        allSpaces: state.allSpaces
+        allSpaces: state.allSpaces,
+        searchTerm: state.searchBar.searchTerm,
+        selectedFeatures: state.searchBar.selectedFeatures
     }
 }
 

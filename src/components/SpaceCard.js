@@ -5,14 +5,16 @@ import { Link } from 'react-router-dom'
 class SpaceCard extends React.Component{
     
     render(){
+        const {id,daily_rate,img_url,name,city,state,features} = this.props.space
         return(
             // <Link to={`/spaces/${this.props.space.id}`}>
-            <Card raised fluid as={Link} to={`/spaces/${this.props.space.id}`}>
-                <div className="rate-div"><h3>${this.props.space.daily_rate} daily</h3></div>
-                <Image className="card-img" src={this.props.space.img_url} />
-                <Card.Content>
-                <Card.Header>{this.props.space.name}</Card.Header>
-                <Card.Description>{this.props.space.city}, {this.props.space.state}</Card.Description>
+            <Card raised fluid as={Link} to={`/spaces/${id}`}>
+                <div className="rate-div"><h3>${daily_rate} daily</h3></div>
+                <Image className="card-img" src={img_url} />
+                <Card.Content id="card-content">
+                <Card.Header>{name}</Card.Header>
+                <Card.Description>{city}, {state}</Card.Description>
+                <div id="card-features-div" align="right">{features.map(feature => <Image id="card-feature" inline src={feature.img_url}/>)}</div>
                 </Card.Content>
             </Card>
             // </Link>

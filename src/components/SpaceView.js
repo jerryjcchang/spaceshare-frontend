@@ -1,18 +1,13 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Image, Container, Segment, Button, Grid, Menu, Icon } from 'semantic-ui-react'
+import { Image, Container, Segment, Button, Grid, Menu, Icon, Popup } from 'semantic-ui-react'
 import { DateInput, DatesRangeInput } from 'semantic-ui-calendar-react'
 import { bookingSpace, setStartDate, setEndDate, editBooking, clearStartDate, clearEndDate, cancelEdit, updatingBooking} from '../redux/actionCreator'
 import BookingDiv from './BookingDiv'
 import moment from 'moment'
 
-// var moment = require('moment')
-// moment().format()
-
 class SpaceView extends React.Component {
-
-    // moment = require('moment')
 
     state = {
         startDate: "",
@@ -20,7 +15,7 @@ class SpaceView extends React.Component {
     }
 
     componentWillUnmount(){
-        document.getElementById("booking-menu").classList.remove("highlight")
+        this.props.cancelEdit()
     }
 
     handleEndDate = () => {
@@ -88,7 +83,9 @@ class SpaceView extends React.Component {
 
     handleCancelEdit = () => {
         this.props.cancelEdit()
-        document.getElementById("booking-menu").classList.remove("highlight")
+        if (document.getElementById("booking-menu")){
+            document.getElementById("booking-menu").classList.remove("highlight")
+        }
     }
 
     handleClickStart = () => {
@@ -158,6 +155,9 @@ class SpaceView extends React.Component {
                                 </Segment>                 
                                 <Segment align="left">
                                     <span><b>Description:</b> {this.props.space.description}</span>
+                                </Segment>
+                                <Segment align="left" horizontal>
+            <b>Amenities</b>: {this.props.space.features.map(feature => <Popup trigger={<Image id="feature-icon" spaced="left" inline src={feature.img_url} />} content={feature.name} />)}
                                 </Segment>
                                 <Segment className="booking-menu" id="booking-menu">
                                     <Menu stackable secondary>

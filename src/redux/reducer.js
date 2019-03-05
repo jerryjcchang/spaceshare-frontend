@@ -111,6 +111,29 @@ const bookingFormEndReducer = (oldState="", action) => {
   }
 }
 
+const searchTermReducer = (oldState="", action) => {
+  switch(action.type){
+    case "SET_SEARCH_TERM":
+      return action.payload
+    default:
+      return oldState
+  }
+}
+
+const featuresReducer = (oldState=[], action) => {
+  switch(action.type){
+    case "SET_FEATURES":
+      return action.payload
+    default:
+      return oldState
+  }
+}
+
+const searchBarReducer = combineReducers({
+  searchTerm: searchTermReducer,
+  selectedFeatures: featuresReducer,
+})
+
 const setBookingFormReducer = combineReducers({
   editing: bookingFormEditingReducer,
   id: bookingFormIdReducer,
@@ -124,6 +147,7 @@ const rootReducer = combineReducers({
   userBookings: setBookingsReducer,
   userSpaces: setSpacesReducer,
   bookingForm: setBookingFormReducer,
+  searchBar: searchBarReducer,
 })
 
 // state = {

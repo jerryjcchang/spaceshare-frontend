@@ -182,10 +182,20 @@ function bookedSpace(booking){
     return {type: "MAKE_BOOKING", payload: booking}
 }
 
+function setFeatures(featuresArray){
+    return {type: "SET_FEATURES", payload: featuresArray}
+}
+
+function setSearchTerm(searchTerm){
+    return {type: "SET_SEARCH_TERM", payload: searchTerm}
+}
+
 export {loggingInUser, 
         loggingInCurrentUser, 
         loggingOut, 
         fetchingAllSpaces, 
+        setSearchTerm,
+        setFeatures,
         setStartDate,
         setEndDate,
         clearStartDate,
