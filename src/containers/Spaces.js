@@ -1,10 +1,13 @@
 import React from 'react'
-import { Container, Card } from 'semantic-ui-react'
+import { Container, Card, Image, Loader } from 'semantic-ui-react'
 import SpaceCard from '../components/SpaceCard'
 import SearchBar from '../components/SearchBar'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { statesHash } from '../StatesData'
+// import { statesHash } from '../StatesData'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { fetchingAllSpaces } from '../redux/actionCreator'
+
 
 class Spaces extends React.Component{
 
@@ -30,13 +33,25 @@ class Spaces extends React.Component{
         
 
     renderSpaces = () => {
-        let {allSpaces, searchTerm, selectedFeatures} = this.props
+        let {allSpaces, searchTerm, selectedFeatures, fetchMoreSpaces} = this.props
         if(this.props.allSpaces && !searchTerm && selectedFeatures.length <= 0){
             console.log('inside block 1')
             return(
+            <InfiniteScroll
+                dataLength={allSpaces.length}
+                next={() => {fetchMoreSpaces(allSpaces.length)}}
+                hasMore={allSpaces.length < 250}
+                loader={<Image centered size="medium" src="https://media.giphy.com/media/MtWKB3pR7vQeQ/giphy.gif"/>}
+                endMessage={
+                    <p style={{textAlign: 'center'}}>
+                      <b>Yay! You have seen it all</b>
+                    </p>
+                  }
+                >
             <Card.Group stackable doubling className="spaces-list" itemsPerRow="4">
                 {this.props.allSpaces.map(space => <SpaceCard key={space.id} space={space} />)}
             </Card.Group>
+            </InfiniteScroll>
             )
         } else if(searchTerm || selectedFeatures){
             console.log('inside block 2')
@@ -73,6 +88,12 @@ const mapStateToProps = (state) => {
     }
 }
 
+const mapDispatchToProps = dispatch => {
+    return {
+        fetchMoreSpaces: (index) => {dispatch(fetchingAllSpaces(index))},
+    }
+  }
 
 
-export default withRouter(connect(mapStateToProps)(Spaces))
+
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(Spaces))

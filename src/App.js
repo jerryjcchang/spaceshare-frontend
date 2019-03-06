@@ -15,7 +15,6 @@ import { withRouter, Router } from 'react-router-dom'
 class App extends Component {
 
   componentDidMount(){
-    debugger
     this.props.fetchAllSpaces(this.props.allSpaces.length)
     if(localStorage.getItem('token'))
     this.props.getCurrentUser()
@@ -27,7 +26,9 @@ class App extends Component {
         <Navbar />
           <ScrollToTop>
         <Route exact path="/spaces" component={Spaces} />
-        <Route exact path="/register" component={Registration} />
+        <Route exact path="/register" render={(props) => {
+          return (<Registration routeProps={props}/>)
+        }} />
         {/* <Route exact path="/login" component={Login} /> */}
 
         <Route exact path="/login" render={() => (

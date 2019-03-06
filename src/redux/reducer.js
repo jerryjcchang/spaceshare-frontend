@@ -52,8 +52,8 @@ const setSpacesReducer = (oldState=[], action) => {
 
 const setAllSpacesReducer = (oldState=[], action) => {
   switch(action.type){
-    case "FETCH_ALL_SPACES":
-      return action.payload
+    case "FETCH_SPACES":
+      return [...oldState].concat(action.payload)
     default:
       return oldState
   }

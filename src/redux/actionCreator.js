@@ -20,7 +20,6 @@ function registerUser(info){
 }
 
 function fetchingAllSpaces(index){
-    debugger
     return (dispatch) => {
         fetch(`${SPACES}/${index}`, {
             method: "GET",
@@ -29,8 +28,8 @@ function fetchingAllSpaces(index){
             // }
         })
         .then(r => r.json())
-        .then(allSpaces => {
-            dispatch(fetchedAllSpaces(allSpaces))
+        .then(spaces => {
+            dispatch(fetchedSpaces(spaces))
         }) 
     }
 }
@@ -175,8 +174,8 @@ function loggingOut(){
     return {type: "LOG_OUT"}
 }
 
-function fetchedAllSpaces(allSpaces){
-    return {type: "FETCH_ALL_SPACES", payload: allSpaces}
+function fetchedSpaces(spaces){
+    return {type: "FETCH_SPACES", payload: spaces}
 }
 
 function bookedSpace(booking){
@@ -191,7 +190,8 @@ function setSearchTerm(searchTerm){
     return {type: "SET_SEARCH_TERM", payload: searchTerm}
 }
 
-export {loggingInUser, 
+export {registerUser,
+        loggingInUser, 
         loggingInCurrentUser, 
         loggingOut, 
         fetchingAllSpaces, 

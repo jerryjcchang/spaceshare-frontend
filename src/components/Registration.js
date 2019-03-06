@@ -1,6 +1,8 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Header, Image, Message, Segment, Dropdown } from 'semantic-ui-react'
 import { reactStatesData } from '../StatesData'
+import { connect } from 'react-redux'
+import { registerUser } from '../redux/actionCreator'
 
 class Registration extends React.Component {
 
@@ -12,7 +14,37 @@ class Registration extends React.Component {
         password: "",
         passwordConfirm: "",
         city: "",
-        phone: ""
+        phone: "",
+    }
+
+    handleRegister = () => {
+      const {email, firstName, lastName, company, password, passwordConfirm, city, phone} = this.state
+      const info = {
+        user: {
+        email,
+        first_name: firstName,
+        last_name: lastName,
+        company,
+        password,
+        password_confirm: passwordConfirm,
+        city,
+        phone,}
+      }
+      // debugger
+      this.props.registerUser(info)
+      this.props.routeProps.history.push('/login')
+    }
+
+    handleDisable = () => {
+      return(
+        !this.state.email ||
+        !this.state.firstName ||
+        !this.state.lastName ||
+        !this.state.company ||
+        !this.state.password ||
+        !this.state.confirmPassword ||
+        !this.state.city
+      )
     }
 
     render(){
@@ -36,28 +68,31 @@ class Registration extends React.Component {
                 <Header as='h2' textAlign='center' style={{color: "white"}}>
                 <div className="reg-header">Sign Up</div>
                 </Header>
-                <Form size='large'>
+                <Form onSubmit={this.handleRegister}size='large'>
                   <Segment stacked className="reg-form">
-                    <Form.Input fluid placeholder='E-mail address'
-                    onChange={e => this.setState({email: e.target.value})} />
+                    <Form.Input fluid icon="mail" placeholder='E-mail address'
+                      onChange={e => this.setState({email: e.target.value})} />
                     <Form.Input fluid placeholder='First Name' 
-                    onChange={e => this.setState({firstName: e.target.value})} />
+                      onChange={e => this.setState({firstName: e.target.value})} />
                     <Form.Input fluid placeholder='Last Name' 
-                    onChange={e => this.setState({lastName: e.target.value})} />
+                      onChange={e => this.setState({lastName: e.target.value})} />
                     <Form.Input fluid placeholder='City' 
-                    onChange={e => this.setState({city: e.target.value})} />
-                    <Form.Select clearable options={reactStatesData} fluid placeholder='State'
-                    onChange={e => this.setState({state: e.target.value})} />
+                      onChange={e => this.setState({city: e.target.value})} />
+                    <Form.Dropdown search selection clearable options={reactStatesData} fluid placeholder='State'
+                      onChange={e => this.setState({state: e.target.value})} />
                     <Form.Input fluid placeholder='Company' 
-                    onChange={e => this.setState({company: e.target.value})} />
-                    <Form.Input fluid placeholder='Password' type='password' 
-                    onChange={e => this.setState({password: e.target.value})} />
-                    <Form.Input fluid placeholder='Confirm' type='password' 
-                    onChange={e => this.setState({passwordConfirm: e.target.value})} />
-        
-                    <Button color='blue' fluid size='large'>
+                      onChange={e => this.setState({company: e.target.value})} />
+                    <Form.Input fluid icon="lock" placeholder='Password' type='password' 
+                      onChange={e => this.setState({password: e.target.value})} />
+                    <Form.Input fluid icon="lock" placeholder='Confirm' type='password' 
+                      onChange={e => this.setState({passwordConfirm: e.target.value})} />
+                    <Form.Input fluid icon="phone" placeholder='(987) 654-3210'
+                      onChange={e => this.setState({phone: e.target.value})} />
+                    <Form.Button color='blue' fluid size='large'
+                      // disabled={this.handleDisable()}
+                    >
                       Register
-                    </Button>
+                    </Form.Button>
                   </Segment>
                 </Form>
                 {/* <Message>
@@ -71,4 +106,15 @@ class Registration extends React.Component {
     }
 }
 
-export default Registration
+const mapStateToProps = (state,ownProps) => {
+  return{
+    routeProps: ownProps.routeProps,
+  }
+}
+
+const mapDispatchToProps = dispatch => {
+  return{
+    registerUser: (info) => dispatch(registerUser(info))
+  }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Registration)
