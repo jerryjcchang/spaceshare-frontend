@@ -9,6 +9,7 @@ import { statesHash } from '../StatesData'
 class Spaces extends React.Component{
 
     filteredSpaces = () => {
+        if(this.props.allSpaces){
         let {allSpaces, searchTerm, selectedFeatures} = this.props
         let filteredSpaces = allSpaces.filter(space => space.name.toLowerCase().includes(searchTerm.toLowerCase()) || space.city.toLowerCase().includes(searchTerm.toLowerCase()) || space.state.toLowerCase().includes(searchTerm.toLowerCase()) )
         if (selectedFeatures.length > 0){
@@ -24,6 +25,7 @@ class Spaces extends React.Component{
             return spaces
         }
         return filteredSpaces
+        }
     }
         
 

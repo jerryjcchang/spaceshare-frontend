@@ -15,7 +15,8 @@ import { withRouter, Router } from 'react-router-dom'
 class App extends Component {
 
   componentDidMount(){
-    this.props.fetchAllSpaces()
+    debugger
+    this.props.fetchAllSpaces(this.props.allSpaces.length)
     if(localStorage.getItem('token'))
     this.props.getCurrentUser()
   }
@@ -50,13 +51,14 @@ class App extends Component {
 
 const mapStateToProps = state => {
   return {
-      currentUser: state.currentUser
+      currentUser: state.currentUser,
+      allSpaces: state.allSpaces,
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-      fetchAllSpaces: () => {dispatch(fetchingAllSpaces())},
+      fetchAllSpaces: (index) => {dispatch(fetchingAllSpaces(index))},
       getCurrentUser: () => {dispatch(loggingInCurrentUser())},
   }
 }

@@ -1,7 +1,7 @@
 const URL = 'http://localhost:3001/api/v1'
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
-const SPACES = `${URL}/spaces`
+const SPACES = `${URL}/get_spaces`
 const BOOKINGS = `${URL}/bookings`
 const USERS = `${URL}/users`
 const token = localStorage.getItem('token')
@@ -19,9 +19,10 @@ function registerUser(info){
     }
 }
 
-function fetchingAllSpaces(){
+function fetchingAllSpaces(index){
+    debugger
     return (dispatch) => {
-        fetch(`${SPACES}`, {
+        fetch(`${SPACES}/${index}`, {
             method: "GET",
             // headers: {
             //     "Authentication": `Bearer ${token}`
