@@ -64,7 +64,9 @@ class SearchBar extends React.Component{
                         className='icon' 
                         icon='search' 
                         placeholder='Where to Work'
-                        onChange={this.handleSearch}/>
+                        onChange={this.handleSearch}
+                        clearable
+                        />
                 </Menu.Item >
                 {/* <Menu.Item borderless position="right">Start</Menu.Item> */}
                 <CalendarInput />

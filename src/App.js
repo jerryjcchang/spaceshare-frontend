@@ -8,8 +8,9 @@ import Spaces from './containers/Spaces'
 import SpaceView from './components/SpaceView'
 import Profile from './components/Profile'
 import { connect } from 'react-redux'
+import ScrollToTop from './components/ScrollToTop'
 import { fetchingAllSpaces, loggingInCurrentUser } from './redux/actionCreator'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Router } from 'react-router-dom'
 
 class App extends Component {
 
@@ -23,7 +24,8 @@ class App extends Component {
     return (
       <div className="app">
         <Navbar />
-        
+          <ScrollToTop>
+        <Route exact path="/spaces" component={Spaces} />
         <Route exact path="/register" component={Registration} />
         {/* <Route exact path="/login" component={Login} /> */}
 
@@ -34,12 +36,13 @@ class App extends Component {
             <Login />
           )
         )}/>
-        <Route exact path="/spaces" component={Spaces} />
+        
         <Route exact path="/spaces/:id" render={(props)=> {
           return (<SpaceView routeProps={props} />)
         }} 
         />
         <Route exact path="/profile" component={Profile} />
+        </ScrollToTop>
       </div>
     );
   }

@@ -1,5 +1,6 @@
 import React from 'react'
 import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { reactStatesData } from '../StatesData'
 
 class Registration extends React.Component {
 
@@ -45,6 +46,8 @@ class Registration extends React.Component {
                     onChange={e => this.setState({lastName: e.target.value})} />
                     <Form.Input fluid placeholder='City' 
                     onChange={e => this.setState({city: e.target.value})} />
+                    <Form.Select clearable options={reactStatesData} fluid placeholder='State'
+                    onChange={e => this.setState({state: e.target.value})} />
                     <Form.Input fluid placeholder='Company' 
                     onChange={e => this.setState({company: e.target.value})} />
                     <Form.Input fluid placeholder='Password' type='password' 

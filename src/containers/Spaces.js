@@ -4,24 +4,24 @@ import SpaceCard from '../components/SpaceCard'
 import SearchBar from '../components/SearchBar'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { statesHash } from '../StatesData'
 
 class Spaces extends React.Component{
 
     filteredSpaces = () => {
         let {allSpaces, searchTerm, selectedFeatures} = this.props
-        let filteredSpaces = allSpaces.filter(space => space.name.toLowerCase().includes(searchTerm.toLowerCase()) || space.city.toLowerCase().includes(searchTerm.toLowerCase()))
+        let filteredSpaces = allSpaces.filter(space => space.name.toLowerCase().includes(searchTerm.toLowerCase()) || space.city.toLowerCase().includes(searchTerm.toLowerCase()) || space.state.toLowerCase().includes(searchTerm.toLowerCase()) )
         if (selectedFeatures.length > 0){
-            let x
+            let spaces
         selectedFeatures.forEach(
             feature => {
                 // debugger
-                    x = filteredSpaces.filter((space) => {
+                    spaces = filteredSpaces.filter((space) => {
                         return space.features_list.includes(feature)
                     })
-            console.log("x is", x)
                 }
             )
-            return x
+            return spaces
         }
         return filteredSpaces
     }
