@@ -4,6 +4,7 @@ const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/get_spaces`
 const BOOKINGS = `${URL}/bookings`
 const USERS = `${URL}/users`
+const REDEEM = `${URL}/redeem`
 const token = localStorage.getItem('token')
 
 function registerUser(info){
@@ -133,7 +134,7 @@ function updatingBooking(info){
 
 function deletingBooking(info){
     return (dispatch) => {
-        fetch(`http://localhost:3001/api/v1/bookings/${info}`, {
+        fetch(`${BOOKINGS}/${info}`, {
             method: 'DELETE',
             headers: {
                 "Content-Type":"application/json",
@@ -145,6 +146,24 @@ function deletingBooking(info){
             dispatch(deletedBooking(booking))
         })
     }
+}
+
+function redeemingReward(){
+    return (dispatch) => {
+        fetch(`${REDEEM}`,{
+            method: 'PATCH',
+            headers: {
+                "Content-Type":"application/json",
+                "Accept":"application/json",
+                "Authentication":`Bearer ${token}`
+            }
+        })
+        .then(dispatch(redeemedReward()))
+    }
+}
+
+function redeemedReward(){
+    return {type: "REDEEM_REWARD"}
 }
 
 function editingBooking(id, start, end){
@@ -206,4 +225,5 @@ export {registerUser,
         editingBooking,
         cancelEdit,
         updatingBooking,
+        redeemingReward,
     }

@@ -51,7 +51,7 @@ code {
   padding-bottom: 2vh;
 }
 
-.ui.image.card-img {
+.ui.card>.image>img, .ui.cards>.card>.image>img, .ui.card>.image, .ui.cards>.card>.image {
   height: 23vh;
   width: 100vw;
 }
@@ -207,4 +207,8 @@ body.profile {
 
 #map-container{
   height: 40vh;
+}
+
+#discount{
+  color: rgb(33, 187, 33);
 }

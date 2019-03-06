@@ -140,6 +140,15 @@ class SpaceView extends React.Component {
         document.getElementById("booking-menu").classList.remove("highlight")
     }
 
+    handleDailyRate = () => {
+
+        if(!this.props.user.reward){ 
+            return <h2>Daily Rate: ${this.props.space.daily_rate}</h2>
+        } else {
+            return <h2 id="discount">Daily Rate: <strike>${this.props.space.daily_rate}</strike>  ${this.props.space.daily_rate - 15}</h2>
+        }
+    }
+
     render(){
         return(
             <body className="space-page">
@@ -199,7 +208,7 @@ class SpaceView extends React.Component {
                                         />
                                         </Menu.Item>
                                         {this.toggleReserveEditButton()}
-                                        <Menu.Item stackable position="right"><h2>Daily Rate: ${this.props.space.daily_rate}</h2></Menu.Item>
+                                        <Menu.Item stackable position="right">{this.handleDailyRate()}</Menu.Item>
                                         </Menu>
                                     </Segment>
                             </Segment.Group>

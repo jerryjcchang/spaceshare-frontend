@@ -1,7 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container, Image, Card } from 'semantic-ui-react' 
+import { Container, Image, Card, Segment, Button } from 'semantic-ui-react' 
 import BookedCard from './BookedCard'
+import { redeemingReward } from '../redux/actionCreator'
 
 class Profile extends React.Component{
 
@@ -16,6 +17,10 @@ class Profile extends React.Component{
         return uniqueBookings
     }
 
+    handleRedeem = () => {
+        this.props.redeem()
+    }
+
     render(){
         return(
             <body className="profile">
@@ -24,11 +29,17 @@ class Profile extends React.Component{
             <Container className="profile">
             <Image circular size="small" centered src="https://www.freeiconspng.com/uploads/customers-icon-20.png" />    
             <h1>{`${this.props.user.first_name} ${this.props.user.last_name}`}</h1>
+            <Segment><h1>SpacePoints: {this.props.user.points}</h1>            
+            <Button onClick={this.handleRedeem} color="green" size="large" 
+                    // disabled={this.props.user.points < 10000}
+            >
+                    Redeem for $15!
+            </Button>
+            </Segment>
             <h3>Booked Spaces</h3>
             <Card.Group itemsPerRow="4">
                 {this.uniqueBookings().map(booking => 
                     <BookedCard booking={booking}/>)}
-
             </Card.Group>
             </Container>
             )
@@ -47,4 +58,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps,)(Profile)
+const mapDispatchToProps = dispatch => {
+    return {
+        redeem: () => {dispatch(redeemingReward())},
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Profile)
