@@ -55,8 +55,8 @@ class SearchBar extends React.Component{
 
     render(){
         return(
-            <Container>
-            <Menu stackable className="spaces-menu">
+            <Container id="search-bar">
+            <Menu fixed="top" className="spaces-menu">
                 <Menu.Item className="search-bar">
                     <Input 
                         name="searchTerm"
@@ -68,10 +68,13 @@ class SearchBar extends React.Component{
                         clearable
                         />
                 </Menu.Item >
+                <Menu.Item>
+                <Dropdown clearable onChange={this.handleDropdown} id="features-dropdown" placeholder ='Select Features' fluid multiple selection options={this.options} />
+                </Menu.Item>
                 {/* <Menu.Item borderless position="right">Start</Menu.Item> */}
-                <CalendarInput />
+                {/* <CalendarInput /> */}
+                
             </Menu>
-            <Dropdown clearable onChange={this.handleDropdown} className="features-dropdown" placeholder ='Select Features' fluid multiple selection options={this.options} />
             </Container>
         )
     }

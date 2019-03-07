@@ -55,7 +55,9 @@ class SpaceView extends React.Component {
                 end: this.props.end
             }
             this.props.bookingSpace(info)
-            // this.props.routeProps.history.push('/profile')
+                if(this.props.user.reward){
+                    
+                }
             }
         } else {
             alert('You must be logged in to reserve a space')

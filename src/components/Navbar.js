@@ -6,16 +6,25 @@ import { loggingOut } from '../redux/actionCreator'
 
 class Navbar extends React.Component{
 
+    state={
+        hover: false
+    }
+
+    handleWelcomeDiv = () => {
+        return (!this.state.hover ? `Hi ${this.props.user.first_name}` : `SpacePoints: ${this.props.user.points}`)
+    }
+
     render(){
      return(
         <Menu fitted="vertically" fixed="top" className="navbar" inverted>
             <Menu.Item position="left">
                 <Image src="/logo_transparent.png" size='tiny' as={Link} to="/spaces"/>
                 {this.props.user ? 
-                <Link to={`/profile`}>
-                    {/* <Image size="mini" src="https://www.freeiconspng.com/uploads/customers-icon-20.png" /> */}
-                    <span className="user-welcome">Hi {this.props.user.first_name}</span>
-                </Link> 
+                <span 
+                    onMouseEnter={()=>{this.setState({hover: !this.state.hover})}} 
+                    onMouseLeave={()=>{this.setState({hover: !this.state.hover})}} 
+                    className="user-welcome">{this.handleWelcomeDiv()}
+                </span>
                 : 
                 null}
             </Menu.Item>

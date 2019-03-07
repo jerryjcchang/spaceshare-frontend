@@ -31,7 +31,7 @@ class Profile extends React.Component{
             <h1>{`${this.props.user.first_name} ${this.props.user.last_name}`}</h1>
             <Segment><h1>SpacePoints: {this.props.user.points}</h1>            
             <Button onClick={this.handleRedeem} color="green" size="large" 
-                    // disabled={this.props.user.points < 10000}
+                    disabled={this.props.user.points < 10000}
             >
                     Redeem for $15!
             </Button>

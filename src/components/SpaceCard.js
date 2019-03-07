@@ -17,7 +17,7 @@ class SpaceCard extends React.Component{
         
         return(
             // <Link to={`/spaces/${this.props.space.id}`}>
-            <Card raised fluid as={Link} to={`/spaces/${id}`}>
+            <Card id="space-card" raised fluid as={Link} to={`/spaces/${id}`}>
                 <div className="rate-div"><h3>${daily_rate} daily</h3></div>
                 {/* <Label color="orange" corner>Promotion</Label> */}
                 <Image id="card-img" src={img_url} label={this.promoHandler()}/>

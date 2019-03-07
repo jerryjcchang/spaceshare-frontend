@@ -6,24 +6,25 @@ const setUserReducer = (oldState="", action) => {
     case "LOG_IN":
       return action.payload.user
     case "MAKE_BOOKING":
-      debugger
-      return {
-        ...oldState,
-        points: oldState.points + action.payload.space.daily_rate * 10,
-        reward: false,
-      }
-    case "DELETE_BOOKING":
     debugger
       return {
         ...oldState,
-        points: oldState.points - action.payload.space.daily_rate * 10
+        points: oldState.points + action.payload.space.daily_rate * action.payload.dates.length * 10,
+        reward: false,
+      }
+    case "DELETE_BOOKING":
+      debugger
+      return {
+        ...oldState,
+        points: oldState.points - action.payload.space.daily_rate * action.payload.dates.length * 10,
       }
     case "LOG_OUT":
       return ""
     case "REDEEM_REWARD":
       return {
         ...oldState,
-        reward: true
+        reward: true,
+        points: oldState.points-10000
       }
     default:
       return oldState
