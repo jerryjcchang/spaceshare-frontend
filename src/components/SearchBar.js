@@ -36,9 +36,11 @@ class SearchBar extends React.Component{
         {key: 'single', text: 'single desk', value: 'single desk'},
         {key: 'group', text: 'group desks', value: 'group desk'},
         {key: 'conference', text: 'conference room', value: 'conference room'},
+        {key: 'office', text: 'office', value:'office'},
         {key: 'wifi', text: 'wifi', value: 'wifi'},
         {key: 'monitors', text: 'monitors', value: 'monitors'},
-        {key: 'coffee machine', text: 'coffee machine', value: 'coffee machine'}
+        {key: 'coffee machine', text: 'coffee machine', value: 'coffee machine'},
+        {key: 'assistant', text: 'assistant', value: 'personal assistant'}
     ]
 
     // formatDate = (date) => {

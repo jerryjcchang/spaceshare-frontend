@@ -119,14 +119,11 @@ function updatingBooking(info){
                 "Content-Type":"application/json",
                 "Accept":"application/json",
                 "Authentication":`Bearer ${token}`},
-            body: JSON.stringify({
-                start: info.start,
-                end: info.end
-            })
+            body: JSON.stringify(info)
         })
         .then(r => r.json())
-        .then(booking => {
-            dispatch(updatedBooking(booking))
+        .then(bookingAndUserPointsObj => {
+            dispatch(updatedBooking(bookingAndUserPointsObj))
             dispatch(cancelEdit())
         })
     }
@@ -166,16 +163,16 @@ function redeemedReward(){
     return {type: "REDEEM_REWARD"}
 }
 
-function editingBooking(id, start, end){
-    return {type: "EDIT_START", payload:{id, start, end}}
+function editingBooking(id, start, end, days){
+    return {type: "EDIT_START", payload:{id, start, end, days}}
 }
 
 function cancelEdit(){
     return {type: "CANCEL_EDIT"}
 }
 
-function updatedBooking(booking){
-    return {type: "UPDATE_BOOKING", payload: booking}
+function updatedBooking(obj){
+    return {type: "UPDATE_BOOKING", payload: obj}
 }
 
 function deletedBooking(booking){

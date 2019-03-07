@@ -20,9 +20,9 @@ class SpaceCard extends React.Component{
             <Card id="space-card" raised fluid as={Link} to={`/spaces/${id}`}>
                 <div className="rate-div"><h3>${daily_rate} daily</h3></div>
                 {/* <Label color="orange" corner>Promotion</Label> */}
-                <Image id="card-img" src={img_url} label={this.promoHandler()}/>
+                <Image id="card-img" src={img_url}/>
                 <Card.Content id="card-content">
-                <Card.Header>{name}</Card.Header>
+                <Card.Header id="card-header">{name}</Card.Header>
                 <Card.Description>{city}, {state}</Card.Description>
                 <div id="card-features-div" align="right">{features.map(feature => <Image id="card-feature" inline src={feature.img_url}/>)}</div>
                 </Card.Content>

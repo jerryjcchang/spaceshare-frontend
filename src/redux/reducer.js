@@ -6,14 +6,13 @@ const setUserReducer = (oldState="", action) => {
     case "LOG_IN":
       return action.payload.user
     case "MAKE_BOOKING":
-    debugger
+    // debugger
       return {
         ...oldState,
         points: oldState.points + action.payload.space.daily_rate * action.payload.dates.length * 10,
         reward: false,
       }
     case "DELETE_BOOKING":
-      debugger
       return {
         ...oldState,
         points: oldState.points - action.payload.space.daily_rate * action.payload.dates.length * 10,
@@ -25,6 +24,11 @@ const setUserReducer = (oldState="", action) => {
         ...oldState,
         reward: true,
         points: oldState.points-10000
+      }
+    case "UPDATE_BOOKING":
+      return {
+        ...oldState,
+        points: action.payload.user_points
       }
     default:
       return oldState
@@ -41,12 +45,12 @@ const setBookingsReducer = (oldState="", action) => {
       return [...oldState, action.payload].sort((a,b) => moment(a.start)-moment(b.start))
     case "UPDATE_BOOKING":
       return oldState.map(booking => {
-        if(booking.id === action.payload.id){
+        if(booking.id === action.payload.booking.id){
           return {
             ...booking,
-            start: action.payload.start,
-            end: action.payload.end,
-            dates: action.payload.dates
+            start: action.payload.booking.start,
+            end: action.payload.booking.end,
+            dates: action.payload.booking_dates
           }
         }
         return booking
@@ -130,6 +134,17 @@ const bookingFormEndReducer = (oldState="", action) => {
   }
 }
 
+const bookingFormOldDaysReducer = (oldState="", action) => {
+  switch(action.type){
+    case "EDIT_START":
+      return action.payload.days
+    case "CANCEL_EDIT":
+      return ""
+    default:
+      return oldState
+  }
+}
+
 const searchTermReducer = (oldState="", action) => {
   switch(action.type){
     case "SET_SEARCH_TERM":
@@ -158,6 +173,7 @@ const setBookingFormReducer = combineReducers({
   id: bookingFormIdReducer,
   start: bookingFormStartReducer,
   end: bookingFormEndReducer,
+  days: bookingFormOldDaysReducer,
 })
 
 const rootReducer = combineReducers({

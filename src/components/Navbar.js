@@ -21,8 +21,8 @@ class Navbar extends React.Component{
                 <Image src="/logo_transparent.png" size='tiny' as={Link} to="/spaces"/>
                 {this.props.user ? 
                 <span 
-                    onMouseEnter={()=>{this.setState({hover: !this.state.hover})}} 
-                    onMouseLeave={()=>{this.setState({hover: !this.state.hover})}} 
+                    onClick={()=>{this.setState({hover: !this.state.hover})}} 
+                    // onMouseLeave={()=>{this.setState({hover: !this.state.hover})}} 
                     className="user-welcome">{this.handleWelcomeDiv()}
                 </span>
                 : 

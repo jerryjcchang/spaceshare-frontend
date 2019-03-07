@@ -1,18 +1,21 @@
 import React from 'react'
 import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Image, Container, Segment, Button, Grid, Menu, Icon, Popup } from 'semantic-ui-react'
+import { Image, Container, Segment, Button, Grid, Menu, Icon, Popup, Confirm } from 'semantic-ui-react'
 import { DateInput, DatesRangeInput } from 'semantic-ui-calendar-react'
 import { bookingSpace, setStartDate, setEndDate, editBooking, clearStartDate, clearEndDate, cancelEdit, updatingBooking} from '../redux/actionCreator'
 import Map from './Map'
 import BookingDiv from './BookingDiv'
 import moment from 'moment'
+import { deflateSync } from 'zlib';
 
 class SpaceView extends React.Component {
 
     state = {
         startDate: "",
         endDate: "",
+        oldBookingDays: "",
+        confirmOpen: false,
     }
 
     componentWillUnmount(){
@@ -46,13 +49,16 @@ class SpaceView extends React.Component {
         moment().format()
         // debugger
         if(this.props.user){
-            if (!this.props.start || !this.props.end){
-                alert('You must select a Start and End date')
+            if(this.props.user)
+            if(!this.props.start || !this.props.end){
+                this.setState({
+                    confirmOpen: true
+                })
             } else {
             let info = {
                 space_id: this.props.space.id,
                 start: this.props.start,
-                end: this.props.end
+                end: this.props.end,
             }
             this.props.bookingSpace(info)
                 if(this.props.user.reward){
@@ -86,6 +92,9 @@ class SpaceView extends React.Component {
 
     handleCancelEdit = () => {
         this.props.cancelEdit()
+        this.setState({
+            oldBookingDays: ""
+        })
         if (document.getElementById("booking-menu")){
             document.getElementById("booking-menu").classList.remove("highlight")
         }
@@ -136,14 +145,14 @@ class SpaceView extends React.Component {
         let info = {
             id: this.props.id,
             start: this.props.start,
-            end: this.props.end
+            end: this.props.end,
+            old_days: this.props.oldDays,
         }
         this.props.updateBooking(info)
         document.getElementById("booking-menu").classList.remove("highlight")
     }
 
     handleDailyRate = () => {
-
         if(!this.props.user.reward){ 
             return <h2>Daily Rate: ${this.props.space.daily_rate}</h2>
         } else {
@@ -151,11 +160,16 @@ class SpaceView extends React.Component {
         }
     }
 
+    close = () => {
+        this.setState({confirmOpen: false})
+    }
+
     render(){
         return(
             <body className="space-page">
             {!this.props.space ? null : (
             <div className="space-page">
+                
                 <Container className="space-page">
                     <Image raised centered size="big" src={this.props.space.img_url}></Image>
                     <Container raised className="space-details">
@@ -166,13 +180,16 @@ class SpaceView extends React.Component {
                                 </Segment>
                                 <Segment align="left">
                                     <span><b>Address:</b> {this.props.space.street_address} </span>
-                                    <span>{`${this.props.space.city}, ${this.props.space.state} ${this.props.space.zip}`}</span>      
+                                    {/* <span>{`${this.props.space.city}, ${this.props.space.state} ${this.props.space.zip}`}</span>       */}
                                 </Segment>                 
                                 <Segment align="left">
                                     <span><b>Description:</b> {this.props.space.description}</span>
                                 </Segment>
                                 <Segment align="left" horizontal>
-            <b>Amenities</b>: {this.props.space.features.map(feature => <Popup trigger={<Image id="feature-icon" spaced="left" inline src={feature.img_url} />} content={feature.name} />)}
+                                    <b>Amenities</b>: {this.props.space.features.map(feature => 
+                                    <Popup content={feature.name} 
+                                           trigger={<Image id="feature-icon" spaced="left" inline src={feature.img_url}/>} 
+                                    />)}
                                 </Segment>
                                 <Segment className="booking-menu" id="booking-menu">
                                     <Menu stackable secondary>
@@ -184,6 +201,7 @@ class SpaceView extends React.Component {
                                             value={this.showStart()}
                                             iconPosition="left"
                                             onChange={this.handleChange}
+                                            minDate={moment().format("MMM-DD-YYYY")}
                                             dateFormat="MMM-DD-YYYY"
                                             closable
                                             disable={this.state.bookedDates}
@@ -225,6 +243,18 @@ class SpaceView extends React.Component {
                     :
                     null
                     }
+                    <Confirm 
+                     content="You must select a START and END date"
+                     dimmer="inverted" 
+                     open={this.state.confirmOpen} 
+                     onCancel={this.close} 
+                     onConfirm={this.close}
+                     confirmButton="Ok"
+                     cancelButton="Back"
+                     header=""
+                     size="tiny"
+                    >
+                    </Confirm>
                 </Container>
 
 
@@ -249,6 +279,7 @@ const mapStateToProps = (state, ownProps) => {
         start: state.bookingForm.start,
         end: state.bookingForm.end,
         id: state.bookingForm.id,
+        oldDays: state.bookingForm.days 
     }
 }
 
