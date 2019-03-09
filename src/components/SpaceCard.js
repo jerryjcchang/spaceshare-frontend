@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Image, Label } from 'semantic-ui-react'
+import { Card, Image, Label, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class SpaceCard extends React.Component{
@@ -24,7 +24,13 @@ class SpaceCard extends React.Component{
                 <Card.Content id="card-content">
                 <Card.Header id="card-header">{name}</Card.Header>
                 <Card.Description id="card-description">{city}, {state}</Card.Description>
-                <div id="card-features-div" align="right">{features.map(feature => <Image id="card-feature" inline src={feature.img_url}/>)}</div>
+                <div id="card-features-div" align="right">
+                {features.map(feature => 
+                    <Popup content={feature.name} 
+                           trigger={<Image key={feature.id} id="card-feature" spaced="left" inline src={feature.img_url}/>}
+                           size="mini" 
+                    />)}                
+                </div>
                 </Card.Content>
             </Card>
             // </Link>

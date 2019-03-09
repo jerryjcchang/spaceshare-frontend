@@ -4,7 +4,7 @@ import SpaceCard from '../components/SpaceCard'
 import SearchBar from '../components/SearchBar'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-// import { statesHash } from '../StatesData'
+import { statesHash } from '../StatesData'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { fetchingAllSpaces } from '../redux/actionCreator'
 
@@ -19,9 +19,8 @@ class Spaces extends React.Component{
         let filteredSpaces
         // if(this.props.allSpaces){
         let {allSpaces, searchTerm, selectedFeatures} = this.props
-        filteredSpaces = allSpaces.filter(space => space.name.toLowerCase().includes(searchTerm.toLowerCase()) || space.city.toLowerCase().includes(searchTerm.toLowerCase()) || space.state.toLowerCase().includes(searchTerm.toLowerCase()) )
+        filteredSpaces = allSpaces.filter(space => space.name.toLowerCase().includes(searchTerm.toLowerCase()) || space.street_address.toLowerCase().includes(searchTerm.toLowerCase()) || space.state.toLowerCase().includes(searchTerm.toLowerCase()) )
         if (selectedFeatures.length > 0){
-            let spaces
         selectedFeatures.forEach(
             feature => {
                 // debugger

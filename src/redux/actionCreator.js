@@ -7,6 +7,14 @@ const USERS = `${URL}/users`
 const REDEEM = `${URL}/redeem`
 const token = localStorage.getItem('token')
 
+function setFeatures(featuresArray){
+    return {type: "SET_FEATURES", payload: featuresArray}
+}
+
+function setSearchTerm(searchTerm){
+    return {type: "SET_SEARCH_TERM", payload: searchTerm}
+}
+
 function registerUser(info){
     return (dispatch) => {
         fetch(`${USERS}`, {
@@ -198,13 +206,6 @@ function bookedSpace(booking){
     return {type: "MAKE_BOOKING", payload: booking}
 }
 
-function setFeatures(featuresArray){
-    return {type: "SET_FEATURES", payload: featuresArray}
-}
-
-function setSearchTerm(searchTerm){
-    return {type: "SET_SEARCH_TERM", payload: searchTerm}
-}
 
 export {registerUser,
         loggingInUser, 

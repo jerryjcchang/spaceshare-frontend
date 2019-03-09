@@ -1,6 +1,24 @@
 import {combineReducers} from 'redux'
 import moment from 'moment'
 
+const searchTermReducer = (oldState="", action) => {
+  switch(action.type){
+    case "SET_SEARCH_TERM":
+      return action.payload
+    default:
+      return oldState
+  }
+}
+
+const featuresReducer = (oldState=[], action) => {
+  switch(action.type){
+    case "SET_FEATURES":
+      return action.payload
+    default:
+      return oldState
+  }
+}
+
 const setUserReducer = (oldState="", action) => {
   switch(action.type){
     case "LOG_IN":
@@ -146,23 +164,6 @@ const bookingFormOldDaysReducer = (oldState="", action) => {
   }
 }
 
-const searchTermReducer = (oldState="", action) => {
-  switch(action.type){
-    case "SET_SEARCH_TERM":
-      return action.payload
-    default:
-      return oldState
-  }
-}
-
-const featuresReducer = (oldState=[], action) => {
-  switch(action.type){
-    case "SET_FEATURES":
-      return action.payload
-    default:
-      return oldState
-  }
-}
 
 const searchBarReducer = combineReducers({
   searchTerm: searchTermReducer,

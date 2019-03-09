@@ -188,7 +188,7 @@ class SpaceView extends React.Component {
                                 <Segment align="left" horizontal>
                                     <b>Amenities</b>: {this.props.space.features.map(feature => 
                                     <Popup content={feature.name} 
-                                           trigger={<Image id="feature-icon" spaced="left" inline src={feature.img_url}/>} 
+                                           trigger={<Image key={feature.id} id="feature-icon" spaced="left" inline src={feature.img_url}/>} 
                                     />)}
                                 </Segment>
                                 <Segment className="booking-menu" id="booking-menu">

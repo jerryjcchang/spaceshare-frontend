@@ -53,7 +53,7 @@ code {
 }
 
 #card-description {
-  height: 1vh;
+  height: 1.5vh;
 }
 
 .ui.card>.image>img, .ui.cards>.card>.image>img, .ui.card>.image, .ui.cards>.card>.image {
@@ -84,9 +84,9 @@ body.login{
   margin-top: 20vh;
 }
 
-#space-card {
-  /* margin: .30vw; */
-}
+/* #space-card {
+  width: 10vh;
+} */
 
 .rate-div {
   background: rgb(5, 80, 128);
@@ -211,7 +211,7 @@ body.profile {
 
 #card-header {
   /* font-size: 1.25vw; */
-  height: 3vh;
+  height: 2.5vh;
 }
 
 #card-features-div{

@@ -76,7 +76,7 @@ class SearchBar extends React.Component{
                         />
                 </Menu.Item >
                 <Menu.Item>
-                <Dropdown clearable onChange={this.handleDropdown} id="features-dropdown" placeholder ='Select Features' multiple options={this.options} />
+                <Dropdown clearable onChange={this.handleDropdown} id="features-dropdown" placeholder ='Select Features' fluid multiple selection options={this.options} value={this.props.selectedFeatures} />
                 </Menu.Item>
                 {/* <Menu.Item borderless position="right">Start</Menu.Item> */}
                 {/* <CalendarInput /> */}
