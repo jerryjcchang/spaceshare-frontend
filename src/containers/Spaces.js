@@ -17,7 +17,7 @@ class Spaces extends React.Component{
 
     filteredSpaces = () => {
         let filteredSpaces
-        if(this.props.allSpaces){
+        // if(this.props.allSpaces){
         let {allSpaces, searchTerm, selectedFeatures} = this.props
         filteredSpaces = allSpaces.filter(space => space.name.toLowerCase().includes(searchTerm.toLowerCase()) || space.city.toLowerCase().includes(searchTerm.toLowerCase()) || space.state.toLowerCase().includes(searchTerm.toLowerCase()) )
         if (selectedFeatures.length > 0){
@@ -33,7 +33,7 @@ class Spaces extends React.Component{
             return filteredSpaces
         }
         return filteredSpaces
-        }
+        // }
     }
 
     handleMoreSpaces = () => {
@@ -46,7 +46,7 @@ class Spaces extends React.Component{
     renderSpaces = () => {
         let {allSpaces, searchTerm, selectedFeatures, fetchMoreSpaces} = this.props
         if(this.props.allSpaces && !searchTerm && selectedFeatures.length <= 0){
-            console.log('inside block 1')
+            // console.log('inside block 1')
             return(
             <InfiniteScroll
                 dataLength={this.state.index}
@@ -65,7 +65,7 @@ class Spaces extends React.Component{
             </InfiniteScroll>
             )
         } else if(searchTerm || selectedFeatures){
-            console.log('inside block 2')
+            // console.log('inside block 2')
             return(
             <Card.Group id="card-group" stackable doubling className="spaces-list" itemsPerRow="4">
                 {this.filteredSpaces().map(space => <SpaceCard key={space.id} space={space} />)}

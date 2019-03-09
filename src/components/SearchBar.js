@@ -25,6 +25,10 @@ class SearchBar extends React.Component{
     //   }
 
     handleSearch = (e, {value}) => {
+        let t = this
+        // debugger
+        this.setState({searchTerm: value})
+        // debugger
         this.props.setSearchTerm(value)
     }
 
@@ -40,7 +44,8 @@ class SearchBar extends React.Component{
         {key: 'wifi', text: 'wifi', value: 'wifi'},
         {key: 'monitors', text: 'monitors', value: 'monitors'},
         {key: 'coffee machine', text: 'coffee machine', value: 'coffee machine'},
-        {key: 'assistant', text: 'assistant', value: 'personal assistant'}
+        {key: 'assistant', text: 'assistant', value: 'personal assistant'},
+        {key: 'formal rental', text: 'formal rental', value: 'formal rental'}
     ]
 
     // formatDate = (date) => {
@@ -58,7 +63,7 @@ class SearchBar extends React.Component{
     render(){
         return(
             <Container id="search-bar">
-            <Menu fixed="top" className="spaces-menu">
+            <Menu fixed="top" className="spaces-menu"> 
                 <Menu.Item className="search-bar">
                     <Input 
                         name="searchTerm"
@@ -71,7 +76,7 @@ class SearchBar extends React.Component{
                         />
                 </Menu.Item >
                 <Menu.Item>
-                <Dropdown clearable onChange={this.handleDropdown} id="features-dropdown" placeholder ='Select Features' fluid multiple selection options={this.options} />
+                <Dropdown clearable onChange={this.handleDropdown} id="features-dropdown" placeholder ='Select Features' multiple options={this.options} />
                 </Menu.Item>
                 {/* <Menu.Item borderless position="right">Start</Menu.Item> */}
                 {/* <CalendarInput /> */}

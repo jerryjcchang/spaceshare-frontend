@@ -23,7 +23,7 @@ class SpaceCard extends React.Component{
                 <Image id="card-img" src={img_url}/>
                 <Card.Content id="card-content">
                 <Card.Header id="card-header">{name}</Card.Header>
-                <Card.Description>{city}, {state}</Card.Description>
+                <Card.Description id="card-description">{city}, {state}</Card.Description>
                 <div id="card-features-div" align="right">{features.map(feature => <Image id="card-feature" inline src={feature.img_url}/>)}</div>
                 </Card.Content>
             </Card>

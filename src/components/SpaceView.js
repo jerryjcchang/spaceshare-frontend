@@ -128,7 +128,7 @@ class SpaceView extends React.Component {
                     bookings.sort(function(a,b){
                         return moment(a.start)-moment(b.start)
                     })
-                    .map(booking => <BookingDiv booking={booking}/>)
+                    .map(booking => <BookingDiv key={booking.id} booking={booking}/>)
                 )
             }
     }
@@ -228,7 +228,7 @@ class SpaceView extends React.Component {
                                         />
                                         </Menu.Item>
                                         {this.toggleReserveEditButton()}
-                                        <Menu.Item stackable position="right">{this.handleDailyRate()}</Menu.Item>
+                                        <Menu.Item position="right">{this.handleDailyRate()}</Menu.Item>
                                         </Menu>
                                     </Segment>
                             </Segment.Group>

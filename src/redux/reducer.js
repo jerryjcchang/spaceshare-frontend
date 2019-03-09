@@ -6,7 +6,7 @@ const setUserReducer = (oldState="", action) => {
     case "LOG_IN":
       return action.payload.user
     case "MAKE_BOOKING":
-    // debugger
+    debugger
       return {
         ...oldState,
         points: oldState.points + action.payload.space.daily_rate * action.payload.dates.length * 10,
@@ -42,6 +42,7 @@ const setBookingsReducer = (oldState="", action) => {
     case "LOG_OUT":
       return ""
     case "MAKE_BOOKING":
+      debugger
       return [...oldState, action.payload].sort((a,b) => moment(a.start)-moment(b.start))
     case "UPDATE_BOOKING":
       return oldState.map(booking => {

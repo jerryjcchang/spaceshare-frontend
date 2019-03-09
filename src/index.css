@@ -52,8 +52,12 @@ code {
   padding-bottom: 2vh;
 }
 
+#card-description {
+  height: 1vh;
+}
+
 .ui.card>.image>img, .ui.cards>.card>.image>img, .ui.card>.image, .ui.cards>.card>.image {
-  height: 25vh;
+  height: 23vh;
   width: 100vw;
 }
 
@@ -98,7 +102,7 @@ body.login{
 }
 
 .ui.menu.spaces-menu {
-  margin-top: 75px;
+  margin-top: 73px;
   margin-bottom: 7px;
   /* top: 90px; */
 
@@ -206,7 +210,7 @@ body.profile {
 }
 
 #card-header {
-  font-size: 1.25vw;
+  /* font-size: 1.25vw; */
   height: 3vh;
 }
 
