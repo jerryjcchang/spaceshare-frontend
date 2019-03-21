@@ -24,12 +24,14 @@ class SearchBar extends React.Component{
     //     }
     //   }
 
-    handleSearch = (e, {value}) => {
-        let t = this
-        // debugger
+    handleSearch = (e) => {
+        if(e.key==="Enter"){
+            this.props.setSearchTerm(this.state.searchTerm)
+        }
+    }
+
+    handleSearchTerm = (e, {value}) => {
         this.setState({searchTerm: value})
-        // debugger
-        this.props.setSearchTerm(value)
     }
 
     handleDropdown = (e, {value}) => {
@@ -67,11 +69,12 @@ class SearchBar extends React.Component{
                 <Menu.Item className="search-bar">
                     <Input 
                         name="searchTerm"
-                        value={this.props.searchTerm}
+                        value={this.state.searchTerm}
                         className='icon' 
                         icon='search' 
                         placeholder='Where to Work'
-                        onChange={this.handleSearch}
+                        onChange={this.handleSearchTerm}
+                        onKeyPress={this.handleSearch}
                         clearable
                         />
                 </Menu.Item >

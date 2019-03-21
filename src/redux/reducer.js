@@ -1,6 +1,11 @@
 import {combineReducers} from 'redux'
 import moment from 'moment'
 
+
+
+
+
+
 const searchTermReducer = (oldState="", action) => {
   switch(action.type){
     case "SET_SEARCH_TERM":
@@ -10,7 +15,9 @@ const searchTermReducer = (oldState="", action) => {
   }
 }
 
-const featuresReducer = (oldState=[], action) => {
+const defaultFeatures = []
+
+const featuresReducer = (oldState=defaultFeatures, action) => {
   switch(action.type){
     case "SET_FEATURES":
       return action.payload
@@ -81,7 +88,9 @@ const setBookingsReducer = (oldState="", action) => {
   }
 }
 
-const setSpacesReducer = (oldState=[], action) => {
+const defaultSpaces = []
+
+const setSpacesReducer = (oldState=defaultSpaces, action) => {
   switch(action.type){
     case "LOG_IN":
       return action.payload.spaces
@@ -92,7 +101,9 @@ const setSpacesReducer = (oldState=[], action) => {
   }
 }
 
-const setAllSpacesReducer = (oldState=[], action) => {
+const defaultAllSpaces = []
+
+const setAllSpacesReducer = (oldState=defaultAllSpaces, action) => {
   switch(action.type){
     case "FETCH_SPACES":
       return [...oldState].concat(action.payload)
