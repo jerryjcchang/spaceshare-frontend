@@ -29,7 +29,7 @@ class Profile extends React.Component{
             <Container className="profile">
             <Image circular size="small" centered src="https://www.freeiconspng.com/uploads/customers-icon-20.png" />    
             <h1>{`${this.props.user.first_name} ${this.props.user.last_name}`}</h1>
-            <Segment><h1>SpacePoints: {this.props.user.points}</h1>            
+            <Segment><h1>SpacePoints: {this.props.user.points.toLocaleString()}</h1>            
             <Button onClick={this.handleRedeem} color="green" size="large" 
                     disabled={this.props.user.points < 10000}
             >

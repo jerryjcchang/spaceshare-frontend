@@ -11,7 +11,7 @@ class Navbar extends React.Component{
     }
 
     handleWelcomeDiv = () => {
-        return (!this.state.hover ? `Hi ${this.props.user.first_name}` : `SpacePoints: ${this.props.user.points}`)
+        return (!this.state.hover ? `Hi ${this.props.user.first_name}` : `SpacePoints: ${this.props.user.points.toLocaleString()}`)
     }
 
     render(){
