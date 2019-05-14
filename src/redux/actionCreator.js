@@ -82,6 +82,10 @@ function loggingInUser(info){
         }
 }
 
+function setLoading(){
+    return {type: "SET_LOADING"}
+}
+
 function setStartDate(startDate){
     return {type: "SET_START", payload: startDate}
 }
@@ -224,4 +228,5 @@ export {registerUser,
         cancelEdit,
         updatingBooking,
         redeemingReward,
+        setLoading
     }

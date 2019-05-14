@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Card, Image, Loader } from 'semantic-ui-react'
+import { Container, Card, Image, Loader, Dimmer, Segment } from 'semantic-ui-react'
 import SpaceCard from '../components/SpaceCard'
 import SearchBar from '../components/SearchBar'
 import { connect } from 'react-redux'
@@ -76,13 +76,13 @@ class Spaces extends React.Component{
     render(){
         return(
             <body className="home">
-                
+                <SearchBar />
                 <Container>
                 {/* <Header as='h1' style={{color: 'white'}} textAlign='center'>
                 <Header.Content>Spaces Index</Header.Content>
                 </Header> */}
-                <SearchBar />
-                    {this.renderSpaces()}
+                
+                    {this.props.loading ? <div id="load-wrapper"><Image id="loader" src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/585d0331234507.564a1d239ac5e.gif"/></div> : this.renderSpaces()}
                 </Container>
                 
             </body>
@@ -92,6 +92,7 @@ class Spaces extends React.Component{
 
 const mapStateToProps = (state) => {
     return{
+        loading: state.loading,
         allSpaces: state.allSpaces,
         searchTerm: state.searchBar.searchTerm,
         selectedFeatures: state.searchBar.selectedFeatures

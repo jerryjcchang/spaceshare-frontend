@@ -12,10 +12,6 @@ class SearchBar extends React.Component{
         searchTerm:"",
         // startDate: "",
         // endDate: "",
-        options: {
-            single: false,
-            group: false,
-        }
     }
 
     // handleChange = (event, {name, value}) => {
@@ -25,9 +21,17 @@ class SearchBar extends React.Component{
     //   }
 
     handleSearch = (e) => {
+        // change state to loading: true
+        // setTimeout 300 ms set stae to loading:false
         if(e.key==="Enter"){
             this.props.setSearchTerm(this.state.searchTerm)
         }
+    }
+
+    handleClearSearch = () => {
+        this.setState({searchTerm: ""}, () => {this.props.setSearchTerm(this.state.searchTerm)})
+        // this.props.setSearchTerm(this.state.searchTerm)
+        console.log("clearing search")
     }
 
     handleSearchTerm = (e, {value}) => {
@@ -71,7 +75,7 @@ class SearchBar extends React.Component{
                         name="searchTerm"
                         value={this.state.searchTerm}
                         className='icon' 
-                        icon='search' 
+                        icon={this.props.searchTerm ? <Icon name='delete' link onClick={this.handleClearSearch}/> : 'search' }
                         placeholder='Where to Work'
                         onChange={this.handleSearchTerm}
                         onKeyPress={this.handleSearch}

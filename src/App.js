@@ -9,13 +9,14 @@ import SpaceView from './components/SpaceView'
 import Profile from './components/Profile'
 import { connect } from 'react-redux'
 import ScrollToTop from './components/ScrollToTop'
-import { fetchingAllSpaces, loggingInCurrentUser } from './redux/actionCreator'
+import { fetchingAllSpaces, loggingInCurrentUser, setLoading } from './redux/actionCreator'
 import { withRouter, Router } from 'react-router-dom'
 
 class App extends Component {
 
   componentDidMount(){
     this.props.fetchAllSpaces(this.props.allSpaces.length)
+    this.props.setLoading()
     if(localStorage.getItem('token'))
     this.props.getCurrentUser()
   }
@@ -59,6 +60,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+      setLoading: () => {dispatch(setLoading())},
       fetchAllSpaces: (index) => {dispatch(fetchingAllSpaces(index))},
       getCurrentUser: () => {dispatch(loggingInCurrentUser())},
   }

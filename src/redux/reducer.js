@@ -4,7 +4,16 @@ import moment from 'moment'
 
 
 
-
+const loadingReducer = (oldState=false, action) => {
+  switch(action.type){
+    case "SET_LOADING":
+      return !oldState
+    case "FETCH_SPACES":
+      return !oldState
+    default:
+      return oldState
+  }
+}
 
 const searchTermReducer = (oldState="", action) => {
   switch(action.type){
@@ -196,6 +205,7 @@ const rootReducer = combineReducers({
   userSpaces: setSpacesReducer,
   bookingForm: setBookingFormReducer,
   searchBar: searchBarReducer,
+  loading: loadingReducer,
 })
 
 // state = {

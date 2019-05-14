@@ -26,6 +26,16 @@ body {
   
 }
 
+#load-wrapper{
+  margin-top: 40vh;
+}
+
+#loader{
+  width: 10vw;
+  display: block;
+  margin: auto auto;
+}
+
 h1.ui.header{
   color: lightblue;
   font-size: 5vh;
