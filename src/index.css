@@ -1,6 +1,6 @@
-html { 
+html {
   /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.pexels.com/photos/908284/pexels-photo-908284.jpeg') no-repeat center center fixed;  */
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('https://media.giphy.com/media/ZPXRNopHrMcMw/giphy.gif') no-repeat center center fixed; 
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('https://media.giphy.com/media/ZPXRNopHrMcMw/giphy.gif') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -23,7 +23,7 @@ body {
   background-repeat: no-repeat;
   background-position: center; */
   background-color: rgba(0,0,0,0);
-  
+
 }
 
 #load-wrapper{
@@ -34,6 +34,16 @@ body {
   width: 10vw;
   display: block;
   margin: auto auto;
+}
+
+#logo {
+  margin-top: 1vh;
+}
+
+#footer {
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+  color: darkgrey;
 }
 
 h1.ui.header{
@@ -68,11 +78,11 @@ code {
 
 .ui.card>.image>img, .ui.cards>.card>.image>img, .ui.card>.image, .ui.cards>.card>.image {
   height: 23vh;
-  width: 100vw;
+  width: 100%;
 }
 
 /* body.home{
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed; 
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -135,7 +145,7 @@ body.home {
 }
 
 body.register {
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed; 
+  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed;
 }
 
 .view-header {
@@ -185,8 +195,10 @@ body.profile {
   min-height: 100vh;
 }
 
+
+
 /* .ui.container.bookings {
-  margin-bottom: 
+  margin-bottom:
 } */
 
 .ui.horizontal.segments.booking-div {
@@ -221,7 +233,8 @@ body.profile {
 
 #card-header {
   /* font-size: 1.25vw; */
-  height: 2.5vh;
+  height: 3.2vh;
+  overflow: hidden;
 }
 
 #card-features-div{

@@ -52,7 +52,7 @@ class Login extends React.Component {
     //     fetch('http://localhost:3001/api/v1/login', {
 	  //       method: "POST",
 	  //       headers: {
-    //             "Content-Type":"application/json", 
+    //             "Content-Type":"application/json",
     //             "Accept":"application/json"},
 	  //       body: JSON.stringify({
 	  //   	    email: this.state.email,
@@ -62,7 +62,7 @@ class Login extends React.Component {
     //     .then(res => res.json())
     //     .then(data => {
     //         console.log(data)
-    //           if(data.error){ 
+    //           if(data.error){
     //             alert('Incorrect username or password')
     //           } else {
     //             this.setState({
@@ -97,13 +97,13 @@ class Login extends React.Component {
             `}</style>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
-              <Image centered size="large" src='/logo_transparent.png' /> 
+              <Image id="logo" centered size="large" src='/logo_transparent.png' /> 
                 {/* <Header className="login-header" as='h1' textAlign='center'>
                   {this.props.currentUser? `Welcome ${this.props.currentUser.first_name}`: null}
                 </Header> */}
                 <Form onSubmit={this.handleLoginSubmitRedux} size='large'>
                   <Segment stacked>
-                    <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address' 
+                    <Form.Input fluid icon='user' iconPosition='left' placeholder='E-mail address'
                       onChange={(e)=> this.setState({ email: e.target.value})}/>
                     <Form.Input
                       fluid

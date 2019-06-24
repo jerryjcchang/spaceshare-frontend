@@ -7,7 +7,6 @@ import { bookingSpace, setStartDate, setEndDate, editBooking, clearStartDate, cl
 import Map from './Map'
 import BookingDiv from './BookingDiv'
 import moment from 'moment'
-import { deflateSync } from 'zlib';
 
 class SpaceView extends React.Component {
 
@@ -16,6 +15,7 @@ class SpaceView extends React.Component {
         endDate: "",
         oldBookingDays: "",
         confirmOpen: false,
+        confirmContent: "",
     }
 
     componentWillUnmount(){
@@ -52,7 +52,8 @@ class SpaceView extends React.Component {
             if(this.props.user)
             if(!this.props.start || !this.props.end){
                 this.setState({
-                    confirmOpen: true
+                    confirmOpen: true,
+                    confirmContent: "You must select a START and END date"
                 })
             } else {
             let info = {
@@ -62,13 +63,24 @@ class SpaceView extends React.Component {
             }
             this.props.bookingSpace(info)
                 if(this.props.user.reward){
-                    
+
                 }
             }
         } else {
-            alert('You must be logged in to reserve a space')
-            this.props.routeProps.history.push('/login')
+            this.setState({
+              confirmOpen: true,
+              confirmContent: "You must be logged in to reserve a space"
+            })
+            // this.props.routeProps.history.push('/login')
         }
+    }
+
+    handleOnConfirm = () => {
+      if(this.state.confirmContent === "You must be logged in to reserve a space"){
+        this.props.routeProps.history.push('/login')
+      } else {
+        this.close()
+      }
     }
 
     toggleReserveEditButton = () => {
@@ -76,7 +88,7 @@ class SpaceView extends React.Component {
             document.getElementById("booking-menu").classList.add("highlight")
             return (<Menu.Item>
                 <Button onClick={this.handleUpdateBooking} color="teal">
-                    Update  
+                    Update
                 </Button>
                 <Button onClick={this.handleCancelEdit} className="edit-back">Back</Button>
                 </Menu.Item>)
@@ -86,7 +98,7 @@ class SpaceView extends React.Component {
             }
             return (<Menu.Item>
                 <Button primary onClick={this.handleReserveButton}>Reserve</Button>
-                </Menu.Item>)    
+                </Menu.Item>)
             }
     }
 
@@ -153,7 +165,7 @@ class SpaceView extends React.Component {
     }
 
     handleDailyRate = () => {
-        if(!this.props.user.reward){ 
+        if(!this.props.user.reward){
             return <h2>Daily Rate: ${this.props.space.daily_rate}</h2>
         } else {
             return <h2 id="discount">Daily Rate: <strike>${this.props.space.daily_rate}</strike>  ${this.props.space.daily_rate - 15}</h2>
@@ -169,7 +181,7 @@ class SpaceView extends React.Component {
             <body className="space-page">
             {!this.props.space ? null : (
             <div className="space-page">
-                
+
                 <Container className="space-page">
                     <Image raised centered size="big" src={this.props.space.img_url}></Image>
                     <Container raised className="space-details">
@@ -181,14 +193,14 @@ class SpaceView extends React.Component {
                                 <Segment align="left">
                                     <span><b>Address:</b> {this.props.space.street_address} </span>
                                     {/* <span>{`${this.props.space.city}, ${this.props.space.state} ${this.props.space.zip}`}</span>       */}
-                                </Segment>                 
+                                </Segment>
                                 <Segment align="left">
                                     <span><b>Description:</b> {this.props.space.description}</span>
                                 </Segment>
                                 <Segment align="left" horizontal>
-                                    <b>Amenities</b>: {this.props.space.features.map(feature => 
-                                    <Popup content={feature.name} 
-                                           trigger={<Image key={feature.id} id="feature-icon" spaced="left" inline src={feature.img_url}/>} 
+                                    <b>Amenities</b>: {this.props.space.features.map(feature =>
+                                    <Popup content={feature.name}
+                                           trigger={<Image key={feature.id} id="feature-icon" spaced="left" inline src={feature.img_url}/>}
                                     />)}
                                 </Segment>
                                 <Segment className="booking-menu" id="booking-menu">
@@ -243,13 +255,13 @@ class SpaceView extends React.Component {
                     :
                     null
                     }
-                    <Confirm 
-                     content="You must select a START and END date"
-                     dimmer="inverted" 
-                     open={this.state.confirmOpen} 
-                     onCancel={this.close} 
-                     onConfirm={this.close}
-                     confirmButton="Ok"
+                    <Confirm
+                     content={this.state.confirmContent}
+                     dimmer="inverted"
+                     open={this.state.confirmOpen}
+                     onCancel={this.close}
+                     onConfirm={this.handleOnConfirm}
+                     confirmButton={this.state.confirmContent.includes("logged in") ? "Login" : "Ok"}
                      cancelButton="Back"
                      header=""
                      size="tiny"
@@ -259,7 +271,7 @@ class SpaceView extends React.Component {
 
 
                 {/* </div> */}
-                
+
             </div>
             )}
             </body>
@@ -279,7 +291,7 @@ const mapStateToProps = (state, ownProps) => {
         start: state.bookingForm.start,
         end: state.bookingForm.end,
         id: state.bookingForm.id,
-        oldDays: state.bookingForm.days 
+        oldDays: state.bookingForm.days
     }
 }
 

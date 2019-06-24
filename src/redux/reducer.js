@@ -15,6 +15,17 @@ const loadingReducer = (oldState=false, action) => {
   }
 }
 
+const indexReducer = (oldState=20, action) => {
+  switch(action.type){
+    case "INCREASE_INDEX":
+      return oldState + 20
+    case "RESET_INDEX":
+      return 20
+    default:
+      return oldState
+  }
+}
+
 const searchTermReducer = (oldState="", action) => {
   switch(action.type){
     case "SET_SEARCH_TERM":
@@ -206,6 +217,7 @@ const rootReducer = combineReducers({
   bookingForm: setBookingFormReducer,
   searchBar: searchBarReducer,
   loading: loadingReducer,
+  index: indexReducer,
 })
 
 // state = {

@@ -26,6 +26,7 @@ class App extends Component {
       <div className="app">
         <Navbar />
           <ScrollToTop>
+        <Route exact path="/" component={Spaces} />
         <Route exact path="/spaces" component={Spaces} />
         <Route exact path="/register" render={(props) => {
           return (<Registration routeProps={props}/>)
@@ -39,10 +40,10 @@ class App extends Component {
             <Login />
           )
         )}/>
-        
+
         <Route exact path="/spaces/:id" render={(props)=> {
           return (<SpaceView routeProps={props} />)
-        }} 
+        }}
         />
         <Route exact path="/profile" component={Profile} />
         </ScrollToTop>

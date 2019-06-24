@@ -1,4 +1,4 @@
-const URL = 'http://localhost:3001/api/v1'
+const URL = 'http://localhost:3000/api/v1'
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/get_spaces`
@@ -9,6 +9,14 @@ const token = localStorage.getItem('token')
 
 function setFeatures(featuresArray){
     return {type: "SET_FEATURES", payload: featuresArray}
+}
+
+function increaseIndex(){
+    return {type: "INCREASE_INDEX"}
+}
+
+function resetIndex(){
+    return {type: "RESET_INDEX"}
 }
 
 function setSearchTerm(searchTerm){
@@ -39,7 +47,7 @@ function fetchingAllSpaces(index){
         .then(r => r.json())
         .then(spaces => {
             dispatch(fetchedSpaces(spaces))
-        }) 
+        })
     }
 }
 
@@ -65,14 +73,14 @@ function loggingInUser(info){
         fetch(`${LOGIN}`, {
             method: "POST",
 	        headers: {
-                "Content-Type":"application/json", 
+                "Content-Type":"application/json",
                 "Accept":"application/json"},
 	        body: JSON.stringify(info)
         })
         .then(res => res.json())
         .then(data => {
             console.log(data)
-              if(data.error){ 
+              if(data.error){
                 alert('Incorrect username or password')
               } else {
                 dispatch(loggedIn(data.user_info))
@@ -212,21 +220,23 @@ function bookedSpace(booking){
 
 
 export {registerUser,
-        loggingInUser, 
-        loggingInCurrentUser, 
-        loggingOut, 
-        fetchingAllSpaces, 
+        loggingInUser,
+        loggingInCurrentUser,
+        loggingOut,
+        fetchingAllSpaces,
         setSearchTerm,
         setFeatures,
         setStartDate,
         setEndDate,
         clearStartDate,
         clearEndDate,
-        bookingSpace, 
+        bookingSpace,
         deletingBooking,
         editingBooking,
         cancelEdit,
         updatingBooking,
         redeemingReward,
-        setLoading
+        setLoading,
+        increaseIndex,
+        resetIndex,
     }

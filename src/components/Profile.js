@@ -1,20 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { Container, Image, Card, Segment, Button } from 'semantic-ui-react' 
+import { Container, Image, Card, Segment, Button } from 'semantic-ui-react'
 import BookedCard from './BookedCard'
 import { redeemingReward } from '../redux/actionCreator'
 
 class Profile extends React.Component{
 
     uniqueBookings = () => {
-        const uniqueBookings = []
+        let uniqueBookings = []
         this.props.bookings.filter(booking => {
             let i = uniqueBookings.findIndex(x => x.space.id === booking.space.id)
             if(i <= -1){
                 uniqueBookings.push(booking)
             } return null
         })
-        return uniqueBookings
+        console.log(uniqueBookings)
+        debugger
     }
 
     handleRedeem = () => {
@@ -27,24 +28,24 @@ class Profile extends React.Component{
             {!this.props.user ? null :
             (
             <Container className="profile">
-            <Image circular size="small" centered src="https://www.freeiconspng.com/uploads/customers-icon-20.png" />    
+            <Image circular size="small" centered src="https://www.freeiconspng.com/uploads/customers-icon-20.png" />
             <h1>{`${this.props.user.first_name} ${this.props.user.last_name}`}</h1>
-            <Segment><h1>SpacePoints: {this.props.user.points.toLocaleString()}</h1>            
-            <Button onClick={this.handleRedeem} color="green" size="large" 
+            <Segment><h1>SpacePoints: {this.props.user.points.toLocaleString()}</h1>
+            <Button onClick={this.handleRedeem} color="green" size="large"
                     disabled={this.props.user.points < 10000}
             >
                     Redeem for $15!
             </Button>
             </Segment>
-            <h3>Booked Spaces</h3>
+            <h3>My Bookings</h3>
             <Card.Group itemsPerRow="4">
-                {this.uniqueBookings().map(booking => 
+                {this.props.bookings.map(booking =>
                     <BookedCard booking={booking}/>)}
             </Card.Group>
             </Container>
             )
             }
-           
+
             </body>
         )
     }
