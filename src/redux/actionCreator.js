@@ -1,4 +1,4 @@
-const URL = 'api-spaceshare.herokuapp.com/api/v1'
+const URL = 'https://api-spaceshare.herokuapp.com/api/v1'
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/get_spaces`
@@ -46,6 +46,7 @@ function fetchingAllSpaces(index){
         })
         .then(r => r.json())
         .then(spaces => {
+            console.log(spaces)
             dispatch(fetchedSpaces(spaces))
         })
     }
