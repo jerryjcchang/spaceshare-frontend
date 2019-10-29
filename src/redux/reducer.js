@@ -41,6 +41,8 @@ const featuresReducer = (oldState=defaultFeatures, action) => {
   switch(action.type){
     case "SET_FEATURES":
       return action.payload
+    case "LOG_OUT":
+      return ''
     default:
       return oldState
   }

@@ -11,7 +11,12 @@ class Navbar extends React.Component{
     }
 
     handleWelcomeDiv = () => {
-        return (!this.state.hover ? `Hi ${this.props.user.first_name}` : `SpacePoints: ${this.props.user.points.toLocaleString()}`)
+        return (
+        <div style={{display: "flex"}}>
+        <Image src={this.props.user.img_url} size="mini" circular />
+        <div style={{"margin-left": "1vw"}}>{!this.state.hover ? `${this.props.user.first_name}` : `SpacePoints: ${this.props.user.points.toLocaleString()}`}</div>
+        </div>
+        )
     }
 
     render(){
@@ -19,13 +24,14 @@ class Navbar extends React.Component{
         <Menu fitted="vertically" fixed="top" className="navbar" inverted>
             <Menu.Item position="left">
                 <Image src="/logo_transparent.png" size='tiny' as={Link} to="/spaces"/>
-                {this.props.user ? 
-                <span 
-                    onClick={()=>{this.setState({hover: !this.state.hover})}} 
-                    // onMouseLeave={()=>{this.setState({hover: !this.state.hover})}} 
-                    className="user-welcome">{this.handleWelcomeDiv()}
+                {this.props.user ?
+                <span
+                    onClick={()=>{this.setState({hover: !this.state.hover})}}
+                    // onMouseLeave={()=>{this.setState({hover: !this.state.hover})}}
+                    className="user-welcome">
+                    {this.handleWelcomeDiv()}
                 </span>
-                : 
+                :
                 null}
             </Menu.Item>
             <Menu.Item position='right'>
