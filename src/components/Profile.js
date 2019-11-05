@@ -28,7 +28,7 @@ class Profile extends React.Component{
             {!this.props.user ? null :
             (
             <Container className="profile">
-            <Image circular size="small" centered src={this.props.user.img_urlHall} />
+            <Image circular size="small" centered src={this.props.user.img_url} />
             <h1>{`${this.props.user.first_name} ${this.props.user.last_name}`}</h1>
             <Segment><h1>SpacePoints: {this.props.user.points.toLocaleString()}</h1>
             <Button onClick={this.handleRedeem} color="green" size="large"
