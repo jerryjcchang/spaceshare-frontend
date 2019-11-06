@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 class SpaceCard extends React.PureComponent{
     constructor(){
       super()
-      console.log('constructor')
+      // console.log('constructor')
     }
     promoHandler= () => {
         return(this.props.space.promo ?
@@ -16,7 +16,7 @@ class SpaceCard extends React.PureComponent{
     }
 
     render(){
-        console.log('rendering ',this.props.space.name)
+        // console.log('rendering ',this.props.space.name)
         const {id,daily_rate,img_url,name,city,state,features} = this.props.space
 
         return(
