@@ -1,10 +1,4 @@
-<<<<<<< HEAD
-const URL = 'https://spaceshare-api.herokuapp.com/api/v1'
-=======
-import { confirm } from '../components/Alerts'
-
 const URL = 'http://localhost:3000'
->>>>>>> development
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/get_spaces`
