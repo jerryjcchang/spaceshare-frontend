@@ -1,3 +1,5 @@
+import { confirm } 'from ../components/Alerts'
+
 const URL = 'http://localhost:3000'
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
