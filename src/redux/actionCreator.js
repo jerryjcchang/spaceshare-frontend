@@ -1,4 +1,10 @@
+<<<<<<< HEAD
 const URL = 'https://spaceshare-api.herokuapp.com/api/v1'
+=======
+import { confirm } from '../components/Alerts'
+
+const URL = 'http://localhost:3000'
+>>>>>>> development
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/get_spaces`
@@ -46,7 +52,7 @@ function fetchingAllSpaces(index){
         })
         .then(r => r.json())
         .then(spaces => {
-            console.log(spaces)
+            // console.log(spaces)
             dispatch(fetchedSpaces(spaces))
         })
     }
@@ -64,7 +70,7 @@ function loggingInCurrentUser(){
             .then(r => r.json())
             .then(user_info => {
                 dispatch(loggedIn(user_info))
-                console.log(user_info)
+                // console.log(user_info)
             })
     }
 }
@@ -80,7 +86,7 @@ function loggingInUser(info){
         })
         .then(res => res.json())
         .then(data => {
-            console.log(data)
+            // console.log(data)
               if(data.error){
                 alert('Incorrect username or password')
               } else {
@@ -124,10 +130,12 @@ function bookingSpace(info){
         })
         .then(res => res.json())
         .then(booking => {
-            console.log(booking)
+            // console.log(booking)
             dispatch(bookedSpace(booking))
             dispatch(clearStartDate())
             dispatch(clearEndDate())
+            window.scrollTo(0, document.documentElement.outerHTML.length)
+            confirm("Confirmed", "Your booking has been made successfully.")
         })
     }
 }
@@ -146,6 +154,7 @@ function updatingBooking(info){
         .then(bookingAndUserPointsObj => {
             dispatch(updatedBooking(bookingAndUserPointsObj))
             dispatch(cancelEdit())
+            confirm("Booking Updated", "Your booking has been successfully updated.")
         })
     }
 }
@@ -162,6 +171,7 @@ function deletingBooking(info){
         .then(r => r.json())
         .then(booking => {
             dispatch(deletedBooking(booking))
+            confirm("Booking Cancelled", "Your booking has been successfully cancelled.")
         })
     }
 }
@@ -176,7 +186,11 @@ function redeemingReward(){
                 "Authentication":`Bearer ${token}`
             }
         })
-        .then(dispatch(redeemedReward()))
+        .then(() => {
+          confirm("Congratulations!", "You've redeemed your award booking!")
+          dispatch(redeemedReward())
+          }
+        )
     }
 }
 
@@ -207,7 +221,6 @@ function loggedIn(user_info){
 
 function loggingOut(){
     localStorage.clear()
-    alert('Goodbye!')
     return {type: "LOG_OUT"}
 }
 

@@ -3,29 +3,26 @@ import { Segment, Button, Icon, Confirm } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { deletingBooking, editingBooking } from '../redux/actionCreator'
 import moment from 'moment'
+import Swal from 'sweetalert2'
+import { confirm } from './Alerts'
 
 class BookingDiv extends React.Component{
 
-    state = {
-        confirmOpen: false,
-        confirm: false,
-    }
-
     handleDeleteBooking = () => {
-        this.setState({
-            confirmOpen: true,
-        })
-    }
-
-    handleConfirmDelete = () => {
-        this.props.cancelBooking(this.props.booking.id)
-        this.setState({
-            confirmOpen: false
-        })
-    }
-
-    close = () => {
-        this.setState({confirmOpen: false})
+        Swal.fire({
+          title: "Confirm Cancellation",
+          text: "Are you sure you want to cancel this booking?",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: 'lightseagreen',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes',
+          cancelButtonText: 'No',
+        }).then(result => {
+            if(result.value){
+            this.props.cancelBooking(this.props.booking.id)
+            }
+          })
     }
 
     render(){
@@ -42,19 +39,6 @@ class BookingDiv extends React.Component{
                     {/* <Icon color="teal" title="Contact Host" size="large" name="mail"/> */}
                     <Button onClick={this.handleDeleteBooking}
                             color="red" title="Cancel Booking">Cancel</Button>
-                </Segment>
-                <Segment>
-                  <Confirm content="Are you sure you want to cancel this booking?"
-                       dimmer="inverted"
-                       open={this.state.confirmOpen}
-                       onCancel={this.close}
-                       onConfirm={this.handleConfirmDelete}
-                       confirmButton="Yes"
-                       cancelButton="Back"
-                       header="Confirm Cancellation"
-                       size="tiny"
-                  >
-                  </Confirm>
                 </Segment>
             </Segment.Group>
         )

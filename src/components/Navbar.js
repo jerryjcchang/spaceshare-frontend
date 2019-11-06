@@ -3,6 +3,7 @@ import { Menu, Button, Image } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { loggingOut } from '../redux/actionCreator'
+import Swal from 'sweetalert2'
 
 class Navbar extends React.Component{
 
@@ -16,7 +17,28 @@ class Navbar extends React.Component{
         <Image src={this.props.user.img_url} size="mini" circular />
         <div style={{"margin-left": "1vw"}}>{!this.state.hover ? `${this.props.user.first_name}` : `SpacePoints: ${this.props.user.points.toLocaleString()}`}</div>
         </div>
-        )
+      )
+    }
+
+    handleLogOut = () => {
+      Swal.fire({
+        title: 'Confirm Logout',
+        text: "Are you sure you want to logout?",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: 'lightseagreen',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes'
+      }).then((result) => {
+        if (result.value) {
+          this.props.logOut()
+          Swal.fire(
+            'Goodbye!',
+            'You have successfully logged out.',
+            'success'
+          )
+        }
+      })
     }
 
     render(){
@@ -40,7 +62,7 @@ class Navbar extends React.Component{
             {this.props.user ?
             <Menu.Item as={Link} to="/profile"><h3>My Profile</h3></Menu.Item> : null}
             {this.props.user ?
-            <Menu.Item onClick={this.props.logOut} as={Link} to="/spaces">
+            <Menu.Item onClick={this.handleLogOut} as={Link} to="/spaces">
                 <h3>Log Out</h3>
             </Menu.Item>
             :

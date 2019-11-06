@@ -7,6 +7,8 @@ import { bookingSpace, setStartDate, setEndDate, editBooking, clearStartDate, cl
 import Map from './Map'
 import BookingDiv from './BookingDiv'
 import moment from 'moment'
+import Swal from 'sweetalert2'
+import { confirm } from './Alerts'
 
 class SpaceView extends React.Component {
 
@@ -51,9 +53,9 @@ class SpaceView extends React.Component {
         if(this.props.user){
             if(this.props.user)
             if(!this.props.start || !this.props.end){
-                this.setState({
-                    confirmOpen: true,
-                    confirmContent: "You must select a START and END date"
+                Swal.fire({
+                  text: "You must select a START and END date.",
+                  icon: "warning"
                 })
             } else {
             let info = {
@@ -67,10 +69,22 @@ class SpaceView extends React.Component {
                 }
             }
         } else {
-            this.setState({
-              confirmOpen: true,
-              confirmContent: "You must be logged in to reserve a space"
-            })
+          Swal.fire({
+            title: "Please Register or Log In",
+            text: "You must be logged in to book a space.",
+            icon: "warning",
+            showCancelButton: true,
+            showCloseButton: true,
+            confirmButtonColor: 'lightseagreen',
+            cancelButtonColor: 'grey',
+            confirmButtonText: 'Log In',
+            cancelButtonText: 'Back',
+          }).then(result => {
+            if(result.value){
+              this.props.routeProps.history.push('/login')
+            }
+          })
+
             // this.props.routeProps.history.push('/login')
         }
     }
@@ -200,7 +214,7 @@ class SpaceView extends React.Component {
                                 <Segment align="left" horizontal>
                                     <b>Amenities</b>: {this.props.space.features.map(feature =>
                                     <Popup content={feature.name}
-                                           trigger={<Image key={feature.id} id="feature-icon" spaced="left" inline src={feature.img_url}/>}
+                                           trigger={<Image size="small" key={feature.id} id="feature-icon" spaced="left" inline src={feature.img_url}/>}
                                     />)}
                                 </Segment>
                                 <Segment className="booking-menu" id="booking-menu">
