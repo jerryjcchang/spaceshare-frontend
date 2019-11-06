@@ -1,6 +1,6 @@
 import { confirm } from '../components/Alerts'
 
-const URL = 'http://spaceshare-api.herokuapp.com/api/v1'
+const URL = 'https://spaceshare-api.herokuapp.com/api/v1'
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/get_spaces`
