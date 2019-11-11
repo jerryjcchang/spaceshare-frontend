@@ -228,6 +228,14 @@ function bookedSpace(booking){
     return {type: "MAKE_BOOKING", payload: booking}
 }
 
+function setReferrer(url){
+    return {type: "SET_REFERRER", payload: url}
+}
+
+function resetReferrer(){
+    return {type: "RESET_REFERRER"}
+}
+
 
 export {registerUser,
         loggingInUser,
@@ -249,4 +257,6 @@ export {registerUser,
         setLoading,
         increaseIndex,
         resetIndex,
+        setReferrer,
+        resetReferrer
     }

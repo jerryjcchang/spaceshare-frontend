@@ -197,6 +197,16 @@ const bookingFormOldDaysReducer = (oldState="", action) => {
   }
 }
 
+const referrerReducer = (oldState="", action) => {
+  switch(action.type){
+    case "SET_REFERRER":
+      debugger
+      return action.payload
+    default:
+      return oldState
+  }
+}
+
 
 const searchBarReducer = combineReducers({
   searchTerm: searchTermReducer,
@@ -220,6 +230,7 @@ const rootReducer = combineReducers({
   searchBar: searchBarReducer,
   loading: loadingReducer,
   index: indexReducer,
+  referrer: referrerReducer
 })
 
 // state = {

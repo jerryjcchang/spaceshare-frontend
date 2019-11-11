@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { Image, Container, Segment, Button, Grid, Menu, Icon, Popup, Confirm } from 'semantic-ui-react'
 import { DateInput, DatesRangeInput } from 'semantic-ui-calendar-react'
-import { bookingSpace, setStartDate, setEndDate, editBooking, clearStartDate, clearEndDate, cancelEdit, updatingBooking} from '../redux/actionCreator'
+import { bookingSpace, setStartDate, setEndDate, editBooking, clearStartDate, clearEndDate, cancelEdit, updatingBooking, setReferrer} from '../redux/actionCreator'
 import Map from './Map'
 import BookingDiv from './BookingDiv'
 import moment from 'moment'
@@ -81,6 +81,10 @@ class SpaceView extends React.Component {
             cancelButtonText: 'Back',
           }).then(result => {
             if(result.value){
+              let arr = window.location.href.split("/")
+              let path = `${arr[arr.length-2]}/${arr[arr.length-1]}`
+              debugger
+              this.props.setReferrer(path)
               this.props.routeProps.history.push('/login')
             }
           })
@@ -317,7 +321,8 @@ const mapDispatchToProps = dispatch => {
         clearStart: () => {dispatch(clearStartDate())},
         clearEnd: () => {dispatch(clearEndDate())},
         cancelEdit: () => {dispatch(cancelEdit())},
-        updateBooking: (info) => {dispatch(updatingBooking(info))}
+        updateBooking: (info) => {dispatch(updatingBooking(info))},
+        setReferrer: (url) => {dispatch(setReferrer(url))}
     }
 }
 

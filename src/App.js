@@ -26,26 +26,26 @@ class App extends Component {
       <div className="app">
         <Navbar />
           <ScrollToTop>
+        <Switch>
         <Route exact path="/" component={Spaces} />
         <Route exact path="/spaces" component={Spaces} />
+        <Route exact path="/login" render={(routeProps) => (
+          this.props.currentUser ? (
+            <Redirect to={this.props.referrer} />
+          ) : (
+            <Login routeProps={routeProps} />
+          )
+        )}/>
         <Route exact path="/register" render={(props) => {
           return (<Registration routeProps={props}/>)
         }} />
-        {/* <Route exact path="/login" component={Login} /> */}
-
-        <Route exact path="/login" render={() => (
-          this.props.currentUser ? (
-            <Redirect to="/spaces" />
-          ) : (
-            <Login />
-          )
-        )}/>
 
         <Route exact path="/spaces/:id" render={(props)=> {
           return (<SpaceView routeProps={props} />)
         }}
         />
         <Route exact path="/profile" component={Profile} />
+        </Switch>
         </ScrollToTop>
       </div>
     );
@@ -56,6 +56,7 @@ const mapStateToProps = state => {
   return {
       currentUser: state.currentUser,
       allSpaces: state.allSpaces,
+      referrer: state.referrer
   }
 }
 
