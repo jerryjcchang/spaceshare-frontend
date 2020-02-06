@@ -63,28 +63,28 @@ class Registration extends React.Component {
                 height: 100%;
               }
             `}</style>
-            <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
+            <Grid textAlign='center' style={{ height: '40%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
                 <Header as='h2' textAlign='center' style={{color: "white"}}>
                 <div className="reg-header">Sign Up</div>
                 </Header>
-                <Form onSubmit={this.handleRegister}size='large'>
+                <Form onSubmit={this.handleRegister} size='tiny' id="reg-form">
                   <Segment stacked className="reg-form">
                     <Form.Input fluid icon="mail" placeholder='E-mail address'
                       onChange={e => this.setState({email: e.target.value})} />
-                    <Form.Input fluid placeholder='First Name' 
+                    <Form.Input fluid placeholder='First Name'
                       onChange={e => this.setState({firstName: e.target.value})} />
-                    <Form.Input fluid placeholder='Last Name' 
+                    <Form.Input fluid placeholder='Last Name'
                       onChange={e => this.setState({lastName: e.target.value})} />
-                    <Form.Input fluid placeholder='City' 
+                    <Form.Input fluid placeholder='City'
                       onChange={e => this.setState({city: e.target.value})} />
                     <Form.Dropdown search selection clearable options={reactStatesData} fluid placeholder='State'
                       onChange={e => this.setState({state: e.target.value})} />
-                    <Form.Input fluid placeholder='Company' 
+                    <Form.Input fluid placeholder='Company'
                       onChange={e => this.setState({company: e.target.value})} />
-                    <Form.Input fluid icon="lock" placeholder='Password' type='password' 
+                    <Form.Input fluid icon="lock" placeholder='Password' type='password'
                       onChange={e => this.setState({password: e.target.value})} />
-                    <Form.Input fluid icon="lock" placeholder='Confirm' type='password' 
+                    <Form.Input fluid icon="lock" placeholder='Confirm' type='password'
                       onChange={e => this.setState({passwordConfirm: e.target.value})} />
                     <Form.Input fluid icon="phone" placeholder='(987) 654-3210'
                       onChange={e => this.setState({phone: e.target.value})} />

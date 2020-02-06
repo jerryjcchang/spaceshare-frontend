@@ -83,7 +83,6 @@ class SpaceView extends React.Component {
             if(result.value){
               let arr = window.location.href.split("/")
               let path = `${arr[arr.length-2]}/${arr[arr.length-1]}`
-              debugger
               this.props.setReferrer(path)
               this.props.routeProps.history.push('/login')
             }

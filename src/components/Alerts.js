@@ -8,6 +8,16 @@ const confirm = (header, text) => {
   })
 }
 
+const myAlert = () => {
+  Swal.fire({
+    icon: 'warning',
+    title: 'Login Unsuccessful',
+    text: 'Incorrect username and password combination, please try again.',
+    heightAuto: false,
+    customClass: 'swal'
+  })
+}
 
 
-export { confirm }
+
+export { confirm, myAlert }

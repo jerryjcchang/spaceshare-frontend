@@ -267,3 +267,11 @@ body.profile {
 #features-dropdown{
   width: 60vw;
 }
+
+#reg-form {
+  margin-top: 5vw;
+}
+
+.swal {
+  height: 300px;
+}

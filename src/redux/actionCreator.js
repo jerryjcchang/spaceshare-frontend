@@ -1,6 +1,7 @@
-import { confirm } from '../components/Alerts'
+import { confirm, myAlert } from '../components/Alerts'
 
-const URL = 'https://spaceshare-api.herokuapp.com/api/v1'
+// const URL = 'https://spaceshare-api.herokuapp.com/api/v1'
+const URL = 'http://localhost:3000/api/v1'
 const LOGIN = `${URL}/login`
 const PROFILE = `${URL}/profile`
 const SPACES = `${URL}/get_spaces`
@@ -84,10 +85,10 @@ function loggingInUser(info){
         .then(data => {
             // console.log(data)
               if(data.error){
-                alert('Incorrect username or password')
+                myAlert()
               } else {
-                dispatch(loggedIn(data.user_info))
                 localStorage.setItem("token", data.token)
+                dispatch(loggedIn(data.user_info))
               }
           })
         }
@@ -121,7 +122,7 @@ function bookingSpace(info){
             headers: {
                 "Content-Type":"application/json",
                 "Accept":"application/json",
-                "Authentication": `Bearer ${token}`},
+                "Authentication": `Bearer ${localStorage.getItem('token')}`},
             body: JSON.stringify(info)
         })
         .then(res => res.json())

@@ -53,7 +53,6 @@ const setUserReducer = (oldState="", action) => {
     case "LOG_IN":
       return action.payload.user
     case "MAKE_BOOKING":
-    debugger
       return {
         ...oldState,
         points: oldState.points + action.payload.space.daily_rate * action.payload.dates.length * 10,
@@ -89,7 +88,6 @@ const setBookingsReducer = (oldState="", action) => {
     case "LOG_OUT":
       return ""
     case "MAKE_BOOKING":
-      debugger
       return [...oldState, action.payload].sort((a,b) => moment(a.start)-moment(b.start))
     case "UPDATE_BOOKING":
       return oldState.map(booking => {
@@ -200,7 +198,6 @@ const bookingFormOldDaysReducer = (oldState="", action) => {
 const referrerReducer = (oldState="", action) => {
   switch(action.type){
     case "SET_REFERRER":
-      debugger
       return action.payload
     default:
       return oldState
