@@ -1,12 +1,9 @@
 import React from 'react'
-import { Card, Image, Label, Popup } from 'semantic-ui-react'
+import { Card, Image, Popup } from 'semantic-ui-react'
 import { Link } from 'react-router-dom'
 
 class SpaceCard extends React.PureComponent{
-    constructor(){
-      super()
-      // console.log('constructor')
-    }
+  
     promoHandler= () => {
         return(this.props.space.promo ?
             {corner: 'right', color: 'green', icon:'dollar'}

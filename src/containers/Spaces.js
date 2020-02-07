@@ -1,12 +1,11 @@
 import React from 'react'
-import { Container, Card, Image, Loader, Dimmer, Segment } from 'semantic-ui-react'
+import { Container, Card, Image } from 'semantic-ui-react'
 import SpaceCard from '../components/SpaceCard'
 import SearchBar from '../components/SearchBar'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { statesHash } from '../StatesData'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { fetchingAllSpaces, increaseIndex } from '../redux/actionCreator'
+import { increaseIndex } from '../redux/actionCreator'
 
 
 class Spaces extends React.Component{
@@ -21,8 +20,6 @@ class Spaces extends React.Component{
     }
 
     filteredSpaces = () => {
-      let {selectedFeatures} = this.props
-      let filteredSpaces = []
       let allSpaces = this.filterBySearchTerm()
       return allSpaces.filter(
         this.filterSpace
@@ -55,7 +52,7 @@ class Spaces extends React.Component{
 
 
     renderSpaces = () => {
-        let {allSpaces, searchTerm, selectedFeatures, index} = this.props
+        let {allSpaces, index} = this.props
         return(this.props.allSpaces ?
             <InfiniteScroll
                 dataLength={index}

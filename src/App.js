@@ -10,7 +10,7 @@ import Profile from './components/Profile'
 import { connect } from 'react-redux'
 import ScrollToTop from './components/ScrollToTop'
 import { fetchingAllSpaces, loggingInCurrentUser, setLoading } from './redux/actionCreator'
-import { withRouter, Router } from 'react-router-dom'
+import { withRouter } from 'react-router-dom'
 
 class App extends Component {
 

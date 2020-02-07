@@ -1,10 +1,9 @@
 import React from 'react'
-import { Segment, Button, Icon, Confirm } from 'semantic-ui-react'
+import { Segment, Button, Icon } from 'semantic-ui-react'
 import { connect } from 'react-redux'
 import { deletingBooking, editingBooking } from '../redux/actionCreator'
 import moment from 'moment'
 import Swal from 'sweetalert2'
-import { confirm } from './Alerts'
 
 class BookingDiv extends React.Component{
 

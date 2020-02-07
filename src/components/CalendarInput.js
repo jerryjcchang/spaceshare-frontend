@@ -1,7 +1,6 @@
 import React from 'react'
 import { Menu, Icon} from 'semantic-ui-react'
 import { DateInput } from 'semantic-ui-calendar-react';
-import moment, { isMoment } from 'moment';
 
 class CalendarInput extends React.Component{
 
@@ -47,7 +46,7 @@ class CalendarInput extends React.Component{
                     dateFormat="MM-DD-YYYY"
                     minDate={this.state.startDate}
                     initialDate={this.state.startDate}
-     
+
                 />
                 </Menu.Item>
                 </Menu>

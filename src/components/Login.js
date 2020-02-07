@@ -1,8 +1,7 @@
 import React from 'react'
-import { Button, Form, Grid, Header, Image, Message, Segment } from 'semantic-ui-react'
+import { Button, Form, Grid, Image, Message, Segment } from 'semantic-ui-react'
 import { connect } from 'react-redux'
-import { loggingInUser, loggingInCurrentUser, loggingOut } from '../redux/actionCreator'
-import { Route, Redirect } from 'react-router'
+import { loggingInUser, loggingOut } from '../redux/actionCreator'
 import { withRouter, Link } from 'react-router-dom'
 
 
@@ -97,7 +96,7 @@ class Login extends React.Component {
             `}</style>
             <Grid textAlign='center' style={{ height: '100%' }} verticalAlign='middle'>
               <Grid.Column style={{ maxWidth: 450 }}>
-              <Image id="logo" centered size="large" src='/logo_transparent.png' /> 
+              <Image id="logo" centered size="large" src='/logo_transparent.png' />
                 {/* <Header className="login-header" as='h1' textAlign='center'>
                   {this.props.currentUser? `Welcome ${this.props.currentUser.first_name}`: null}
                 </Header> */}

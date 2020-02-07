@@ -1,14 +1,12 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { Image, Container, Segment, Button, Grid, Menu, Icon, Popup, Confirm } from 'semantic-ui-react'
-import { DateInput, DatesRangeInput } from 'semantic-ui-calendar-react'
-import { bookingSpace, setStartDate, setEndDate, editBooking, clearStartDate, clearEndDate, cancelEdit, updatingBooking, setReferrer} from '../redux/actionCreator'
+import { Image, Container, Segment, Button, Menu, Popup, Confirm } from 'semantic-ui-react'
+import { DateInput } from 'semantic-ui-calendar-react'
+import { bookingSpace, setStartDate, setEndDate, clearStartDate, clearEndDate, cancelEdit, updatingBooking, setReferrer} from '../redux/actionCreator'
 import Map from './Map'
 import BookingDiv from './BookingDiv'
 import moment from 'moment'
 import Swal from 'sweetalert2'
-import { confirm } from './Alerts'
 
 class SpaceView extends React.Component {
 
