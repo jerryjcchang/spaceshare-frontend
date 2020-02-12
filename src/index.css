@@ -1,12 +1,17 @@
 html {
   /* background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.pexels.com/photos/908284/pexels-photo-908284.jpeg') no-repeat center center fixed;  */
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2) ), url('https://media.giphy.com/media/ZPXRNopHrMcMw/giphy.gif') no-repeat center center fixed;
+  /* background: lightgrey; */
+}
+
+.login {
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
+    url("https://media.giphy.com/media/ZPXRNopHrMcMw/giphy.gif") no-repeat
+      center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   height: 100%;
-  /* background: lightgrey; */
 }
 
 body {
@@ -22,15 +27,14 @@ body {
   /* background-size: contain;
   background-repeat: no-repeat;
   background-position: center; */
-  background-color: rgba(0,0,0,0);
-
+  background-color: rgba(0, 0, 0, 0);
 }
 
-#load-wrapper{
+#load-wrapper {
   margin-top: 40vh;
 }
 
-#loader{
+#loader {
   width: 10vw;
   display: block;
   margin: auto auto;
@@ -46,12 +50,12 @@ body {
   color: darkgrey;
 }
 
-h1.ui.header{
+h1.ui.header {
   color: lightblue;
   font-size: 5vh;
 }
 
-.reg-header{
+.reg-header {
   color: white;
 }
 
@@ -76,7 +80,10 @@ code {
   height: 1.5vh;
 }
 
-.ui.card>.image>img, .ui.cards>.card>.image>img, .ui.card>.image, .ui.cards>.card>.image {
+.ui.card > .image > img,
+.ui.cards > .card > .image > img,
+.ui.card > .image,
+.ui.cards > .card > .image {
   height: 23vh;
   width: 100%;
 }
@@ -89,9 +96,8 @@ code {
   background-size: cover;
 } */
 
-body.login{
+body.login {
   /* background-color: blue; */
-
 }
 
 .navbar {
@@ -110,7 +116,7 @@ body.login{
 
 .rate-div {
   background: rgb(5, 80, 128);
-  opacity: .8;
+  opacity: 0.8;
   color: white;
   min-height: 5vh;
   vertical-align: center;
@@ -125,10 +131,9 @@ body.login{
   margin-top: 73px;
   margin-bottom: 7px;
   /* top: 90px; */
-
 }
 
-#search-bar{
+#search-bar {
   z-index: 5;
 }
 
@@ -136,27 +141,28 @@ body.login{
 }
 
 .search-bar {
-  width: 35vw
+  width: 35vw;
 }
 
-body.home {
+.home {
   background: rgb(231, 230, 230);
-  min-height: 100vh;
+  height: 100%;
 }
 
 body.register {
-  background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('/work.jpeg') no-repeat center center fixed;
+  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url("/work.jpeg") no-repeat center center fixed;
 }
 
 .view-header {
   margin-top: 12vh;
 }
 
-.ui.container.space-page{
+.ui.container.space-page {
   margin-top: 90px;
 }
 
-.ui.container.space-details{
+.ui.container.space-details {
   margin-bottom: 5vh;
 }
 
@@ -178,7 +184,7 @@ body.profile {
   height: 100%;
 }
 
-.ui.big.centered.image{
+.ui.big.centered.image {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 1vh;
 }
@@ -195,8 +201,6 @@ body.profile {
   min-height: 100vh;
 }
 
-
-
 /* .ui.container.bookings {
   margin-bottom:
 } */
@@ -211,8 +215,8 @@ body.profile {
   margin-bottom: 5vh;
 }
 
-.ui.menu:not(.vertical) .item>.button {
-  margin-left: .4vw;
+.ui.menu:not(.vertical) .item > .button {
+  margin-left: 0.4vw;
 }
 
 .ui.segment.booking-menu.highlight {
@@ -237,7 +241,7 @@ body.profile {
   overflow: hidden;
 }
 
-#card-features-div{
+#card-features-div {
   margin-top: 1.5vh;
   border: 0vh;
   border-top: 1px;
@@ -250,21 +254,21 @@ body.profile {
   /* padding: 1vh; */
 }
 
-#card-feature{
+#card-feature {
   width: 2.65vh;
   length: 2.65vh;
-  margin-left: .5vh;
+  margin-left: 0.5vh;
 }
 
-#map-container{
+#map-container {
   height: 40vh;
 }
 
-#discount{
+#discount {
   color: rgb(33, 187, 33);
 }
 
-#features-dropdown{
+#features-dropdown {
   width: 60vw;
 }
 
@@ -274,4 +278,36 @@ body.profile {
 
 .swal {
   height: 300px;
+}
+
+@media (max-width: 991px) {
+  #card-img {
+    height: 35vh;
+  }
+}
+
+@media (max-width: 768px) {
+  #card-img {
+    height: 20rem;
+    object-fit: cover;
+  }
+
+  #card-group {
+    margin-top: 12rem;
+  }
+
+  #card-feature {
+    width: 2rem;
+  }
+
+  .rate-div {
+    height: 4rem;
+    padding-top: 1.5rem;
+  }
+
+  #logo {
+    width: 20rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 }

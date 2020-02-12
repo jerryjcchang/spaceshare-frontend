@@ -15,7 +15,7 @@ class Navbar extends React.Component{
         return (
         <div style={{display: "flex"}}>
         <Image src={this.props.user.img_url} size="mini" circular />
-        <div style={{"margin-left": "1vw"}}>{!this.state.hover ? `${this.props.user.first_name}` : `SpacePoints: ${this.props.user.points.toLocaleString()}`}</div>
+        <div style={{"marginLeft": "1vw"}}>{!this.state.hover ? `${this.props.user.first_name}` : `SpacePoints: ${this.props.user.points.toLocaleString()}`}</div>
         </div>
       )
     }

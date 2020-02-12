@@ -155,7 +155,7 @@ class SpaceView extends React.Component {
                     bookings.sort(function(a,b){
                         return moment(a.start)-moment(b.start)
                     })
-                    .map(booking => <BookingDiv key={booking.id} booking={booking}/>)
+                    .map(booking => <BookingDiv key={booking.id} booking={booking} key={booking.id}/>)
                 )
             }
     }
@@ -198,8 +198,8 @@ class SpaceView extends React.Component {
             <div className="space-page">
 
                 <Container className="space-page">
-                    <Image raised centered size="big" src={this.props.space.img_url}></Image>
-                    <Container raised className="space-details">
+                    <Image centered size="big" src={this.props.space.img_url}></Image>
+                    <Container className="space-details">
                             <h1>{this.props.space.name}</h1>
                             <Segment.Group>
                                 <Segment id="map-container">
@@ -212,10 +212,11 @@ class SpaceView extends React.Component {
                                 <Segment align="left">
                                     <span><b>Description:</b> {this.props.space.description}</span>
                                 </Segment>
-                                <Segment align="left" horizontal>
-                                    <b>Amenities</b>: {this.props.space.features.map(feature =>
+                                <Segment align="left">
+                                    <b>Amenities</b>: {this.props.space.features.map((feature,index) =>
                                     <Popup content={feature.name}
-                                           trigger={<Image size="small" key={feature.id} id="feature-icon" spaced="left" inline src={feature.img_url}/>}
+                                           key={index}
+                                           trigger={<Image size="small" key={index} id="feature-icon" spaced="left" inline src={feature.img_url}/>}
                                     />)}
                                 </Segment>
                                 <Segment className="booking-menu" id="booking-menu">
