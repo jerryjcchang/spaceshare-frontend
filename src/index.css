@@ -291,7 +291,10 @@ body.profile {
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 812px) {
+  body {
+    width: 100%;
+  }
   #card-img {
     height: 20rem;
     object-fit: cover;
