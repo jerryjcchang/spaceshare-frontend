@@ -42,7 +42,7 @@ class Navbar extends React.Component {
 
   render() {
     return (
-      <Menu fitted="vertically" fixed="top" className="navbar" inverted>
+      <Menu fitted="vertically" fixed="top" className="navbar" inverted compact>
         <Menu.Item position="left">
           <Image
             src="/logo_transparent.png"
