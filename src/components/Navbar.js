@@ -41,7 +41,7 @@ class Navbar extends React.Component {
   };
 
   render() {
-    let width = window.innerWidth;
+    let width = window.innerWidth > 0 ? window.innerWidth : screen.width;
     return (
       <Menu
         fitted="vertically"
