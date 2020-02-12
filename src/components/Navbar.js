@@ -41,8 +41,16 @@ class Navbar extends React.Component {
   };
 
   render() {
+    let width = window.innerWidth;
     return (
-      <Menu fitted="vertically" fixed="top" className="navbar" inverted compact>
+      <Menu
+        fitted="vertically"
+        fixed="top"
+        className="navbar"
+        inverted
+        compact
+        borderless
+      >
         <Menu.Item position="left">
           <Image
             src="/logo_transparent.png"
@@ -50,7 +58,7 @@ class Navbar extends React.Component {
             as={Link}
             to="/spaces"
           />
-          {this.props.user ? (
+          {this.props.user && width > 812 ? (
             <span
               onClick={() => {
                 this.setState({ hover: !this.state.hover });
