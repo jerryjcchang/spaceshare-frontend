@@ -280,6 +280,11 @@ body.profile {
   height: 300px;
 }
 
+#avatar {
+  height: 3rem;
+  border-radius: 50%;
+}
+
 @media (max-width: 991px) {
   #card-img {
     height: 35vh;
@@ -309,5 +314,9 @@ body.profile {
     width: 20rem;
     margin-top: 2rem;
     margin-bottom: 2rem;
+  }
+
+  #profile-div {
+    padding-left: 0px;
   }
 }
