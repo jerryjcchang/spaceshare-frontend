@@ -323,4 +323,8 @@ body.profile {
     padding-left: 0px;
     padding-right: 0px;
   }
+
+  #loader {
+    width: 25%;
+  }
 }

@@ -103,10 +103,7 @@ class Spaces extends React.Component {
 
           {this.props.loading ? (
             <div id="load-wrapper">
-              <Image
-                id="loader"
-                src="https://mir-s3-cdn-cf.behance.net/project_modules/disp/585d0331234507.564a1d239ac5e.gif"
-              />
+              <Image id="loader" src="/loader.gif" />
             </div>
           ) : (
             this.renderSpaces()
