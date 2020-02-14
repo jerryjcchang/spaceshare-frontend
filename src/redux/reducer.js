@@ -1,224 +1,236 @@
-import {combineReducers} from 'redux'
-import moment from 'moment'
+import { combineReducers } from "redux";
+import moment from "moment";
 
-
-
-
-const loadingReducer = (oldState=false, action) => {
-  switch(action.type){
+const loadingReducer = (oldState = false, action) => {
+  switch (action.type) {
     case "SET_LOADING":
-      return !oldState
+      return !oldState;
     case "FETCH_SPACES":
-      return !oldState
+      return !oldState;
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const indexReducer = (oldState=20, action) => {
-  switch(action.type){
+const windowWidthReducer = (oldState = window.innerWidth, action) => {
+  switch (action.type) {
+    case "SET_WIDTH":
+      return action.payload;
+    default:
+      return oldState;
+  }
+};
+
+const indexReducer = (oldState = 20, action) => {
+  switch (action.type) {
     case "INCREASE_INDEX":
-      return oldState + 20
+      return oldState + 20;
     case "RESET_INDEX":
-      return 20
+      return 20;
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const searchTermReducer = (oldState="", action) => {
-  switch(action.type){
+const searchTermReducer = (oldState = "", action) => {
+  switch (action.type) {
     case "SET_SEARCH_TERM":
-      return action.payload
+      return action.payload;
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const defaultFeatures = []
+const defaultFeatures = [];
 
-const featuresReducer = (oldState=defaultFeatures, action) => {
-  switch(action.type){
+const featuresReducer = (oldState = defaultFeatures, action) => {
+  switch (action.type) {
     case "SET_FEATURES":
-      return action.payload
+      return action.payload;
     case "LOG_OUT":
-      return ''
+      return "";
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const setUserReducer = (oldState="", action) => {
-  switch(action.type){
+const setUserReducer = (oldState = "", action) => {
+  switch (action.type) {
     case "LOG_IN":
-      return action.payload.user
+      return action.payload.user;
     case "MAKE_BOOKING":
       return {
         ...oldState,
-        points: oldState.points + action.payload.space.daily_rate * action.payload.dates.length * 10,
-        reward: false,
-      }
+        points:
+          oldState.points +
+          action.payload.space.daily_rate * action.payload.dates.length * 10,
+        reward: false
+      };
     case "DELETE_BOOKING":
       return {
         ...oldState,
-        points: oldState.points - action.payload.space.daily_rate * action.payload.dates.length * 10,
-      }
+        points:
+          oldState.points -
+          action.payload.space.daily_rate * action.payload.dates.length * 10
+      };
     case "LOG_OUT":
-      return ""
+      return "";
     case "REDEEM_REWARD":
       return {
         ...oldState,
         reward: true,
-        points: oldState.points-10000
-      }
+        points: oldState.points - 10000
+      };
     case "UPDATE_BOOKING":
       return {
         ...oldState,
         points: action.payload.user_points
-      }
+      };
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const setBookingsReducer = (oldState="", action) => {
-  switch(action.type){
+const setBookingsReducer = (oldState = "", action) => {
+  switch (action.type) {
     case "LOG_IN":
-      return action.payload.bookings
+      return action.payload.bookings;
     case "LOG_OUT":
-      return ""
+      return "";
     case "MAKE_BOOKING":
-      return [...oldState, action.payload].sort((a,b) => moment(a.start)-moment(b.start))
+      return [...oldState, action.payload].sort(
+        (a, b) => moment(a.start) - moment(b.start)
+      );
     case "UPDATE_BOOKING":
       return oldState.map(booking => {
-        if(booking.id === action.payload.booking.id){
+        if (booking.id === action.payload.booking.id) {
           return {
             ...booking,
             start: action.payload.booking.start,
             end: action.payload.booking.end,
             dates: action.payload.booking_dates
-          }
+          };
         }
-        return booking
-      })
+        return booking;
+      });
     case "DELETE_BOOKING":
-      return oldState.filter(booking => booking.id !== action.payload.id)
+      return oldState.filter(booking => booking.id !== action.payload.id);
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const defaultSpaces = []
+const defaultSpaces = [];
 
-const setSpacesReducer = (oldState=defaultSpaces, action) => {
-  switch(action.type){
+const setSpacesReducer = (oldState = defaultSpaces, action) => {
+  switch (action.type) {
     case "LOG_IN":
-      return action.payload.spaces
+      return action.payload.spaces;
     case "LOG_OUT":
-      return ""
+      return "";
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const defaultAllSpaces = []
+const defaultAllSpaces = [];
 
-const setAllSpacesReducer = (oldState=defaultAllSpaces, action) => {
-  switch(action.type){
+const setAllSpacesReducer = (oldState = defaultAllSpaces, action) => {
+  switch (action.type) {
     case "FETCH_SPACES":
-      return [...oldState].concat(action.payload)
+      return [...oldState].concat(action.payload);
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const bookingFormEditingReducer = (oldState=false, action) => {
-  switch(action.type){
+const bookingFormEditingReducer = (oldState = false, action) => {
+  switch (action.type) {
     case "EDIT_START":
-      return true
+      return true;
     case "CANCEL_EDIT":
-      return false
+      return false;
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const bookingFormIdReducer = (oldState="", action) => {
-  switch(action.type){
+const bookingFormIdReducer = (oldState = "", action) => {
+  switch (action.type) {
     case "EDIT_START":
-      return action.payload.id
+      return action.payload.id;
     case "CANCEL_EDIT":
-      return ""
+      return "";
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const bookingFormStartReducer = (oldState="", action) => {
-  switch(action.type){
+const bookingFormStartReducer = (oldState = "", action) => {
+  switch (action.type) {
     case "SET_START":
-      return action.payload
+      return action.payload;
     case "CLEAR_START":
-      return ""
+      return "";
     case "CANCEL_EDIT":
-      return ""
+      return "";
     case "EDIT_START":
-      return action.payload.start
+      return action.payload.start;
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const bookingFormEndReducer = (oldState="", action) => {
-  switch(action.type){
+const bookingFormEndReducer = (oldState = "", action) => {
+  switch (action.type) {
     case "SET_END":
-      return action.payload
+      return action.payload;
     case "CLEAR_END":
-      return ""
+      return "";
     case "EDIT_START":
-      return action.payload.end
+      return action.payload.end;
     case "CANCEL_EDIT":
-      return ""
+      return "";
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const bookingFormOldDaysReducer = (oldState="", action) => {
-  switch(action.type){
+const bookingFormOldDaysReducer = (oldState = "", action) => {
+  switch (action.type) {
     case "EDIT_START":
-      return action.payload.days
+      return action.payload.days;
     case "CANCEL_EDIT":
-      return ""
+      return "";
     default:
-      return oldState
+      return oldState;
   }
-}
+};
 
-const referrerReducer = (oldState="", action) => {
-  switch(action.type){
+const referrerReducer = (oldState = "", action) => {
+  switch (action.type) {
     case "SET_REFERRER":
-      return action.payload
+      return action.payload;
     default:
-      return oldState
+      return oldState;
   }
-}
-
+};
 
 const searchBarReducer = combineReducers({
   searchTerm: searchTermReducer,
-  selectedFeatures: featuresReducer,
-})
+  selectedFeatures: featuresReducer
+});
 
 const setBookingFormReducer = combineReducers({
   editing: bookingFormEditingReducer,
   id: bookingFormIdReducer,
   start: bookingFormStartReducer,
   end: bookingFormEndReducer,
-  days: bookingFormOldDaysReducer,
-})
+  days: bookingFormOldDaysReducer
+});
 
 const rootReducer = combineReducers({
+  windowWidth: windowWidthReducer,
   allSpaces: setAllSpacesReducer,
   currentUser: setUserReducer,
   userBookings: setBookingsReducer,
@@ -228,7 +240,7 @@ const rootReducer = combineReducers({
   loading: loadingReducer,
   index: indexReducer,
   referrer: referrerReducer
-})
+});
 
 // state = {
 //   email: "",
@@ -277,4 +289,4 @@ const rootReducer = combineReducers({
 //   }
 // }
 
-export default rootReducer
+export default rootReducer;

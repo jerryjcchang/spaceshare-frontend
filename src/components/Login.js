@@ -29,7 +29,13 @@ class Login extends React.Component {
           console.log(data);
         });
     }
+    this.updateWindowDimensions();
+    window.addEventListener("resize", this.updateWndowDimensions);
   }
+
+  updateWindowDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  };
 
   handleLoginSubmitRedux = () => {
     let info = {

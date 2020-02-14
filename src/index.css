@@ -61,6 +61,7 @@ h1.ui.header {
 
 .reg-form {
   background: grey;
+  height: 70%;
 }
 
 code {
@@ -149,9 +150,11 @@ body.login {
   height: 100%;
 }
 
-body.register {
+.register {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
     url("/work.jpeg") no-repeat center center fixed;
+  background-size: cover;
+  overflow: hidden;
 }
 
 .view-header {
@@ -232,7 +235,7 @@ body.profile {
 #feature-icon {
   width: 8vh;
   length: 8vh;
-  margin-right: 3vh;
+  margin-right: 0.5rem;
 }
 
 #card-header {
@@ -264,6 +267,9 @@ body.profile {
   height: 40vh;
 }
 
+#map-container:first-child:first-child {
+  width: 100%;
+}
 #discount {
   color: rgb(33, 187, 33);
 }
@@ -285,9 +291,19 @@ body.profile {
   border-radius: 50%;
 }
 
+#registration-form {
+  margin-top: 10rem;
+  height: 100%;
+}
+
 @media (max-width: 991px) {
   #card-img {
     height: 35vh;
+  }
+
+  #feature-icon {
+    margin-right: 0.5rem;
+    width: 8%;
   }
 }
 
@@ -326,5 +342,19 @@ body.profile {
 
   #loader {
     width: 25%;
+  }
+
+  #map-child {
+    width: 95%;
+  }
+
+  #amenities-div {
+    display: flex;
+  }
+
+  #feature-icon {
+    width: 3rem;
+    margin-right: 0.2rem;
+    margin-bottom: 0.2rem;
   }
 }
