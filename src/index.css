@@ -5,8 +5,7 @@ html {
 
 .login {
   background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2)),
-    url("https://media.giphy.com/media/ZPXRNopHrMcMw/giphy.gif") no-repeat
-      center center fixed;
+    url("/login-bg.gif") no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
