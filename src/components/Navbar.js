@@ -13,7 +13,7 @@ class Navbar extends React.Component {
   handleWelcomeDiv = () => {
     return (
       <div style={{ display: "flex" }}>
-        <img id="avatar" src={this.props.user.img_url} />
+        <img id="avatar" src={this.props.user.img_url} alt="user avatar" />
         <div id="user-div" style={{ marginLeft: "1vw" }}>
           {!this.state.hover
             ? `${this.props.user.first_name}`
@@ -56,6 +56,7 @@ class Navbar extends React.Component {
             size="tiny"
             as={Link}
             to="/spaces"
+            alt="spaceshare logo"
           />
           {this.props.user && this.props.windowWidth > 812 ? (
             <span

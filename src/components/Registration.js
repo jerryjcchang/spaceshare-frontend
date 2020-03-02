@@ -1,5 +1,5 @@
 import React from "react";
-import { Form, Grid, Header, Segment, TableBody } from "semantic-ui-react";
+import { Form, Grid, Header, Segment } from "semantic-ui-react";
 import { reactStatesData } from "../StatesData";
 import { connect } from "react-redux";
 import { registerUser } from "../redux/actionCreator";

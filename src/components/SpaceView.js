@@ -188,9 +188,7 @@ class SpaceView extends React.Component {
         .sort(function(a, b) {
           return moment(a.start) - moment(b.start);
         })
-        .map(booking => (
-          <BookingDiv key={booking.id} booking={booking} key={booking.id} />
-        ));
+        .map(booking => <BookingDiv key={booking.id} booking={booking} />);
     }
   };
 

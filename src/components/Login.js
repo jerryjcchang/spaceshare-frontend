@@ -12,7 +12,9 @@ class Login extends React.Component {
   };
 
   componentDidMount() {
-    document.querySelector("body").classList.remove("home");
+    let body = document.querySelector("body");
+    body.classList.remove("home");
+    body.classList.add("login");
     let token = localStorage.getItem("token");
     if (token) {
       fetch("http://localhost:3001/api/v1/profile", {
@@ -31,6 +33,11 @@ class Login extends React.Component {
     }
     this.updateWindowDimensions();
     window.addEventListener("resize", this.updateWndowDimensions);
+  }
+
+  componentWillUnmount() {
+    let body = document.querySelector("body");
+    body.classList.remove("login");
   }
 
   updateWindowDimensions = () => {
@@ -84,70 +91,68 @@ class Login extends React.Component {
 
   render() {
     return (
-      <body className="login">
-        <div className="login-form">
-          {/*
+      <div className="login-form">
+        {/*
               Heads up! The styles below are necessary for the correct render of this example.
               You can do same with CSS, the main idea is that all the elements up to the `Grid`
               below must have a height of 100%.
             */}
-          <style>{`
+        <style>{`
               body > div,
               body > div > div,
               body > div > div > div.login-form {
                 height: 100%;
               }
             `}</style>
-          <Grid
-            textAlign="center"
-            style={{ height: "100%" }}
-            verticalAlign="middle"
-          >
-            <Grid.Column style={{ maxWidth: 450 }}>
-              <Image
-                id="logo"
-                centered
-                size="large"
-                src="/logo_transparent.png"
-              />
-              {/* <Header className="login-header" as='h1' textAlign='center'>
+        <Grid
+          textAlign="center"
+          style={{ height: "100%" }}
+          verticalAlign="middle"
+        >
+          <Grid.Column style={{ maxWidth: 450 }}>
+            <Image
+              id="logo"
+              centered
+              size="large"
+              src="/logo_transparent.png"
+            />
+            {/* <Header className="login-header" as='h1' textAlign='center'>
                   {this.props.currentUser? `Welcome ${this.props.currentUser.first_name}`: null}
                 </Header> */}
-              <Form onSubmit={this.handleLoginSubmitRedux} size="large">
-                <Segment stacked>
-                  <Form.Input
-                    fluid
-                    icon="user"
-                    iconPosition="left"
-                    placeholder="E-mail address"
-                    onChange={e => this.setState({ email: e.target.value })}
-                  />
-                  <Form.Input
-                    fluid
-                    icon="lock"
-                    iconPosition="left"
-                    placeholder="Password"
-                    type="password"
-                    onChange={e => this.setState({ password: e.target.value })}
-                  />
-                  {!this.props.currentUser ? (
-                    <Button color="blue" fluid size="large">
-                      Login
-                    </Button>
-                  ) : (
-                    <Button color="red" fluid size="large">
-                      Logout
-                    </Button>
-                  )}
-                </Segment>
-              </Form>
-              <Message>
-                New to us? <Link to="/register">Sign Up</Link>
-              </Message>
-            </Grid.Column>
-          </Grid>
-        </div>
-      </body>
+            <Form onSubmit={this.handleLoginSubmitRedux} size="large">
+              <Segment stacked>
+                <Form.Input
+                  fluid
+                  icon="user"
+                  iconPosition="left"
+                  placeholder="E-mail address"
+                  onChange={e => this.setState({ email: e.target.value })}
+                />
+                <Form.Input
+                  fluid
+                  icon="lock"
+                  iconPosition="left"
+                  placeholder="Password"
+                  type="password"
+                  onChange={e => this.setState({ password: e.target.value })}
+                />
+                {!this.props.currentUser ? (
+                  <Button color="blue" fluid size="large">
+                    Login
+                  </Button>
+                ) : (
+                  <Button color="red" fluid size="large">
+                    Logout
+                  </Button>
+                )}
+              </Segment>
+            </Form>
+            <Message>
+              New to us? <Link to="/register">Sign Up</Link>
+            </Message>
+          </Grid.Column>
+        </Grid>
+      </div>
     );
   }
 }
