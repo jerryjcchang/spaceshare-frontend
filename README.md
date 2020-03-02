@@ -15,7 +15,7 @@ HTML5 | CSS3 | Semantic-UI React
 <br>
 GoogleMaps API | MomentJS | SweetAlert2
 <br>
-React-Infinit-Scroll-Component
+React-Infinite-Scroll-Component
 
 ### `Getting Started`
 
