@@ -11,11 +11,15 @@ Global Dependencies:
 
 JavaScript ES6 | ReactJS | Redux
 <br>
+
 HTML5 | CSS3 | Semantic-UI React
+
 <br>
 GoogleMaps API | MomentJS | SweetAlert2
+
 <br>
 React-Infinite-Scroll-Component
+
 
 ### `Getting Started`
 
