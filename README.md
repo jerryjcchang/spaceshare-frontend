@@ -1,3 +1,6 @@
+# spaceshare-frontend #
+
+
 This is the React Front-end for Spaceshare - a mock-up concept for a membership-based service to find and book co-working spaces in the United States using data from the Coworking Map API. This fully responsive progressive webapp was bootstrapped using Create-React-App.
 
 Global Dependencies:
@@ -7,8 +10,12 @@ Global Dependencies:
 ### `Technology`
 
 JavaScript ES6 | ReactJS | Redux
+<br>
 HTML5 | CSS3 | Semantic-UI React
+<br>
 GoogleMaps API | MomentJS | SweetAlert2
+<br>
+React-Infinit-Scroll-Component
 
 ### `Getting Started`
 
