@@ -35,13 +35,22 @@ class SpaceCard extends React.PureComponent {
             {city}, {state}
           </Card.Description>
           <div id="card-features-div" align="right">
-            {/* {features.map((feature, i) =>
-                    <Popup
-                      key={i}
-                      content={feature.name}
-                      trigger={<Image key={feature.id} id="card-feature" spaced="left" inline src={feature.img_url}/>}
-                      size="mini"
-                    />)} */}
+            {features.map((feature, i) => (
+              <Popup
+                key={i}
+                content={feature.name}
+                trigger={
+                  <Image
+                    key={feature.id}
+                    id="card-feature"
+                    spaced="left"
+                    inline
+                    src={feature.img_url}
+                  />
+                }
+                size="mini"
+              />
+            ))}
           </div>
         </Card.Content>
       </Card>
