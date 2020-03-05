@@ -1,8 +1,10 @@
 import React from "react";
-import { Form, Grid, Header, Segment } from "semantic-ui-react";
-import { reactStatesData } from "../StatesData";
+import { Form, Grid, Header, Segment, Message } from "semantic-ui-react";
+import { statesOptions } from "../StatesData";
 import { connect } from "react-redux";
 import { registerUser } from "../redux/actionCreator";
+import { warning } from "./Alerts";
+import _, { debounce } from "lodash";
 
 class Registration extends React.Component {
   componentDidMount() {
@@ -14,57 +16,78 @@ class Registration extends React.Component {
   }
 
   state = {
-    email: "",
-    firstName: "",
-    lastName: "",
-    company: "",
-    password: "",
-    passwordConfirm: "",
-    city: "",
-    phone: ""
+    form: {
+      email: "",
+      firstName: "",
+      lastName: "",
+      company: "",
+      password: "",
+      passwordConfirm: "",
+      city: "",
+      phone: ""
+    },
+    showError: false,
+    validEmail: true,
+    passwordMatch: true
   };
 
-  handleRegister = () => {
+  validateEmail = email => {
+    const re = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+    let validate = re.test(email);
+    this.setState({ validEmail: validate });
+  };
+
+  validatePassword = password => {
+    if (password !== this.state.form.password) {
+      this.setState({ passwordMatch: false });
+    } else {
+      this.setState({ passwordMatch: true });
+    }
+  };
+
+  handleChange = debounce((e, data) => {
+    let newState = { ...this.state.form };
+    newState[data.name] = data.value;
+    if (data.name === "email") {
+      this.validateEmail(data.value);
+    }
+    if (data.name.includes("password")) {
+      this.validatePassword(data.value);
+    }
+    this.setState({ form: newState });
+  }, 200);
+
+  handleRegister = e => {
+    const { validEmail, passwordMatch } = this.state;
+    const info = {
+      user: this.state.form
+    };
+    // debugger
+    if (
+      !Object.values(this.state.form).includes("") &&
+      validEmail &&
+      passwordMatch
+    ) {
+      this.props.registerUser(info);
+      this.props.routeProps.history.push("/login");
+    } else {
+      warning();
+      this.setState({ showError: true });
+    }
+  };
+
+  render() {
+    const { email, validEmail, passwordMatch, showError, form } = this.state;
     const {
-      email,
       firstName,
       lastName,
       company,
       password,
       passwordConfirm,
       city,
+      selectedState,
       phone
-    } = this.state;
-    const info = {
-      user: {
-        email,
-        first_name: firstName,
-        last_name: lastName,
-        company,
-        password,
-        password_confirm: passwordConfirm,
-        city,
-        phone
-      }
-    };
-    // debugger
-    this.props.registerUser(info);
-    this.props.routeProps.history.push("/login");
-  };
-
-  handleDisable = () => {
-    return (
-      !this.state.email ||
-      !this.state.firstName ||
-      !this.state.lastName ||
-      !this.state.company ||
-      !this.state.password ||
-      !this.state.confirmPassword ||
-      !this.state.city
-    );
-  };
-
-  render() {
+    } = form;
     return (
       <div id="registration-form">
         <Grid
@@ -82,65 +105,90 @@ class Registration extends React.Component {
                   fluid
                   icon="mail"
                   placeholder="E-mail address"
-                  onChange={e => this.setState({ email: e.target.value })}
+                  name="email"
+                  onChange={this.handleChange}
+                  error={!validEmail}
                 />
+                {!validEmail ? (
+                  <Message
+                    size="mini"
+                    error
+                    content="E-mail must be in a valid format"
+                  />
+                ) : null}
                 <Form.Input
                   fluid
                   placeholder="First Name"
-                  onChange={e => this.setState({ firstName: e.target.value })}
+                  name="firstName"
+                  onChange={this.handleChange}
+                  error={showError && !firstName}
                 />
                 <Form.Input
                   fluid
                   placeholder="Last Name"
-                  onChange={e => this.setState({ lastName: e.target.value })}
+                  name="lastName"
+                  onChange={this.handleChange}
+                  error={showError && !lastName}
                 />
                 <Form.Input
                   fluid
                   placeholder="City"
-                  onChange={e => this.setState({ city: e.target.value })}
+                  name="city"
+                  onChange={this.handleChange}
+                  error={showError && !city}
                 />
                 <Form.Dropdown
                   search
+                  name="selectedState"
                   selection
                   clearable
-                  options={reactStatesData}
+                  options={statesOptions}
                   fluid
                   placeholder="State"
-                  onChange={e => this.setState({ state: e.target.value })}
+                  onChange={this.handleChange}
+                  error={showError && !selectedState}
                 />
                 <Form.Input
                   fluid
-                  placeholder="Company"
-                  onChange={e => this.setState({ company: e.target.value })}
+                  name="company"
+                  placeholder="Company (Optional)"
+                  onChange={this.handleChange}
                 />
                 <Form.Input
                   fluid
                   icon="lock"
+                  name="password"
                   placeholder="Password"
                   type="password"
-                  onChange={e => this.setState({ password: e.target.value })}
+                  onChange={this.handleChange}
+                  error={showError && !password}
                 />
                 <Form.Input
                   fluid
                   icon="lock"
+                  name="passwordConfirm"
                   placeholder="Confirm"
                   type="password"
-                  onChange={e =>
-                    this.setState({ passwordConfirm: e.target.value })
-                  }
+                  onChange={this.handleChange}
+                  error={!passwordMatch}
                 />
-                <Form.Input
+
+                {!this.state.passwordMatch ? (
+                  <Message
+                    attached="bottom"
+                    size="mini"
+                    error
+                    content="passwords must match"
+                  />
+                ) : null}
+
+                {/* <Form.Input
                   fluid
                   icon="phone"
                   placeholder="(987) 654-3210"
                   onChange={e => this.setState({ phone: e.target.value })}
-                />
-                <Form.Button
-                  color="blue"
-                  fluid
-                  size="large"
-                  // disabled={this.handleDisable()}
-                >
+                /> */}
+                <Form.Button color="blue" fluid size="large">
                   Register
                 </Form.Button>
               </Segment>
