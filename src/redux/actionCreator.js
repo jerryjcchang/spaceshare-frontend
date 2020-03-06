@@ -5,7 +5,7 @@ import { confirm, myAlert } from "../components/Alerts";
 //     : "https://spaceshare-api.herokuapp.com/api/v1";
 console.log(process.env.REACT_APP_API_URL);
 
-const URL = "https://spaceshare-api.herokuapp.com/api/v1";
+const URL = process.env.REACT_APP_API_URL;
 const LOGIN = `${URL}/login`;
 const PROFILE = `${URL}/profile`;
 const SPACES = `${URL}/get_spaces`;
