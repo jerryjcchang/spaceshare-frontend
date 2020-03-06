@@ -3,9 +3,10 @@ import { confirm, myAlert } from "../components/Alerts";
 //   process.env.NODE_ENV === "development"
 //     ? "http://localhost:3000/api/v1"
 //     : "https://spaceshare-api.herokuapp.com/api/v1";
-console.log(process.env.REACT_APP_API_URL);
 
 const URL = process.env.REACT_APP_API_URL;
+console.log(URL);
+
 const LOGIN = `${URL}/login`;
 const PROFILE = `${URL}/profile`;
 const SPACES = `${URL}/get_spaces`;
