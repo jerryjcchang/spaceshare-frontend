@@ -1,6 +1,5 @@
 import React from "react";
 import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
-import API_KEY from "../secret";
 import { connect } from "react-redux";
 
 class MapContainer extends React.Component {
@@ -41,6 +40,6 @@ const mapStateToProps = state => {
 
 export default connect(mapStateToProps)(
   GoogleApiWrapper({
-    apiKey: API_KEY
+    apiKey: process.env.REACT_APP_GMAPS
   })(MapContainer)
 );

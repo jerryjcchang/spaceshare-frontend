@@ -34,7 +34,12 @@ class SpaceView extends React.Component {
     confirmContent: ""
   };
 
+  componentDidMount() {
+    document.querySelector("body").classList.add("space-page");
+  }
+
   componentWillUnmount() {
+    document.querySelector("body").classList.remove("space-page");
     this.props.cancelEdit();
   }
 
@@ -232,7 +237,7 @@ class SpaceView extends React.Component {
 
   render() {
     return (
-      <body className="space-page">
+      <div>
         {!this.props.space ? null : (
           <div className="space-page">
             <Container className="space-page">
@@ -349,7 +354,7 @@ class SpaceView extends React.Component {
             {/* </div> */}
           </div>
         )}
-      </body>
+      </div>
     );
   }
 }

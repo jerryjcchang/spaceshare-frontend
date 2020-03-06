@@ -4,11 +4,24 @@ import { statesOptions } from "../StatesData";
 import { connect } from "react-redux";
 import { registerUser } from "../redux/actionCreator";
 import { warning } from "./Alerts";
-import _, { debounce } from "lodash";
+import { debounce } from "lodash";
 
 class Registration extends React.Component {
   componentDidMount() {
     document.querySelector("body").classList.add("register");
+    setTimeout(() => {
+      let newFormState = {};
+      const formFields = document.querySelector(".reg-form").children;
+      for (let i = 0; i < formFields.length - 1; i++) {
+        let field = formFields[i].firstChild.firstChild;
+        let name = field.name;
+        let value = field.value;
+        if (value) {
+          newFormState[name] = value;
+        }
+      }
+      this.setState({ form: { ...this.state.form, ...newFormState } });
+    }, 200);
   }
 
   componentWillUnmount() {
@@ -23,8 +36,7 @@ class Registration extends React.Component {
       company: "",
       password: "",
       passwordConfirm: "",
-      city: "",
-      phone: ""
+      city: ""
     },
     showError: false,
     validEmail: true,
@@ -33,41 +45,34 @@ class Registration extends React.Component {
 
   validateEmail = email => {
     const re = /^([a-zA-Z0-9_\-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([a-zA-Z0-9\-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-    let validate = re.test(email);
-    this.setState({ validEmail: validate });
+    return re.test(email);
   };
 
   validatePassword = password => {
-    if (password !== this.state.form.password) {
-      this.setState({ passwordMatch: false });
-    } else {
-      this.setState({ passwordMatch: true });
-    }
+    return password === this.state.form.password;
   };
 
   handleChange = debounce((e, data) => {
-    let newState = { ...this.state.form };
-    newState[data.name] = data.value;
+    let newState = { ...this.state, form: { ...this.state.form } };
+    newState.form[data.name] = data.value;
     if (data.name === "email") {
-      this.validateEmail(data.value);
+      newState.validEmail = this.validateEmail(data.value);
     }
     if (data.name.includes("password")) {
-      this.validatePassword(data.value);
+      newState.passwordMatch = this.validatePassword(data.value);
     }
-    this.setState({ form: newState });
+    this.setState(newState);
   }, 200);
 
   handleRegister = e => {
-    const { validEmail, passwordMatch } = this.state;
+    const { validEmail, passwordMatch, form } = this.state;
     const info = {
       user: this.state.form
     };
-    // debugger
-    if (
-      !Object.values(this.state.form).includes("") &&
-      validEmail &&
-      passwordMatch
-    ) {
+    debugger;
+    let formValues = Object.values(this.state.form);
+    formValues.splice(3, 1);
+    if (!formValues.includes("") && validEmail && passwordMatch) {
       this.props.registerUser(info);
       this.props.routeProps.history.push("/login");
     } else {
@@ -77,7 +82,7 @@ class Registration extends React.Component {
   };
 
   render() {
-    const { email, validEmail, passwordMatch, showError, form } = this.state;
+    const { validEmail, passwordMatch, showError, form } = this.state;
     const {
       firstName,
       lastName,
@@ -85,9 +90,10 @@ class Registration extends React.Component {
       password,
       passwordConfirm,
       city,
-      selectedState,
-      phone
+      selectedState
     } = form;
+    console.log(!validEmail);
+
     return (
       <div id="registration-form">
         <Grid
