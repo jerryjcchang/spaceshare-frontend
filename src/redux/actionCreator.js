@@ -1,8 +1,9 @@
 import { confirm, myAlert } from "../components/Alerts";
-const URL =
-  process.env.NODE_ENV === "production"
-    ? "https://spaceshare-api.herokuapp.com/api/v1"
-    : "http://localhost:3000/api/v1";
+const URL = "https://spaceshare-api.herokuapp.com/api/v1"
+  // process.env.NODE_ENV === "production"
+    // ?
+
+    // : "http://localhost:3000/api/v1";
 // const URL = 'http://localhost:3000/api/v1'
 const LOGIN = `${URL}/login`;
 const PROFILE = `${URL}/profile`;
