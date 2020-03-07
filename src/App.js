@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import HttpsRedirect from "react-https-redirect";
 import { Route, Switch, Redirect } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Registration from "./components/Registration";
@@ -26,42 +27,44 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app">
-        <Navbar />
-        <ScrollToTop>
-          <Switch>
-            <Route exact path="/" component={Spaces} />
-            <Route exact path="/spaces" component={Spaces} />
-            <Route
-              exact
-              path="/login"
-              render={routeProps =>
-                this.props.currentUser ? (
-                  <Redirect to={this.props.referrer} />
-                ) : (
-                  <Login routeProps={routeProps} />
-                )
-              }
-            />
-            <Route
-              exact
-              path="/register"
-              render={props => {
-                return <Registration routeProps={props} />;
-              }}
-            />
+      <HttpsRedirect>
+        <div className="app">
+          <Navbar />
+          <ScrollToTop>
+            <Switch>
+              <Route exact path="/" component={Spaces} />
+              <Route exact path="/spaces" component={Spaces} />
+              <Route
+                exact
+                path="/login"
+                render={routeProps =>
+                  this.props.currentUser ? (
+                    <Redirect to={this.props.referrer} />
+                  ) : (
+                    <Login routeProps={routeProps} />
+                  )
+                }
+              />
+              <Route
+                exact
+                path="/register"
+                render={props => {
+                  return <Registration routeProps={props} />;
+                }}
+              />
 
-            <Route
-              exact
-              path="/spaces/:id"
-              render={props => {
-                return <SpaceView routeProps={props} />;
-              }}
-            />
-            <Route exact path="/profile" component={Profile} />
-          </Switch>
-        </ScrollToTop>
-      </div>
+              <Route
+                exact
+                path="/spaces/:id"
+                render={props => {
+                  return <SpaceView routeProps={props} />;
+                }}
+              />
+              <Route exact path="/profile" component={Profile} />
+            </Switch>
+          </ScrollToTop>
+        </div>
+      </HttpsRedirect>
     );
   }
 }
