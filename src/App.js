@@ -26,6 +26,8 @@ class App extends Component {
   }
 
   render() {
+    console.log(process.env.NODE_ENV);
+
     return (
       <HttpsRedirect>
         <div className="app">
