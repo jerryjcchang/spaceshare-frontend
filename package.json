@@ -19,14 +19,16 @@
     "semantic-ui-calendar-react": "^0.14.1",
     "semantic-ui-css": "^2.4.1",
     "semantic-ui-react": "^0.85.0",
+    "serve": "^11.3.0",
     "sweetalert2": "^9.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "PORT=3001 react-scripts start",
+    "start": "serve -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "dev": "PORT=3001 react-scripts start"
+    "heroku-postbuild": "npm run build"
   },
   "eslintConfig": {
     "extends": "react-app"
